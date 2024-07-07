@@ -68,7 +68,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"horizongazer.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"horizongazer.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"LyT8mpSI2Jq9CRhOtNOgBXkE-9Nh9j0Va","app_key":"fUOlkXhD9wcmxOTed9NdlqPH","server_url":"https://lyt8mpsi.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -78,6 +78,35 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
 
 
   
@@ -94,7 +123,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>Hexo</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -160,10 +189,62 @@
           
           
             <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>小白指南</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://hexo.fluid-dev.com/docs/start/" target="_self">
+                    
+                    <span>安装主题</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://hexo.fluid-dev.com/docs/guide/" target="_self">
+                    
+                    <span>配置指南</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://hexo.fluid-dev.com/docs/icon/" target="_self">
+                    
+                    <span>图标用法</span>
+                  </a>
+                
+              </div>
             </li>
           
         
@@ -190,7 +271,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('http://img.netbian.com/file/2023/1022/210232lVk42.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -326,9 +407,15 @@
             
               
               
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
                   <span class="hint--top hint--rounded" aria-label="BY - 署名">
                     <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
                   </span>
                 </a>
               
@@ -357,6 +444,37 @@
             </div>
 
             
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"LyT8mpSI2Jq9CRhOtNOgBXkE-9Nh9j0Va","appKey":"fUOlkXhD9wcmxOTed9NdlqPH","path":"window.location.pathname","placeholder":"留言仅限讨论，禁止广告等行为","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://lyt8mpsi.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"LyT8mpSI2Jq9CRhOtNOgBXkE-9Nh9j0Va","appkey":"fUOlkXhD9wcmxOTed9NdlqPH"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
           </article>
         </div>
       </div>
@@ -452,6 +570,31 @@
        <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
   
   
   
@@ -597,9 +740,15 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
+  <script defer src="/js/leancloud.js" ></script>
+
   <script  src="/js/local-search.js" ></script>
 
 
+
+
+  
+<script src="/js/custom.js"></script>
 
 
 
