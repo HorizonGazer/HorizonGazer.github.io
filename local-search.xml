@@ -31,6 +31,37 @@
   
   
   <entry>
+    <title>single_cell_tutorial</title>
+    <link href="/2024/06/30/single_cell_tutorial/"/>
+    <url>/2024/06/30/single_cell_tutorial/</url>
+    
+    <content type="html"><![CDATA[<h2 id="简介">简介</h2><p>人体是一个复杂的机器，严重依赖于生命的基本单位——细胞。细胞可以分为不同类型，在发育过程中甚至会发生转变，在疾病或再生时也会如此。这种细胞的异质性在形态、功能和基因表达谱上都有所体现。强烈的干扰会导致细胞类型的紊乱，从而影响整个系统，甚至引发像癌症这样严重的疾病。因此，了解细胞在正常状态和干扰下的行为对于改善我们对整个细胞系统的理解至关重要。</p><p>这项庞大的任务可以通过不同的方式来解决，其中最有前途的方法是在个体水平上对细胞进行分析。到目前为止，每个细胞的转录组主要是通过一种称为单细胞RNA测序的过程来检测的。随着单细胞基因组学的最新进展，现在可以将转录组信息与空间、染色质可及性或蛋白质信息结合起来。这些进展不仅可以揭示复杂的调控机制，而且还增加了数据分析师的复杂性。</p><p>如今，数据分析师面临着一个庞大的分析工具领域，其中包含1000多种计算单细胞分析方法。在这个广泛的工具范围中导航以生成科学前沿的可靠结果变得越来越具有挑战性。</p><p>这里我整理了单细胞测序分析的最佳实践，以供大家参考以及练习。</p><h2 id="单细胞分析框架">单细胞分析框架</h2><p>目前单细胞领域的工具主要有三种：</p><ul><li>Bioconductor：R语言实现的生物信息学生态</li><li>Seurat：R语言实现的单细胞分析生态</li><li>Scverse：基于Python实现的单细胞分析生态。</li></ul><p>Bioconductor 是一个开发、支持和共享免费开源软件的项目，重点是对包括单细胞在内的许多不同生物测定的数据进行严格且可重复的分析。同质的开发人员和用户体验以及带有用户友好小插图的丰富文档是 Bioconductor 的最大优势。</p><p>Seurat 是一款备受推崇的 R 软件包，专为分析单细胞数据而设计。它为分析的所有步骤提供工具，包括多模式和空间数据。修拉以写得好的小插图和庞大的用户群而闻名。</p><p>然而，对于极大的数据集（超过 50 万个单元），这两种 R 选项都会遇到可扩展性问题，这促使基于 Python 的社区开发 scverse 生态系统。scverse 是一个致力于生命科学基础工具的组织和生态系统，最初重点关注单细胞。可扩展性、可扩展性以及与现有 Python 数据和机器学习工具的强大互操作性是 scverse 生态系统的一些优势。</p><h2 id="基于-R-的scRNA-seq最佳实践教程">基于 R 的scRNA-seq最佳实践教程</h2><p>《使用Bioconductor进行单细胞分析》<a href="https://bioconductor.org/books/release/OSCA/">(Bioconductor OSCA)</a>是一本数字书籍，旨在教授使用基于 R 的Bioconductor包分析 scRNA-Seq 的常见工作流程。</p><p><a href="https://doi.org/10.1038/nmeth.3252">同名论文</a>概述了使用 Bioconductor 进行单细胞分析，该书是一个相关的在线版本，其中包含大量代码示例。</p><p>该书在基本的scRNA-Seq分析方面非常全面，有很好的解释和大量的工作流程示例。然而，它不包括其他单细胞组学，如scATAC-seq即<a href="https://lmweber.org/OSTA-book/">空间转录组学</a>在补充的 Bioconductor OSTA 一书中有所介绍。由于这些书籍是为 Bioconductor 系统设计的，因此它们仅使用 Bioconductor 上可用的工具。这些并不一定导致书籍本身所指出的最佳分析。我们认为 Bioconductor 书籍对于具有基本 R 和更强生物学背景的人特别有用，他们有兴趣学习如何使用 Bioconductor 分析单细胞和空间转录组学数据分析。</p><h2 id="基于Python的scRNA-seq最佳实践教程">基于Python的scRNA-seq最佳实践教程</h2><p>《单细胞RNA-seq分析的最佳实践：教程》<a href="https://www.sc-best-practices.org/preamble.html">(Single cell best practice)</a>是基于Python实现的单细胞分析教程。</p><p>Malte Lücken 和 Fabian Theis 撰写的<a href="https://doi.org/10.15252/msb.20188746">同名论文</a>，介绍了 scRNA-Seq 分析的最佳实践。这篇论文对该领域的独特贡献在于，它不仅作为对可能的分析步骤的回顾，而且总是基于独立基准提出最佳实践。当没有关于最佳做法的建议时，就建议对分析方法提出一般建议。该论文本身附有来自<a href="https://doi.org/10.1038/nature24489">Haber等人</a>的<a href="https://github.com/theislab/single-cell-tutorial/">小鼠肠上皮区域的示例分析</a>。</p><p>教程详细地介绍 scverse 生态系统，并重点介绍最重要的数据结构，解释最重要的概念。</p><p>该教程提倡分析师应该熟悉所有三个生态系统，并在它们之间轻松切换。这种方法允许分析师使用性能最佳的工具和方法，而不管它们是如何实现的。当分析师不愿意在生态系统之间移动时，他们通常倾向于使用易于访问的包，即使它们已被证明与另一个生态系统中的包相比存在缺点。分析师在生态系统之间移动的能力使开发人员能够利用编程语言的不同优势。例如，R 对复杂的统计建模有强大的内置支持，而大多数深度学习库都专注于 Python。通过支持常见的磁盘数据格式和内存中数据结构，开发人员可以确信分析师可以访问他们的软件包，并且可以使用最适合其方法的平台平台。对多个生态系统感到满意的另一个动机是数据、结果和文档的可访问性和可用性。通常，数据或结果仅以一种格式提供，分析师需要熟悉该格式才能访问它。在决定使用哪种方法时，还需要对其他生态系统有基本的了解，以便理解包文档和教程。</p><h2 id="本喵的计划">本喵的计划</h2><p>后续将持续在个人blog上更新基于R或Python的scRNA-seq练习以及个人总结~</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>scRNA-seq</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+      <tag>R</tag>
+      
+      <tag>scRNA-seq</tag>
+      
+      <tag>tutorial</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>一篇基于R语言的scRNA-seq文章复现</title>
     <link href="/2024/05/20/%E4%B8%80%E7%AF%87%E5%9F%BA%E4%BA%8ER%E8%AF%AD%E8%A8%80%E7%9A%84scRNA-seq%E6%96%87%E7%AB%A0%E5%A4%8D%E7%8E%B0/"/>
     <url>/2024/05/20/%E4%B8%80%E7%AF%87%E5%9F%BA%E4%BA%8ER%E8%AF%AD%E8%A8%80%E7%9A%84scRNA-seq%E6%96%87%E7%AB%A0%E5%A4%8D%E7%8E%B0/</url>
