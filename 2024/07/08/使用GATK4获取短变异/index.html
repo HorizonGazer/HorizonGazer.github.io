@@ -1,0 +1,1165 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="HorizonGazer">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 实验目的 GATK (Genome Analysis Toolkit)，它是用于分析高通量测序数据的命令行工具集合，主要侧重于变体发现。本实验将使用使用GATK4获取短变异。 实验步骤为：准备参考基因组其他文件构成BWA索引，将样本ZW177与参考基因进行比对，对重复reads进行排序和标记生成.sorted.dedup.bam文件  ，IGV可视化BAM文件，在单个样本上运行GATK Ha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用GATK4获取短变异">
+<meta property="og:url" content="http://horizongazer.github.io/2024/07/08/%E4%BD%BF%E7%94%A8GATK4%E8%8E%B7%E5%8F%96%E7%9F%AD%E5%8F%98%E5%BC%82/index.html">
+<meta property="og:site_name" content="HorizonGazer">
+<meta property="og:description" content="1. 实验目的 GATK (Genome Analysis Toolkit)，它是用于分析高通量测序数据的命令行工具集合，主要侧重于变体发现。本实验将使用使用GATK4获取短变异。 实验步骤为：准备参考基因组其他文件构成BWA索引，将样本ZW177与参考基因进行比对，对重复reads进行排序和标记生成.sorted.dedup.bam文件  ，IGV可视化BAM文件，在单个样本上运行GATK Ha">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://horizongazer.github.io/img/image-20231015191953933.png">
+<meta property="article:published_time" content="2024-07-08T05:57:21.151Z">
+<meta property="article:modified_time" content="2024-07-08T06:05:03.283Z">
+<meta property="article:author" content="HorizonGazer">
+<meta property="article:tag" content="HW">
+<meta property="article:tag" content="Genomics">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="GATK4">
+<meta property="article:tag" content="SNP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://horizongazer.github.io/img/image-20231015191953933.png">
+  
+  
+  
+  <title>使用GATK4获取短变异 - HorizonGazer</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"horizongazer.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"kSreM0uY5jXWPRahJhw2LDbE-gzGzoHsz","app_key":"Ux8qZ1XPuB6R9or0uKIElE9b","server_url":"https://ksrem0uy.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HorizonGazer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>小白指南</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://hexo.fluid-dev.com/docs/start/" target="_self">
+                    
+                    <span>安装主题</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://hexo.fluid-dev.com/docs/guide/" target="_self">
+                    
+                    <span>配置指南</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://hexo.fluid-dev.com/docs/icon/" target="_self">
+                    
+                    <span>图标用法</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="使用GATK4获取短变异"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-08 13:57" pubdate>
+          2024年7月8日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          50 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">使用GATK4获取短变异</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="1-实验目的">1. 实验目的</h3>
+<p>GATK (<strong>G</strong>enome <strong>A</strong>nalysis <strong>T</strong>ool<strong>k</strong>it)，它是用于分析高通量测序数据的命令行工具集合，主要侧重于变体发现。本实验将使用使用GATK4获取短变异。</p>
+<p>实验步骤为：准备参考基因组其他文件构成BWA索引，将样本ZW177与参考基因进行比对，对重复reads进行排序和标记生成.sorted.dedup.bam文件  ，IGV可视化BAM文件，在单个样本上运行GATK HaplotypeCaller，使用GenotypeGVCFs进行联合变异的调用，使用FreeBayes进行联合变异调用，过滤变异体确保只有高质量的变异数据被用于后续的分析，基本的统计和比较不同的集合等过程。</p>
+<h3 id="2-实验准备">2. 实验准备</h3>
+<h4 id="2-1-实验平台">2.1 实验平台</h4>
+<p>Linux JSvr01 3.10.0-1160.80.1.el7.x86_64 #1 SMP Tue Nov 8 15:48:59 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</p>
+<h4 id="2-2-数据简述">2.2 数据简述</h4>
+<table>
+<thead>
+<tr>
+<th>数据</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/img/image-20231015194925726.png" srcset="/img/loading.gif" lazyload></td>
+<td>/work/cb-data/Variants_workshop_2020/*.fastq.gz</td>
+</tr>
+<tr>
+<td>genome.fa</td>
+<td>/work/cb-data/Variants_workshop_2020/genome</td>
+</tr>
+<tr>
+<td><img src="/img/image-20231015195114150.png" srcset="/img/loading.gif" lazyload></td>
+<td>/work/cb-data/Variants_workshop_2020/premade_gvcf/</td>
+</tr>
+<tr>
+<td><img src="/img/image-20231015195200421.png" srcset="/img/loading.gif" lazyload></td>
+<td>/work/cb-data/Variants_workshop_2020/processed_bams/</td>
+</tr>
+<tr>
+<td><img src="/img/image-20231015195239274.png" srcset="/img/loading.gif" lazyload></td>
+<td>/work/cb-data/Variants_workshop_2020/scripts</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-3-软件配置">2.3 软件配置</h4>
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th>版本</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bwa</td>
+<td>0.7.17-r1188</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>GATK(自行设置路径)</td>
+<td>4.1.9.0</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>Samtools</td>
+<td>1.7</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>vcftools</td>
+<td>0.1.15</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>FileZilla</td>
+<td>3.65.0</td>
+<td><a target="_blank" rel="noopener" href="https://filezilla-project.org/">https://filezilla-project.org/</a></td>
+</tr>
+<tr>
+<td>IGV</td>
+<td>2.6.3</td>
+<td><a target="_blank" rel="noopener" href="https://data.broadinstitute.org/igv/projects/downloads/2.6/">https://data.broadinstitute.org/igv/projects/downloads/2.6/</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-实验内容">3. 实验内容</h3>
+<p>本实验步骤为：准备参考基因组其他文件构成BWA索引，将样本ZW177与参考基因进行比对，对重复reads进行排序和标记生成.sorted.dedup.bam文件  ，IGV可视化BAM文件，在单个样本上运行GATK HaplotypeCaller，使用GenotypeGVCFs进行联合变异的调用，使用FreeBayes进行联合变异调用，过滤变异体确保只有高质量的变异数据被用于后续的分析，基本的统计和比较不同的集合等过程。</p>
+<h4 id="3-1-Data-used-in-the-exercise">3.1 <strong>Data used in the exercise</strong></h4>
+<p>我们将使用 黑腹果蝇WGS配对末端Illumina数据与NCBI种质SRR1663608，SRR1663609，SRR1663610，SRR1663611，分别对应于样品ZW155，ZW177，ZW184和ZW185。为了加快计算速度，最初每个样本约1000万个读取对的数据已被下采样50%。</p>
+<p>该练习包括这几个步骤：从 WGS Illumina 读取到 GATK 最佳实践中指定的四样本变体调用。要调用所有四个样本中的变体，需要对四个 FASTQ 文件对中的每一个执行从读取对齐到单倍型调用的所有步骤。在具有大内存的多 CPU 计算机上，可以并行启动此类运行。</p>
+<h4 id="3-2-Log-in-to-your-workshop-machine">3.2  <strong>Log in to your workshop machine</strong></h4>
+<h4 id="3-3-General-tips">3.3  <strong>General tips</strong></h4>
+<p><strong>检查所有提供的 shell 脚本</strong>，例如，在文本编辑器(如nano或vim)中打开它们。阅读解释性评论。注意使用环境变量来简化和泛化脚本。例如，下面定义一个变量ACC：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ACC=SRR1663609<br></code></pre></td></tr></table></figure>
+<p>每当脚本中出现 $ACC 或 ${ACC} 时，都会被解释为 SRR1663609 。请注意将长行分成以“\”字符结尾的较小部分的技术。对于bash来说，这仍然是一条很长的线，但对我们来说更容易阅读。</p>
+<p>使用 top 命令监控活动的进度，最好在单独的窗口中运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">top -u S20213281022<br></code></pre></td></tr></table></figure>
+<p>这将显示动态更新的流程列表，最活跃的进程位于顶部。由于GATK工具是用Java编写的，因此 将看到最多的过程将是称为java的Java虚拟机。 在对齐阶段，要寻找的过程将是称为 bwa 的 BWA 对准器。 顶部列表中没有任何活动进程（消耗 CPU 时间）将表示 正在运行的任何脚本完成（或崩溃）。注意不同运行的内存使用情况（%MEM 列）。</p>
+<p><strong>查看日志文件</strong>。每次运行脚本时，所有命令的屏幕输出都会保存到日志文件（例如，脚本 .log ）。尽管写入该文件的消息有时听起来很神秘，但它们通常允许用户确定当前正在运行计算的哪个阶段。它还包含有用的计时信息（各个阶段的开始和结束日期，经过的时间，预计到达时间）。若要查看日志文件，可以使用以下命令之一：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">more script.log #  从头开始浏览文件<br>tail -100 script.log #  显示文件的最后100行<br>tail -f script.log #  连续显示入线<br></code></pre></td></tr></table></figure>
+<p>当然， 也可以通过在文本编辑器中打开它来查看整个文件。</p>
+<p><strong>查看工作目录</strong> （/$USER） 随着运行的进行，正在生成各种中间文件。偶尔执行 <code>ls -al</code> 将允许 查看这些文件以及它们的大小如何增加。如果即使脚本似乎已结束，也看不到预期的输出文件，通常意味着出了问题。检查屏幕日志文件以查找错误消息。</p>
+<p><strong>可以断开连接</strong>。如果一个步骤花费的时间超过愿意等待的时间，可以断开与 VNC 或screen会话的连接（在 VNC 中，单击 VNC 窗口右上角的叉号，但不要  “注销”！所有程序和窗口将继续运行， 可以在以后重新连接时检查结果。此外，如果 通过 ssh 客户端（而不是 VNC）工作并且没有screen，只要 正在运行的脚本是通过 nohup 在后台提交的， 就可以安全地注销 ssh 会话（按照本练习中的建议）。下次登录到计算机时，脚本仍将运行（或已完成）。</p>
+<h4 id="3-4-Fetch-input-files-and-scripts-to-your-local-scratch-directory">3.4  <strong>Fetch input files and scripts to your local scratch directory</strong></h4>
+<p>准备所需的文件，放至工作目录下。</p>
+<h5 id="1-创建文件夹">(1)   创建文件夹</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir S20213281022<br></code></pre></td></tr></table></figure>
+<h5 id="2-复制文件至工作目录">(2)  复制文件至工作目录</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp ../Variants_workshop_2020/*.fastq.gz .<br>cp -r ../Variants_workshop_2020/scripts/ .<br>cp -r ../Variants_workshop_2020/genome/ .<br>ls -l<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015151247684.png" srcset="/img/loading.gif" lazyload>
+<p>需要注意的是，脚本文件需要可执行权限，可在/scripts目录下使用<code>chmod u+x *.sh</code>加权限。</p>
+<h4 id="3-5-Prepare-reference-genome">3.5  <strong>Prepare reference genome</strong></h4>
+<p>子目录基因组中的文件 genome.fa 是我们将读取对齐的参考。在启动管道之前，需要为BWA对准器索引基因组。此外，需要总结所有染色体的长度信息。</p>
+<h5 id="1-修改脚本权限">(1)  修改脚本权限</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd scripts/<br>chmod u+x prepare_genome.sh<br></code></pre></td></tr></table></figure>
+<h5 id="2-修改脚本路径">(2)  修改脚本路径</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment"># index reference genome for bwa, create fasta indexes (fai and dict)</span><br>TMP=/home/<span class="hljs-variable">$USER</span>/<span class="hljs-variable">$USER</span> <span class="hljs-comment"># 修改成自己的目录</span><br>GATKDIR=/programs/gatk-4.1.9.0<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$GATKDIR</span>:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">cd</span> genome<br><span class="hljs-comment"># Genome summary files needed and by GATK tools</span><br>gatk CreateSequenceDictionary -R genome.fa  -O genome.dict<br>samtools faidx genome.fa<br><span class="hljs-comment"># index for BWA alignment</span><br>bwa index genome.fa<br><span class="hljs-comment"># index image file needed by some Spark-based tools (if used)</span><br>gatk --java-options <span class="hljs-string">&quot;-Djava.io.tmpdir=<span class="hljs-variable">$TMP</span>&quot;</span> BwaMemIndexImageCreator \<br>     -I genome.fa \<br>     -O genome.fa.img<br></code></pre></td></tr></table></figure>
+<h5 id="3-运行脚本">(3)  运行脚本</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ..<br>nohup ./scripts/prepare_genome.sh &gt;&amp; prepare_genome.log &amp;<br>top -u S20213281022<br>cd genome<br>ls -l<br></code></pre></td></tr></table></figure>
+<p>该脚本将在后台运行，大约需要 10 分钟才能完成（在单独的窗口中使用 top -u $USER  来监视进程）。</p>
+<img src="/img/image-20231015151933510.png" srcset="/img/loading.gif" lazyload>
+<img src="/img/image-20231015152513462.png" srcset="/img/loading.gif" lazyload>
+<p>完成后，列出子目录基因组的内容 。文件genome.fa.fai 和 genome.fa.dict 是简单的文本文件，总结了原始FASTA文件中的染色体大小和起始字节位置。这与其他文件构成 BWA 索引。</p>
+<h5 id="4-查看工作日志">(4)  查看工作日志</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nano ../prepare_genome.log<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015152650821.png" srcset="/img/loading.gif" lazyload>
+<h5 id="5-查看提供随机访问fasta-fastq文件接口的-fai文件">(5)  查看提供随机访问fasta/fastq文件接口的.fai文件</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nano genome.fa.fai<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015152720055.png" srcset="/img/loading.gif" lazyload>
+<p>fai的格式：以\t分割，fasta 5列，fastq 6列:</p>
+<ul>
+<li><strong>NAME</strong> Name of this reference sequence</li>
+<li><strong>LENGTH</strong> Total length of this reference sequence, in bases</li>
+<li><strong>OFFSET</strong> Offset in the FASTA/FASTQ file of this sequence’s first base</li>
+<li><strong>LINEBASES</strong> The number of bases on each line</li>
+<li><strong>LINEWIDTH</strong> The number of bytes in each line, including the newline</li>
+<li><strong>QUALOFFSET</strong> Offset of sequence’s first quality within the FASTQ file</li>
+</ul>
+<h5 id="6-查看用来reference-genome序列的dict文件">(6)  查看用来reference genome序列的dict文件</h5>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs fsharp">nano genome.<span class="hljs-built_in">dict</span><br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015152742001.png" srcset="/img/loading.gif" lazyload>
+<p>@SQ用于分割每一条染色体信息，第一列是染色体信息，第二列是染色体名字，第三列是M5码，第四列是来源 。</p>
+<h4 id="3-6-Align-reads-to-reference">3.6  <strong>Align reads to reference</strong></h4>
+<p>使用脚本aln_bwa.sh，将SRR1663609(样本ZW177)与参考基因进行比对，它立即将其转换为 BAM  格式的压缩二进制文件，相当于 SAM，但小了几倍。由于这种管道机制，bwa mem 的大型中间输出文件不需要写入磁盘。</p>
+<p>在我们的练习中，每个样本在一个 Illumina 泳道上测序一次。</p>
+<h5 id="1-修改脚本权限-2">(1)  修改脚本权限</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ../scripts<br>chmod u+x bwa_aln.sh<br>cd ..<br></code></pre></td></tr></table></figure>
+<h5 id="2-执行脚本">(2)  执行脚本</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">nohup ./scripts/bwa_aln.sh SRR1663608 ZW155 &gt;&amp; bwa_aln_SRR1663608.log &amp;<br>nohup ./scripts/bwa_aln.sh SRR1663609 ZW177 &gt;&amp; bwa_aln_SRR1663609.log &amp;<br>nohup ./scripts/bwa_aln.sh SRR1663610 ZW184 &gt;&amp; bwa_aln_SRR1663610.log &amp;<br>nohup ./scripts/bwa_aln.sh SRR1663611 ZW185 &gt;&amp; bwa_aln_SRR1663611.log &amp;<br>top -u S20213281022<br>ls -l<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015153143961.png" srcset="/img/loading.gif" lazyload>
+<img src="/img/image-20231015154113030.png" srcset="/img/loading.gif" lazyload>
+<h5 id="3-查看SRR1663609-bam">(3)  查看SRR1663609.bam</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">samtools view -h SRR1663609.bam | less<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015154214597.png" srcset="/img/loading.gif" lazyload>
+<h4 id="3-7-Sort-and-mark-duplicates">3.7  <strong>Sort and mark duplicates</strong></h4>
+<p>在此步骤中，在先前获得的BAM文件中发现的任何重复片段现在将被标记为在下游分析中忽略，并且将根据基因组坐标对比对进行排序。生成的排序 BAM 文件也将编制索引。所有这些操作现在都由一个名为 MarkDuplicatesSpark 的单个 GATK 工具执行。</p>
+<p>运行的结果将是文件 SRR1663609.sorted.dedup.bam ，并附有索引文件 SRR1663609.sorted.dedup.bai 。</p>
+<h5 id="1-修改脚本权限-3">(1)  修改脚本权限</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd scripts<br>chmod u+x sort_dedup_index.sh<br></code></pre></td></tr></table></figure>
+<h5 id="2-修改脚本">(2)  修改脚本</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nano sort_dedup_index.sh<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>REFFASTA=./genome/genome.fa<br>GATKDIR=/programs/gatk-4.1.9.0<br>TMP=/home/<span class="hljs-variable">$USER</span>/<span class="hljs-variable">$USER</span> <span class="hljs-comment">#修改路径</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/local/jdk1.8.0_121<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$GATKDIR</span>:<span class="hljs-variable">$PATH</span><br><span class="hljs-comment"># run this script as follows</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#    nohup ./sort_dedup_index.sh SRR1663609 &gt;&amp; log &amp;</span><br><span class="hljs-comment">#</span><br>ACC=<span class="hljs-variable">$1</span><br><span class="hljs-comment"># Note: GATK will create its temporary files in $TMP which is on large local disk.</span><br><span class="hljs-comment"># This is safer than putting them in default /tmp, which is usually small</span><br><span class="hljs-built_in">echo</span> Dedup/sorting started<br><span class="hljs-built_in">date</span><br>gatk MarkDuplicatesSpark \<br>            -I <span class="hljs-variable">$&#123;ACC&#125;</span>.bam \<br>            -O <span class="hljs-variable">$&#123;ACC&#125;</span>.sorted.dedup.bam \<br>            -M <span class="hljs-variable">$&#123;ACC&#125;</span>.sorted.dedup.txt \<br>            --tmp-dir <span class="hljs-variable">$TMP</span> \<br>            --conf <span class="hljs-string">&#x27;spark.executor.cores=4&#x27;</span><br><span class="hljs-comment"># Separate indexing not needed if CREATE_INDEX true in MarkDuplicates</span><br><span class="hljs-comment">#echo Indexing started</span><br><span class="hljs-comment">#date</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#gatk --java-options &quot;-Djava.io.tmpdir=$TMP&quot; BuildBamIndex \</span><br><span class="hljs-comment">#    --INPUT=$ACC.sorted.dedup.bam</span><br><span class="hljs-built_in">echo</span> Run completed<br><span class="hljs-built_in">date</span><br></code></pre></td></tr></table></figure>
+<h5 id="3-执行脚本">(3)  执行脚本</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ..<br>nohup ./scripts/sort_dedup_index.sh SRR1663608 &gt;&amp; sort_dedup_index_SRR1663608.log &amp;<br>nohup ./scripts/sort_dedup_index.sh SRR1663609 &gt;&amp; sort_dedup_index_SRR1663609.log &amp;<br>nohup ./scripts/sort_dedup_index.sh SRR1663610 &gt;&amp; sort_dedup_index_SRR1663610.log &amp;<br>nohup ./scripts/sort_dedup_index.sh SRR1663611 &gt;&amp; sort_dedup_index_SRR1663611.log &amp;<br>top -u S20213281022<br></code></pre></td></tr></table></figure>
+<p>脚本运行近5分钟。</p>
+<img src="/img/image-20231015154945525.png" srcset="/img/loading.gif" lazyload>
+<h5 id="4-查看目录中文件">(4)查看目录中文件</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls -l<br></code></pre></td></tr></table></figure>
+<p>生成了.sorted.dedup.bam文件，以及索引文件.sorted.dedup.bai文件</p>
+<img src="/img/image-20231015155657392.png" srcset="/img/loading.gif" lazyload>
+<h5 id="5-使用samtools命令查看获取到的文件的比对状态汇总">(5) 使用samtools命令查看获取到的文件的比对状态汇总</h5>
+<p>检查获取的文件的对齐统计信息摘要，运行 samtools 命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">samtools flagstat SRR1663609.sorted.dedup.bam<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015155805035.png" srcset="/img/loading.gif" lazyload>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs tap">结果如下：<br>10209495 +<span class="hljs-number"> 0 </span>in total (QC-passed reads + QC-failed reads) <span class="hljs-comment"># 这部分指示总的测序读数，包括通过质量控制（QC-passed reads）和未通过质量控制（QC-failed reads）的读数。在这个例子中，共有10209495个读数，都通过了质量控制。</span><br>82057 +<span class="hljs-number"> 0 </span>secondary <span class="hljs-comment">#  这表示有82057个测序读数被标记为次要（secondary）。通常，次要的测序读数是与同一片段相关的其他读数，通常对于比对结果中的多对一比对情况。</span><br>0 +<span class="hljs-number"> 0 </span>supplementary <span class="hljs-comment">#  在这里，没有补充的测序读数。补充读数通常与主要的测序读数相关，用于补充详细信息或分割跨越引物结合位点的片段。</span><br>750524 +<span class="hljs-number"> 0 </span>duplicates <span class="hljs-comment">#  这表明有750524个测序读数被标记为重复。这些测序读数通常是PCR扩增或文库制备过程中的复制物。</span><br>9698015 +<span class="hljs-number"> 0 </span>mapped (94.99% : N/A) <span class="hljs-comment">#  这表示有9698015个测序读数成功比对到参考基因组，比例为94.99%。N/A表示这里没有提供与该比率相关的额外信息。</span><br>10127438 +<span class="hljs-number"> 0 </span>paired in sequencing <span class="hljs-comment">#  这表示共有10127438对测序片段被测序，每对片段包括一条read1和一条read2。</span><br>5063719 +<span class="hljs-number"> 0 </span>read1 <br>5063719 +<span class="hljs-number"> 0 </span>read2 <span class="hljs-comment">#这些数字表示分别有5063719个read1和5063719个read2。这对应于上述的10127438对测序片段。</span><br>8749418 +<span class="hljs-number"> 0 </span>properly paired (86.39% : N/A) <span class="hljs-comment">#  这表示有8749418个测序片段被正确地匹配，比例为86.39%。通常，&quot;properly paired&quot; 意味着read1和read2在参考基因组上的位置和方向都正确匹配。</span><br>9504024 +<span class="hljs-number"> 0 </span>with itself and mate mapped <span class="hljs-comment">#  这表示有9504024对测序片段的read1和read2都成功比对，并且它们彼此之间也成功比对到了。</span><br>111934 +<span class="hljs-number"> 0 </span>singletons (1.11% : N/A) <span class="hljs-comment">#  这表示有111934个测序片段是单端测序（singletons），未成功形成配对。</span><br>254130 +<span class="hljs-number"> 0 </span>with mate mapped to a different chr <span class="hljs-comment">#  这表示有254130对测序片段的read1和read2分别比对到了不同的染色体。</span><br>88723 +<span class="hljs-number"> 0 </span>with mate mapped to a different chr (mapQ&gt;=5) <span class="hljs-comment">#  这表示有88723对测序片段的read1和read2分别比对到了不同的染色体，并且其比对质量（mapQ）大于等于5。</span><br></code></pre></td></tr></table></figure>
+<h4 id="3-8-Visualize-the-alignments-using-IGV">3.8  <strong>Visualize the alignments using IGV</strong></h4>
+<h5 id="1-利用FilleZilla下载文件">(1)  利用FilleZilla下载文件</h5>
+<p>SRR1663609.sorted.dedup.bam，SRR1663609.sorted.dedup.bam.bai，genome.fa</p>
+<h5 id="2-使用IGV可视化SRR1663609-sorted-dedup-bam">(2) 使用IGV可视化SRR1663609.sorted.dedup.bam</h5>
+<img src="/img/image-20231015165530800.png" srcset="/img/loading.gif" lazyload>
+<p>在IGV图中，灰色表示insert size正常，是常规reads。红色表示insert size大于预期，表示可能存在缺失突变。蓝色表示insert size小于预期，表示可能存在插入突变。紫色的部分说明了存在插入碱基，数字表示插入碱基的个数。当覆盖轨道为彩色时，表示核苷酸与参照碱基比对的差异查过20%,可以根据这个，判断这些点位的SNP。</p>
+<p>本图出现较多的paired end reads中成对两条reads比对到了不同的染色体Mapping在chr3LHet：2,258,070bp左右，并且chr3LHet：2,257,400bp左右有一个read存在39bp的碱基插入。</p>
+<h4 id="3-9-Run-GATK-HaplotypeCaller-on-individual-samples">3.9  <strong>Run GATK HaplotypeCaller on individual samples</strong></h4>
+<p>在此步骤中，我们将在BAM文件上运行HaplotypeCaller，以生成感兴趣基因组区域中每个位点的每个样本的基因型似然信息。通常，这个区域将是整个基因组。为了节省时间，我们将专注于一条染色体chr2R。预期结果将是文件SRR1663609.g.vcf ，其中包含该样本的GVCF格式的中间基因分型数据 。</p>
+<h5 id="1-修改脚本权限-4">(1) 修改脚本权限</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd scripts<br>chmod u+x hc.sh<br></code></pre></td></tr></table></figure>
+<h5 id="2-修改脚本-2">(2)  修改脚本</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nano hc.sh<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>REFFASTA=./genome/genome.fa<br>GATKDIR=/programs/gatk-4.1.9.0<br>TMP=/home/<span class="hljs-variable">$USER</span>/<span class="hljs-variable">$USER</span>  <span class="hljs-comment">#修改路径</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$GATKDIR</span>:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/local/jdk1.8.0_121<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-comment"># We will run the genotyping on one chromosome only.</span><br><span class="hljs-comment"># Other chromosomes clould be handlen in separate runs,</span><br><span class="hljs-comment"># possibly in parallel..</span><br>REGION=chr2R<br>ACC=<span class="hljs-variable">$1</span><br><span class="hljs-comment"># multi-threading does not work well here - they recommend using Queue to</span><br><span class="hljs-comment"># parallelize over regions, or just manually run a few in parallel...</span><br><span class="hljs-built_in">echo</span> Genotyping <span class="hljs-keyword">for</span> <span class="hljs-variable">$ACC</span> started<br><span class="hljs-built_in">date</span><br>gatk --java-options <span class="hljs-string">&quot;-Xmx4g&quot;</span>  HaplotypeCaller \<br>      --tmp-dir <span class="hljs-variable">$TMP</span> \<br>     -R <span class="hljs-variable">$REFFASTA</span> \<br>     -I <span class="hljs-variable">$ACC</span>.sorted.dedup.bam  \<br>     -L <span class="hljs-variable">$REGION</span> \<br>     -ERC GVCF \<br>     --native-pair-hmm-threads 4 \<br>     --minimum-mapping-quality 30 \<br>     -O <span class="hljs-variable">$ACC</span>.g.vcf<br><span class="hljs-built_in">echo</span> Run ended<br><span class="hljs-built_in">date</span><br></code></pre></td></tr></table></figure>
+<h5 id="3-运行脚本-2">(3)运行脚本</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ..<br>nohup ./scripts/hc.sh SRR1663608 &gt;&amp; hc_SRR1663608.log &amp;<br>nohup ./scripts/hc.sh SRR1663609 &gt;&amp; hc_SRR1663609.log &amp;<br>nohup ./scripts/hc.sh SRR1663610 &gt;&amp; hc_SRR1663610.log &amp;<br>nohup ./scripts/hc.sh SRR1663611 &gt;&amp; hc_SRR1663611.log &amp;<br>top -u S20213281022<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015160359403.png" srcset="/img/loading.gif" lazyload>
+<p><strong>此步骤的估计运行时间为 1 小时</strong>，并且必须对其他 3 个样本重复此操作。出于本练习的目的，我们建议至少一个示例使用 <a target="_blank" rel="noopener" href="http://hc.sh">hc.sh</a> 和脚本运行此步骤，并将预制的 *.g.vcf 文件和相应的索引文件 *.g.vcf.idx 复制到目录中。</p>
+<h5 id="4-查看-g-vcf文件">(4)  查看  .g.vcf文件</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nano SRR1663610.g.vcf<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015165857087.png" srcset="/img/loading.gif" lazyload>
+<p>VCF格式用于记录变异位点（SNP/InDel）的文件格式。</p>
+<p>#开头注释部分</p>
+<p>无#开头 主体部分，主体部分包含10列数据，主体部分每一行代表一个变异位点信息。</p>
+<p>主体部分10列代表的意义：</p>
+<p>1、CHROM 参考序列名 2、POS 变异位点所在的left-most位置（1-base position）。（发生变异的的位置的第一个碱基所在） 3、ID 变异位点ID。同时对应着dbSNP数据库中的ID，若没有，使用默认使用 。 4、REF 参考序列的等位基因（Allele）（等位碱基，即参考序列该位置的碱基类型及碱基数量） 5、ALT 变异位点的等位基因，若有多个，则使用逗号分隔。（变异位点碱基） 6、QUAL 变异位点的质量。Phred格式的数值，代表着此位点是纯合的概率。此值越大，概率越低，代表 着此位点是变异位点的可能性越大。 7、FILTER 此位点是否要被过滤掉。如果是PASS，则表示此位点可以考虑为变异位点。 8、INFO 变异位点的相关信息。 9、FORMAT 变异位点的格式，如GT：AD：DP：GQ：PL。10、SAMPLEs各个样本的值，由BAM文件中＠RG下的SM标签所决定。这些值对应着第九列的各种格式。 不同格式的值用冒号分开。每个样本对应着一列；多个样本则对应着多列，这种情况下列的数量 会超过10列。</p>
+<h5 id="5-查看目录文件">(5)  查看目录文件</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls -l<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015165951361.png" srcset="/img/loading.gif" lazyload>
+<h4 id="3-10-Joint-variant-calling-with-GenotypeGVCFs">3.10  <strong>Joint variant calling with GenotypeGVCFs</strong></h4>
+<p>在中间样本级文件 *.g.vcf 结果可用于联合调用所有四个样本的变体之前，必须  使用 GATK4 的工具 CombineGVCFs 将它们合并为单个多样本 g.vcf 文件。</p>
+<h5 id="1-修改脚本权限-5">(1)  修改脚本权限</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd scripts<br>chmod u+x combineGVCFs.sh<br>chmod u+x genotypeGVCFs.sh<br>nano combineGVCFs.sh<br></code></pre></td></tr></table></figure>
+<h5 id="2-修改脚本-3">(2)  修改脚本</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>REFFASTA=./genome/genome.fa<br>GATKDIR=/programs/gatk-4.1.9.0<br>TMP=/home/<span class="hljs-variable">$USER</span>/<span class="hljs-variable">$USER</span>  <span class="hljs-comment">#  修改路径</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$GATKDIR</span>:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/local/jdk1.8.0_121<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-comment"># the gVCFG files obyained before need to be combined to be used with GenotypeGVCFs tool</span><br>REGION=chr2R<br><span class="hljs-built_in">echo</span> Combining GVCFs started<br><span class="hljs-built_in">date</span><br>gatk CombineGVCFs \<br>     --tmp-dir <span class="hljs-variable">$TMP</span> \<br>     -R <span class="hljs-variable">$REFFASTA</span> \<br>     -L <span class="hljs-variable">$REGION</span> \<br>     --variant SRR1663608.g.vcf \<br>     --variant SRR1663609.g.vcf \<br>     --variant SRR1663610.g.vcf \<br>     --variant SRR1663611.g.vcf \<br>     -O all.g.vcf<br><span class="hljs-built_in">echo</span> Run ended<br><span class="hljs-built_in">date</span><br></code></pre></td></tr></table></figure>
+<h5 id="3-运行合并脚本">(3)  运行合并脚本</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ..<br>nohup ./scripts/combineGVCFs.sh &gt;&amp; combineGVCFs.log &amp;<br>top -u S20213281022<br></code></pre></td></tr></table></figure>
+<p>运行时间：5-6 分钟。生成all.vcf文件 。</p>
+<p><img src="/img/image-20231015170330836.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls -l -t<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015171157459.png" srcset="/img/loading.gif" lazyload>
+<h5 id="4-修改联合变异体的调用的脚本">(4)  修改联合变异体的调用的脚本</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd scripts<br>nano genotypeGVCFs.sh<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>REFFASTA=./genome/genome.fa<br>GATKDIR=/programs/gatk-4.1.9.0<br>TMP=/home/<span class="hljs-variable">$USER</span>/<span class="hljs-variable">$USER</span>  <span class="hljs-comment">#  修改路径</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$GATKDIR</span>:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/local/jdk1.8.0_121<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-comment"># the gVCFG files obyained before need to be combined to be used with GenotypeGVCFs tool</span><br>REGION=chr2R<br><span class="hljs-built_in">echo</span> Joint genotyping started<br><span class="hljs-built_in">date</span><br>gatk  GenotypeGVCFs \<br>   -R <span class="hljs-variable">$REFFASTA</span> \<br>   --tmp-dir <span class="hljs-variable">$TMP</span> \<br>   -V all.g.vcf \<br>   -O all.vcf \<br>   -stand-call-conf 5<br><span class="hljs-built_in">echo</span> Run ended<br><span class="hljs-built_in">date</span><br></code></pre></td></tr></table></figure>
+<h5 id="5-调用联合变异">(5)  调用联合变异</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ..<br>nohup ./scripts/genotypeGVCFs.sh &gt;&amp; genotypeGVCFs.log &amp;<br></code></pre></td></tr></table></figure>
+<p>运行时间：5-6 分钟。生成all.vcf文件 。</p>
+<img src="/img/image-20231015171533555.png" srcset="/img/loading.gif" lazyload>
+<h5 id="6-查看all-vcf文件">(6)  查看all.vcf文件</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nano all.vcf<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015183527031.png" srcset="/img/loading.gif" lazyload>
+<h4 id="3-11-Joint-variant-calling-using-FreeBayes">3.11  <strong>Joint variant calling using FreeBayes</strong></h4>
+<p>与GATK的HaplotypeCaller类似，FreeBayes使用基于单倍型的方法来检测变体，尽管实现方式不同。FreeBayes 的输入由所有涉及的样本的对齐 BAM 文件组成。我们将使用在本练习前面获得的已处理的 BAM 文件。结果将是变体文件 fb.vcf 。</p>
+<h5 id="1-修改脚本权限-6">(1)  修改脚本权限</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd scripts<br>chmod u+x fb.sh<br>nano fb.sh<br></code></pre></td></tr></table></figure>
+<h5 id="2-修改脚本-4">(2)  修改脚本</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment">#  修改FB路径</span><br>FB=/work/miniconda3/envs/FreeBayes/bin/freebayes<br>REFFASTA=./genome/genome.fa<br><span class="hljs-built_in">echo</span> Started at<br><span class="hljs-built_in">date</span><br><span class="hljs-variable">$FB</span> -f <span class="hljs-variable">$REFFASTA</span> \<br>SRR1663608.sorted.dedup.bam \<br>SRR1663609.sorted.dedup.bam \<br>SRR1663610.sorted.dedup.bam \<br>SRR1663611.sorted.dedup.bam \<br>--min-mapping-quality 30 \<br>-r chr2R &gt; fb.vcf<br><span class="hljs-built_in">echo</span> Completed at<br><span class="hljs-built_in">date</span><br></code></pre></td></tr></table></figure>
+<h5 id="3-运行脚本-3">(3)  运行脚本</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ..<br>nohup ./scripts/fb.sh &amp;&gt;fb.log <br></code></pre></td></tr></table></figure>
+<h5 id="4-检查生成的fb-vcf文件">(4)  检查生成的fb.vcf文件</h5>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">nano <span class="hljs-built_in">fb</span>.vcf<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015185534374.png" srcset="/img/loading.gif" lazyload>
+<p>检查生成的 VCF 文件时，注意 FreeBayes 生成的注释字段中的参数通常与 GATK 调用方发出的参数不同。</p>
+<h4 id="3-12-Filter-variants">3.12  <strong>Filter variants</strong></h4>
+<p>在前面的步骤中获得的 VCF 文件是原始结果，可能包含大量误报，具体取决于调用中使用的严格选项。由于调用步骤非常耗时，因此通常建议将这些选项设置为发出一组包含的变体，然后根据各种参数过滤此组。在GATK，选项 --stand-call-conf 控制要输出的变体的质量下限阈值（VCF 的 QUAL 字段）。此选项应设置为某个低值。</p>
+<h5 id="1-从原始-all-vcf中提取QUAL大于60的变体子集">(1)  从原始 all.vcf中提取QUAL大于60的变体子集</h5>
+<p>可以使用许多不同的工具完成原始变体集的过滤。在很多情况下，人们可以简单地使用标准的Linux文本解析工具，如grep，awk或sed。例如，要从原始 all 中提取 QUAL 大于 60 的变体子集.vcf我们可以使用以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"> 将VCF头行(包含“#”)提取到一个新的VCF文件中</span><br>grep &quot;#&quot; all.vcf &gt; all.qual60.vcf<br>nano all.qual60.vcf<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015185621014.png" srcset="/img/loading.gif" lazyload>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"> 处理非头行，仅当第六列(即QUAL所在的位置)大于60时才将它们附加到新文件中。</span><br>grep -v &quot;#&quot; all.vcf | awk &#x27;&#123;if($6&gt;60) print&#125;&#x27; &gt;&gt; all.qual60.vcf<br>nano all.qual60.vcf<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015185722716.png" srcset="/img/loading.gif" lazyload>
+<h5 id="2-使用VariantFiltration过滤">(2)  使用VariantFiltration过滤</h5>
+<p>GATK提供了一个名为VariantFiltration的工具，它允许更复杂的过滤模式。使用此工具的示例脚本称为 filter_vcf.sh 。检查此脚本时，您会注意到应用于 SNP 的过滤条件与应用于插入缺失的过滤条件不同。为此，首先将 SNP 和插入缺失提取到单独的文件中，对这些文件进行过滤，然后将 SNP 和插入缺失过滤的文件合并回单个过滤文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"> 修改脚本权限</span><br>cd scripts<br>chmod u+x filter_vcf.sh <br>nano filter_vcf.sh <br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#  修改脚本</span><br><span class="hljs-comment">#!/bin/bash</span><br>REFFASTA=./genome/genome.fa<br>GATKDIR=/programs/gatk-4.1.9.0<br>TMP=/home/<span class="hljs-variable">$USER</span>/<span class="hljs-variable">$USER</span>  <span class="hljs-comment">#  修改路径</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$GATKDIR</span>:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/local/jdk1.8.0_121<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$PATH</span><br>VCF=<span class="hljs-variable">$1</span>     <span class="hljs-comment"># this should be the name *without* .vcf extension!</span><br><span class="hljs-built_in">echo</span> Run started<br><span class="hljs-built_in">date</span><br><span class="hljs-comment"># Separate snps</span><br>gatk SelectVariants \<br>    --tmp-dir <span class="hljs-variable">$TMP</span> \<br>    -R <span class="hljs-variable">$REFFASTA</span> \<br>    -V <span class="hljs-variable">$VCF</span>.vcf \<br>    --select-type-to-include SNP \<br>    -O <span class="hljs-variable">$VCF</span>.snps.vcf<br><span class="hljs-comment"># Filter SNPs</span><br>gatk VariantFiltration \<br>    --tmp-dir <span class="hljs-variable">$TMP</span> \<br>    -R <span class="hljs-variable">$REFFASTA</span> \<br>    -V <span class="hljs-variable">$VCF</span>.snps.vcf \<br>    --filter-expression <span class="hljs-string">&quot;QD &lt; 2.0 || FS &gt; 60.0 || MQ &lt; 40.0 || ReadPosRankSum &lt; -8.0&quot;</span> \<br>    --filter-name <span class="hljs-string">&quot;my_snp_filter&quot;</span> \<br>    -O <span class="hljs-variable">$VCF</span>.snps.filtered.vcf<br><span class="hljs-comment"># Separate indels</span><br>gatk SelectVariants \<br>    --tmp-dir <span class="hljs-variable">$TMP</span> \<br>    -R <span class="hljs-variable">$REFFASTA</span> \<br>    -V <span class="hljs-variable">$VCF</span>.vcf \<br>    --select-type-to-include INDEL \<br>    -O <span class="hljs-variable">$VCF</span>.indels.vcf<br><span class="hljs-comment"># Filter indels</span><br>gatk VariantFiltration \<br>    --tmp-dir <span class="hljs-variable">$TMP</span> \<br>    -R <span class="hljs-variable">$REFFASTA</span> \<br>    -V <span class="hljs-variable">$VCF</span>.indels.vcf \<br>    --filter-expression <span class="hljs-string">&quot;QD &lt; 2.0 || FS &gt; 200.0&quot;</span> \<br>    --filter-name <span class="hljs-string">&quot;my_indel_filter&quot;</span> \<br>    -O <span class="hljs-variable">$VCF</span>.indels.filtered.vcf<br><span class="hljs-comment"># Merge filtered files</span><br>gatk --java-options <span class="hljs-string">&quot;-Djava.io.tmpdir=<span class="hljs-variable">$TMP</span>&quot;</span> MergeVcfs \<br>   -R <span class="hljs-variable">$REFFASTA</span> \<br>   -I <span class="hljs-variable">$VCF</span>.snps.filtered.vcf \<br>   -I <span class="hljs-variable">$VCF</span>.indels.filtered.vcf \<br>   -O <span class="hljs-variable">$VCF</span>.filtered.vcf \<br><span class="hljs-built_in">echo</span> Run ended<br><span class="hljs-built_in">date</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"> 执行脚本</span><br>cd ..<br>nohup ./scripts/filter_vcf.sh all &gt;&amp; filter_vcf.log &amp;<br>top -u S20213281022<br></code></pre></td></tr></table></figure>
+<p><img src="/img/image-20231015190111246.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>运行时间： 3 分钟。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"> 查看all.filtered.vcf文件</span><br>nano all.filtered.vcf<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015190148768.png" srcset="/img/loading.gif" lazyload>
+<p>过滤后的VCF文件将称为 all.filtered.vcf （相应的索引文件*.vcf.idx 也将被创建）。其他中间文件（具有单独的 SNP、插入缺失、过滤连同它们的索引）也会产生——这些可能会被删除。检查已过滤的VCF文件。请注意“筛选器”字段中的更改。而不是点“.”（无过滤信息），此字段现在将包含标志 PASS （通过过滤器的变体）和my_snp_filter 或 my_indel_filter （这两个字符串都是在过滤命令中定义的）–标记未通过相应过滤器的变体。</p>
+<h4 id="3-13-Basic-stats-and-comparison-of-variant-sets">3.13  <strong>Basic stats and comparison of variant sets</strong></h4>
+<h5 id="1-使用Linux命令">(1)  使用Linux命令</h5>
+<p>给定一个VCF文件，其最简单的属性可以通过运行标准的Linux文本解析工具获得。例如，若要获取文件中的变体数，请运行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">grep -v &quot;#&quot; all.vcf | wc -l<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015190234965.png" srcset="/img/loading.gif" lazyload>
+<p>grep 过滤掉标题行并将其输出通过管道传输到 wc -l  中，后者计算剩余的行并在屏幕上显示结果）。要提取位于染色体chr2R上位置10000和20000之间的位点并将其保存在文件中，只需运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">grep -v &quot;#&quot; all.vcf | awk &#x27;&#123;if($1==&quot;chr2R&quot; &amp;&amp; $2 &gt;=10000 &amp;&amp; $2 &lt;=20000) print&#125;&#x27;&gt; extracted_records<br>nano extracted_records<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015190324163.png" srcset="/img/loading.gif" lazyload>
+<p>（请注意，在这种情况下，染色体条件$1==“chr2R”并不是真正需要的，因为我们的VCF文件只包含chr2R的数据，但是，需要更一般的输入）。要快速找出有多少变体通过了过滤，只需键入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">awk &#x27;&#123;if($7==&quot;PASS&quot;) print&#125;&#x27; all.filtered.vcf | wc -l<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015190359799.png" srcset="/img/loading.gif" lazyload>
+<p>存在417825变体。</p>
+<h5 id="2-使用GATK4的-Concordance-和-GenotypeConcordance-工具">(2)  使用GATK4的 Concordance 和 GenotypeConcordance 工具</h5>
+<p>GATK4 提供了有趣的函数，一致性和基因型一致性，以汇总变体集的各种统计数据，并将其与从相同数据获得的另一个变体集进行比较，但使用不同的方法，例如。基于此功能的脚本var_compar.sh将比较任意两个VCF文件，例如all.vcf和fb.vcf（分别使用GATK4和FreeBayes获得）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"> 修改脚本权限</span><br>cd scripts<br>chmod u+x var_compar.sh<br>nano var_compar.sh <br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#  修改脚本</span><br><span class="hljs-comment">#!/bin/bash</span><br>REFFASTA=./genome/genome.fa<br>GATKDIR=/programs/gatk-4.1.9.0<br>TMP=/home/<span class="hljs-variable">$USER</span>/<span class="hljs-variable">$USER</span>  <span class="hljs-comment">#  修改路径</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$GATKDIR</span>:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/local/jdk1.8.0_121<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-comment"># Supply only core file names (i.e., without .vcf suffix) of the VCF files</span><br>VCF1=<span class="hljs-variable">$1</span><br>VCF2=<span class="hljs-variable">$2</span><br>SAMPLE=<span class="hljs-variable">$3</span><br><span class="hljs-comment"># variants in VCF2 will be called &quot;truth&quot;, and those from VCF1</span><br><span class="hljs-comment"># will be &quot;evaluated&quot; against them.</span><br><span class="hljs-comment"># Check site concordance between two variant sets</span><br>gatk --java-options <span class="hljs-string">&quot;-Xmx2g -Djava.io.tmpdir=<span class="hljs-variable">$TMP</span>&quot;</span> Concordance \<br>   -R <span class="hljs-variable">$REFFASTA</span> \<br>   --evaluation <span class="hljs-variable">$VCF1</span>.vcf  \<br>   --truth <span class="hljs-variable">$VCF2</span>.vcf \<br>   --summary <span class="hljs-variable">$VCF1</span>.<span class="hljs-variable">$VCF2</span>.comp.site_summary<br><span class="hljs-comment"># Check genotype concordance for sample SAMPLE</span><br>gatk --java-options <span class="hljs-string">&quot;-Xmx2g -Djava.io.tmpdir=<span class="hljs-variable">$TMP</span>&quot;</span> GenotypeConcordance \<br>   --CALL_VCF <span class="hljs-variable">$VCF1</span>.vcf  \<br>   --TRUTH_VCF <span class="hljs-variable">$VCF2</span>.vcf \<br>   --CALL_SAMPLE <span class="hljs-variable">$SAMPLE</span> \<br>   --TRUTH_SAMPLE <span class="hljs-variable">$SAMPLE</span> \<br>   --O <span class="hljs-variable">$VCF1</span>.<span class="hljs-variable">$VCF2</span>.comp<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"> 运行脚本</span><br>cd ..<br>./scripts/var_compar.sh fb all ZW155 &gt;&amp; var_compar.log &amp;<br>top -u S20213281022<br>ls -l<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015190702759.png" srcset="/img/loading.gif" lazyload>
+<img src="/img/image-20231015191038059.png" srcset="/img/loading.gif" lazyload>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"> 查看fb.all.comp.site_summary文件</span><br>nano fb.all.comp.site_summary<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015191058859.png" srcset="/img/loading.gif" lazyload>
+<p>从图中可知，使用GATK4，以all.vcf为原假设，在InDel中，大部分都是假阳性，只有8个是真阳性。 而使用FreeBayes，以fb.vcf为原假设，其中有79.2%的SNP都是真阳性，少部分为假阳性。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"> 提供更详细的分析ZW155基因型一致性</span><br>nano fb.all.comp.genotype_concordance_summary_metrics<br>nano fb.all.comp.genotype_concordance_contingency_metrics<br>nano fb.all.comp.genotype_concordance_detail_metrics<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015191214629.png" srcset="/img/loading.gif" lazyload>
+<img src="/img/image-20231015191159629.png" srcset="/img/loading.gif" lazyload>
+<img src="/img/image-20231015191323980.png" srcset="/img/loading.gif" lazyload>
+<p>上面的命令将生成四个文件fb.all.comp.site_summary，其中包含站点一致性摘要，以及另外三个文件<br>
+(fb.all.comp.genotype_concordance_summary_metrics,fb.all.comp.genotype_concordance_detail_metrics,fb.all.comp.genotype_concordance_contingency_metrics)，并提供更详细的分析ZW155基因型一致性。</p>
+<h5 id="3-使用-vcftools">(3)  使用 vcftools</h5>
+<p>vcftools 是用于分析和操作VCF文件的流行工具包。以下是一些使用示例（在VCF文件上尝试）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vcftools --vcf all.vcf<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015191357889.png" srcset="/img/loading.gif" lazyload>
+<p>显示有四个样本，共423493个变异体。</p>
+<p>提取变体子集(chr2R，1M和2M之间)并将其写入新的VCF文件 ：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">vcftools --vcf all.vcf --chr chr2R --from-bp 1000000 --to-bp 2000000 --recode --recode-INFO-all -c &gt; subset.vcf<br>nano subset.vcf<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015191854446.png" srcset="/img/loading.gif" lazyload>
+<p>获取所有变体的等位基因频率并将其写入文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">vcftools --vcf all.vcf --freq -c &gt; all.freqs<br>nano all.freqs<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015191932852.png" srcset="/img/loading.gif" lazyload>
+<p>比较两个VCF文件（将在文件fb.all.compare中打印出各种比较信息 ）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vcftools --vcf fb.vcf --diff all.vcf --out fb.all.compare<br></code></pre></td></tr></table></figure>
+<img src="/img/image-20231015191953933.png" srcset="/img/loading.gif" lazyload>
+<p>发现fb.vcf和all.vcf，都至少含有399691个短变异。之前实验可得GATK4发现了423493个变异体。</p>
+<h3 id="4-实验总结">4. 实验总结</h3>
+<h4 id="4-1-实验结论">4.1 实验结论</h4>
+<ul>
+<li>在本次实验中，GATK4发现了423493个变异体，而FreeBayes发现399691个变异体。</li>
+<li>使用GATK4，以all.vcf为原假设，在InDel中，大部分都是假阳性，只有8个是真阳性。 而使用FreeBayes，以fb.vcf为原假设，其中有79.2%的SNP都是真阳性，少部分为假阳性。</li>
+</ul>
+<h4 id="4-2-实验收获">4.2 实验收获</h4>
+<ul>
+<li>使用samtools命令查看获取到的文件的比对状态汇总。</li>
+<li>使用GATK4以及FreeBayes调用短变异体 。</li>
+<li>学习利用IGV可视化BAM等文件，分析其生物学意义。</li>
+<li>了解BAM与VCF等格式文件。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Genomics/" class="category-chain-item">Genomics</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HW/" class="print-no-link">#HW</a>
+      
+        <a href="/tags/Genomics/" class="print-no-link">#Genomics</a>
+      
+        <a href="/tags/R/" class="print-no-link">#R</a>
+      
+        <a href="/tags/GATK4/" class="print-no-link">#GATK4</a>
+      
+        <a href="/tags/SNP/" class="print-no-link">#SNP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>使用GATK4获取短变异</div>
+      <div>http://horizongazer.github.io/2024/07/08/使用GATK4获取短变异/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>HorizonGazer</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/08/%E4%BD%BF%E7%94%A8MAKER%E8%BF%9B%E8%A1%8C%E5%9F%BA%E5%9B%A0%E7%BB%84%E6%B3%A8%E9%87%8A/" title="使用MAKER进行基因组注释">
+                        <span class="hidden-mobile">使用MAKER进行基因组注释</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"kSreM0uY5jXWPRahJhw2LDbE-gzGzoHsz","appKey":"Ux8qZ1XPuB6R9or0uKIElE9b","path":"window.location.pathname","placeholder":"留言仅限讨论，禁止广告等行为","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://ksrem0uy.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"kSreM0uY5jXWPRahJhw2LDbE-gzGzoHsz","appkey":"Ux8qZ1XPuB6R9or0uKIElE9b"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/custom.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
