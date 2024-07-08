@@ -1,0 +1,1016 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="HorizonGazer">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 实验目的 在本实验中，我们将使用MAKER进行基因组注释，它的工作原理是将尽可能多的证据沿着基因组序列排列，然后协调所有这些信号，以确定可能的基因结构。证据可以是来自同一(或密切相关)生物体的转录物或蛋白质序列。这些序列可以来自公共数据库或来自自己的实验数据(例如RNASeq实验的转录组组装)。Maker还能够考虑到重复的元素。 Maker使用ab-initio预测器(如Augustus或S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用MAKER进行基因组注释">
+<meta property="og:url" content="http://horizongazer.github.io/2024/07/08/%E4%BD%BF%E7%94%A8MAKER%E8%BF%9B%E8%A1%8C%E5%9F%BA%E5%9B%A0%E7%BB%84%E6%B3%A8%E9%87%8A/index.html">
+<meta property="og:site_name" content="HorizonGazer">
+<meta property="og:description" content="1. 实验目的 在本实验中，我们将使用MAKER进行基因组注释，它的工作原理是将尽可能多的证据沿着基因组序列排列，然后协调所有这些信号，以确定可能的基因结构。证据可以是来自同一(或密切相关)生物体的转录物或蛋白质序列。这些序列可以来自公共数据库或来自自己的实验数据(例如RNASeq实验的转录组组装)。Maker还能够考虑到重复的元素。 Maker使用ab-initio预测器(如Augustus或S">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://horizongazer.github.io/img/image-20231022145420930.png">
+<meta property="article:published_time" content="2024-07-08T05:41:11.829Z">
+<meta property="article:modified_time" content="2024-07-08T05:51:53.036Z">
+<meta property="article:author" content="HorizonGazer">
+<meta property="article:tag" content="HW">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="MAKER">
+<meta property="article:tag" content="Genomics">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://horizongazer.github.io/img/image-20231022145420930.png">
+  
+  
+  
+  <title>使用MAKER进行基因组注释 - HorizonGazer</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"horizongazer.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"kSreM0uY5jXWPRahJhw2LDbE-gzGzoHsz","app_key":"Ux8qZ1XPuB6R9or0uKIElE9b","server_url":"https://ksrem0uy.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HorizonGazer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>小白指南</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://hexo.fluid-dev.com/docs/start/" target="_self">
+                    
+                    <span>安装主题</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://hexo.fluid-dev.com/docs/guide/" target="_self">
+                    
+                    <span>配置指南</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://hexo.fluid-dev.com/docs/icon/" target="_self">
+                    
+                    <span>图标用法</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="使用MAKER进行基因组注释"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-08 13:41" pubdate>
+          2024年7月8日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">使用MAKER进行基因组注释</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-实验目的">1. 实验目的</h2>
+<p>在本实验中，我们将使用MAKER进行基因组注释，它的工作原理是将尽可能多的证据沿着基因组序列排列，然后协调所有这些信号，以确定可能的基因结构。证据可以是来自同一(或密切相关)生物体的转录物或蛋白质序列。这些序列可以来自公共数据库或来自自己的实验数据(例如RNASeq实验的转录组组装)。Maker还能够考虑到重复的元素。</p>
+<p>Maker使用ab-initio预测器(如Augustus或SNAP)来改进其预测:这些软件工具能够通过使用统计模型分析基因组序列来进行基因结构预测。</p>
+<p>在本实验中，将学习如何执行基因组注释，以及如何评估其质量，学习训练从头算预测器产生良好结果的重要步骤，最后，将学习如何使用IGV来可视化结果。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html</a></p>
+<h3 id="2-实验准备">2. 实验准备</h3>
+<h4 id="2-1-实验平台">2.1 实验平台</h4>
+<p>Linux JSvr01 3.10.0-1160.80.1.el7.x86_64 #1 SMP Tue Nov 8 15:48:59 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</p>
+<h4 id="2-2-数据简述">2.2 数据简述</h4>
+<table>
+<thead>
+<tr>
+<th>数据</th>
+<th>数据来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>maker_tutorial.tgz</td>
+<td>/work/cb-data/annotation2019</td>
+</tr>
+<tr>
+<td>pyu_rnd1.maker.output.tgz</td>
+<td>/work/cb-data/annotation2019</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-3-软件配置">2.3 软件配置</h4>
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th>版本</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FileZilla</td>
+<td>3.65.0</td>
+<td><a target="_blank" rel="noopener" href="https://filezilla-project.org/">https://filezilla-project.org/</a></td>
+</tr>
+<tr>
+<td>IGV</td>
+<td>2.6.3</td>
+<td><a target="_blank" rel="noopener" href="https://data.broadinstitute.org/igv/projects/downloads/2.6/">https://data.broadinstitute.org/igv/projects/downloads/2.6/</a></td>
+</tr>
+<tr>
+<td>BuildDatabase</td>
+<td>2.0.1</td>
+<td>/work/bin/RepeatModeler-2.0.1/</td>
+</tr>
+<tr>
+<td>RepeatModeler</td>
+<td>2.0.1</td>
+<td>/work/bin/RepeatModeler-2.0.1/</td>
+</tr>
+<tr>
+<td>maker</td>
+<td>2.31.10</td>
+<td>/work/bin/maker</td>
+</tr>
+<tr>
+<td>mpiexec</td>
+<td>1.5</td>
+<td>/work/bin/maker/exe/mpich2/bin</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-实验内容">3. 实验内容</h3>
+<p>在本实验中，将学习如何执行基因组注释，以及如何评估其质量，学习训练从头算预测器产生良好结果的重要步骤，最后，将学习如何使用IGV来可视化结果。</p>
+<p>对于第一轮，我们将Maker配置为仅通过将EST和蛋白质与基因组对齐来构建基因模型。这将生成一个初稿注释，我们将在接下来的步骤中对其进行改进。</p>
+<p>第二轮，我们使用SNAP进行从头算预测因子首次训练。在 Maker 中使用它之前，我们需要使用我们在前面步骤中生成的第一个注释草稿来训练它们。只有最好的评分基因（即那些有最强证据的基因）才会被保留来训练预测因子。“Ab-initio”意味着这些预测因子能够仅根据基因组的序列和物种特异性统计模型来预测基因组中基因的结构。他们不使用任何证据（例如EST或蛋白质）来预测基因，但他们需要用一组已经预测的基因进行训练。Maker能够使用EST和蛋白质证据，并将它们与几个从头预测因子的结果相结合，以预测共识基因模型。它允许检测没有EST或蛋白质对齐的区域的基因，还可以在有EST和/或蛋白质证据以及从头预测的区域改进基因结构。</p>
+<p>第三轮，我们需要运行新一轮的Maker。由于证据在第一次运行时已经在基因组上对齐，我们可以按原样重用这些对齐。 但这一次，启用从头的基因预测，禁用直接从所有 EST 和蛋白质推断基因预测：现在我们希望 Maker 通过协调证据比对<em>和</em>从头基因预测来推断基因预测。为了获得更好的结果，我们将对 SNAP进行第二次训练，然后第三次（最后一次）运行 Maker。</p>
+<h4 id="3-1-Prepare-working-directory">3.1  Prepare working directory</h4>
+<p>准备文件，创建工作目录。</p>
+<p>将“ /work/cb-data/annotation2019/” 目录下的 data 文件拷贝到“ ~/$USER” 目录下，并解压。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir $USER<br>mkdir $USER/tmp<br>cd $USER<br>cp ../annotation2019/maker_tutorial.tgz ./<br>tar -zxf maker_tutorial.tgz<br>cd maker_tutorial<br>ls -1<br></code></pre></td></tr></table></figure>
+<p><img src="/img/image-20231021204216470.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h4 id="3-2-Maker-round-1-Map-known-genes-to-the-genome">3.2  Maker round 1 - Map known genes to the genome</h4>
+<p>将已知基因映射到基因组中，包括：重复掩蔽和将已知的转录组/蛋白质序列与基因组对齐 。</p>
+<h5 id="1-构建自定义的重复数据库">(1)  构建自定义的重复数据库</h5>
+<p>这个步骤对于这个练习来说是可选的，因为它是一个非常小的基因组，不需要重复掩蔽就可以了。 当在做一个真实的项目时，可以从 <a target="_blank" rel="noopener" href="https://www.girinst.org/repbase/">RepBase</a>，需要许可下载一个数据库，也可以用自己的基因组序列构建一个自定义的重复数据库。</p>
+<p>RepeatModeler  是一个用于构建自定义数据库的软件。这里提供了用于构建重复数据库的命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ~/$USER/maker_tutorial/example_02_abinitio<br><span class="hljs-meta prompt_"># </span><span class="language-bash"> 可以删除路径环境变量</span><br>export PATH=$(echo $PATH | tr &#x27;:&#x27; &#x27;\n&#x27; | grep -v &#x27;/work/bin/RepeatModeler-2.0.1&#x27; | tr &#x27;\n&#x27; &#x27;:&#x27; | sed &#x27;s/:$//&#x27;)<br><span class="hljs-meta prompt_"># </span><span class="language-bash"> 重新定义路径</span><br>export PATH=/work/bin/RepeatModeler-2.0.1:$PATH<br>BuildDatabase -name pyu pyu_contig.fasta<br>RepeatModeler -pa 4 -database pyu &gt;&amp; repeatmodeler.log<br>nano repeatmodeler.log<br></code></pre></td></tr></table></figure>
+<p><img src="/img/image-20231021211215656.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="/img/image-20231021211641284.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>运行结束后获得pyu-families.fa，将其提供给maker_opts.ctl文件的“rmlib= ”选项</p>
+<h5 id="2-设置环境运行-Maker-并创建-Maker-控制文件">(2)  设置环境运行 Maker 并创建 Maker 控制文件</h5>
+<p>Maker 中的每一步都是由 Maker 控制文件指定的。 “ maker -CTL” 命令将创建三个控制文件： maker_bopts.ctl, maker_exe.ctl, maker_opts.ctl.by</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">export PATH=/work/bin/maker/bin:/work/bin/RepeatMasker:/work/bin/maker/exe/snap:$PATH<br>export ZOE=/work/bin/maker/exe/snap/Zoe<br>cd ~/$USER/maker_tutorial/example_02_abinitio<br>maker -CTL<br></code></pre></td></tr></table></figure>
+<p><img src="/img/image-20231022101537615.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="3-修正控制文件-maker-opts-ctl">(3)  修正控制文件 maker_opts.ctl</h5>
+<p>将修改后的文件放在相同的目录“example_02_abinitio” 中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"> 在 maker_opts.ctl修改以下变量，分为两部分：</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># 运行RepeatMasker的配置</span></span><br>model_org=simple  #  tells RepeatMasker to mask the low complexity sequence (e.g.“AAAAAAAAAAAAA”)<br>rmlib=   #  tells RepeatMasker not to mask repeat sequences like transposon elements. If you have a repeat fasta file (e.g. output fromRepeatModeler) that you need to mask, put the fasta file name next to “rmlib=”<br>softmask=1  #  tells RepeatMasker to do soft-masking which converts repeats to lower case, instead of hard-masking which converts repeats to “N”. &quot;Soft-masking&quot; is important so that short repeat sequences within genes can still be annotated as part of gene.<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment">#  匹配文件pyu_est.fasta中转录序列与文件sp_protein.fasta中蛋白质序列到基因组以及推断证据支持基因模型中</span></span><br>genome=pyu_contig.fasta<br>est=pyu_est.fasta<br>protein=sp_protein.fasta  #   specify the fasta file names of the EST and protein sequences. In general, the EST sequence file contains the assembled transcriptome from RNA-seq data. The protein sequence file include proteins from closely related species or swiss-prot. If you have multiple protein or EST files, separate file names with &quot;,&quot;.<br>est2genome=1<br>protein2genome=1  #  tell MAKER to align the transcript sequences from the pyu_est.fasta file and protein sequences from the sp_protein.fasta file to the genome. These two files are used to define evidence supported gene model.<br>TMP=~/$USER/tmp #important for big genome, as the default /tmp is too small<br></code></pre></td></tr></table></figure>
+<h5 id="4-利用screen执行重复序列屏蔽">(4)  利用screen执行重复序列屏蔽</h5>
+<p>重复掩蔽和对齐。 这一步需要一个小时。在screen中运行。在命令中:“ mpiexec -n 2” 意味着你将使用 MPI 并行 Maker，并且一次使用两个线程。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">screen<br>export PATH=/work/bin/maker/bin:/work/bin/RepeatMasker:/work/bin/maker/exe/snap:$PATH<br>export ZOE=/work/bin/maker/exe/snap/Zoe<br><br>cd ~/$USER/maker_tutorial/example_02_abinitio<br>/work/bin/maker/exe/mpich2/bin/mpiexec -n 2 maker -base pyu_rnd1 &gt;&amp; log1 &amp;<br></code></pre></td></tr></table></figure>
+<p><img src="/img/image-20231022104332557.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="/img/image-20231022113838827.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>Maker is now finished!!!</p>
+<h4 id="3-3-Maker-round-2-Gene-prediction-using-SNAP">3.3  Maker round 2 - Gene prediction using SNAP</h4>
+<p>使用 SNAP 进行基因预测</p>
+<h5 id="1-训练一个SNAP基因模型">(1)  训练一个SNAP基因模型</h5>
+<p>SNAP是从基因组进行从头算基因预测的软件。使用 SNAP做基因预测，将首先使用上一个生成的对齐结果训练 SNAP 模型。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ~/$USER/maker_tutorial/example_02_abinitio<br>cp ~/annotation2019/pyu_rnd1.maker.output.tgz ./<br>tar xvfz pyu_rnd1.maker.output.tgz<br></code></pre></td></tr></table></figure>
+<p>设置环境变量，如果是新session</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">export PATH=/work/bin/maker/bin:/work/bin/RepeatMasker:/work/bin/maker/exe/snap:$PATH<br>export ZOE=/work/bin/maker/exe/snap/Zoe<br></code></pre></td></tr></table></figure>
+<p>接下的命令将MAKER round 1的结果传递到输入文件，构造一个SNAP模型</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir snap1<br>cd snap1<br>gff3_merge -d ../pyu_rnd1.maker.output/pyu_rnd1_master_datastore_index.log<br>maker2zff -l 50 -x 0.5 pyu_rnd1.all.gff  #   specify that only gene models with AED score&gt;0.5 and protein length&gt;50 are used for building models.<br></code></pre></td></tr></table></figure>
+<p>生成了三个文件：pyu_rnd1.all.gff &amp; genome.ann &amp; genome.dna</p>
+<p><img src="/img/image-20231022110139244.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>maker2zff生成一个ZFF格式文件（genome.ann）和一个FASTA格式文件（genome.dna），过滤用于再次训练的高置信度基因，共有7个选项：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-c 由EST/mRNA-Seq比对确定的剪接位点的比例，默认0.5</span><br><span class="hljs-deletion">-e 与EST/mRNA-Seq比对重叠的外显子的比例，默认0.5</span><br><span class="hljs-deletion">-o 和任何证据（EST或者蛋白）重叠的外显子的比例，默认0.5</span><br><span class="hljs-deletion">-a 从头预测证实的剪接位点的比例，默认0</span><br><span class="hljs-deletion">-t 和从头预测结果重叠的外显子的比例，默认0</span><br><span class="hljs-deletion">-l mRNA翻译的蛋白质序列的最短长度	</span><br><span class="hljs-deletion">-x 最大AED值，默认0.5</span><br><span class="hljs-deletion">-n 不过滤</span><br></code></pre></td></tr></table></figure>
+<p>AED值：maker2使用注释编辑距离（AED）来评估基因组注释的准确性，AED是一个介于 0 和 1 之间的数字，衡量注释与支持它的evidence的拟合优度，0 表示与可用证据完全一致，1 表示缺乏对注释基因模型的支持</p>
+<p>现在将运行以下命令来训练SNAP。训练SNAP的基本步骤是：首先对输入的基因模型进行过滤，然后立即捕获周围的基因组序列每个模型轨迹，最后使用这些捕获的片段生成HMM。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">fathom -categorize 1000 genome.ann genome.dna<br>fathom -export 1000 -plus uni.ann uni.dna<br>forge export.ann export.dna<br>hmm-assembler.pl pyu . &gt; ../pyu1.hmm<br>mv pyu_rnd1.all.gff ../<br>cd ..<br></code></pre></td></tr></table></figure>
+<p>在此之后，将在 example_02_abinitio 目录中找到两个新文件:pyu_rnd1.all.gff:第一轮的gff文件，它是基于证据的基因。 pyu1.hmm:一个从基于证据的基因训练出来的隐藏马尔科夫模型。</p>
+<p><img src="/img/image-20231022112811141.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="2-用SNAP去预测基因">(2)  用SNAP去预测基因</h5>
+<p>直接修改 maker_opts。之前修改过的 CTL文件。在此之前，保存一个maker_opts 的备份副本 CTL用于第一轮。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp maker_opts.ctl maker_opts.ctl_backup_rnd1<br></code></pre></td></tr></table></figure>
+<p>修改文件maker_opts.ctl  中一些变量的值：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell">maker_gff= pyu_rnd1.all.gff<br>est_pass=1 # use est alignment from round 1<br>protein_pass=1 #use protein alignment from round 1<br>rm_pass=1 # use repeats in the gff file<br>snaphmm=pyu1.hmm<br>est= # remove est file, do not run EST blast again<br>protein= # remove protein file, do not run blast again<br>model_org= #remove repeat mask model, so not running RM again<br>rmlib= # not running repeat masking again<br>repeat_protein= #not running repeat masking again<br>est2genome=0 # do not do EST evidence based gene model<br>protein2genome=0 # do not do protein based gene model.<br>pred_stats=1 #report AED stats<br>alt_splice=0 # 0: keep one isoform per gene; 1: identify splicing variants of the same gene<br>keep_preds=1 # keep genes even without evidence support, set to 0 if no<br></code></pre></td></tr></table></figure>
+<p>用新的控制文件运行 maker。这个步骤需要几分钟。 (一个真正的项目可能需要几个小时才能完成)。将使用选项“ -base pyu_rnd2” ，这样结果将被写入一个新目录“ pyu_rnd2” 。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">/work/bin/maker/exe/mpich2/bin/mpiexec -n 2 maker -base pyu_rnd2 &gt;&amp; log2 &amp;<br></code></pre></td></tr></table></figure>
+<p><img src="/img/image-20231022113650745.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="/img/image-20231022113923968.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>Maker is now finished!!!</p>
+<h4 id="3-4-Maker-round-3-Retrain-SNAP-model-and-do-another-round-of-SNAP-gene-prediction">3.4  Maker round 3 - Retrain SNAP model and do another round of SNAP gene prediction</h4>
+<p>重新训练 SNAP 模型，并进行另一轮 SNAP 基因预测，可能需要运行两到三轮 SNAP。所以你要再次重复第二部分。确保将 snap1 替换为 snap2，这样就不会覆盖上一轮。</p>
+<h5 id="1-首先训练一个新的SNAP模型">(1)  首先训练一个新的SNAP模型</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir snap2<br>cd snap2<br>gff3_merge -d ../pyu_rnd2.maker.output/pyu_rnd2_master_datastore_index.log<br>maker2zff -l 50 -x 0.5 pyu_rnd2.all.gff<br>fathom -categorize 1000 genome.ann genome.dna<br>fathom -export 1000 -plus uni.ann uni.dna<br>forge export.ann export.dna<br>hmm-assembler.pl pyu . &gt; ../pyu2.hmm<br>mv pyu_rnd2.all.gff ..<br>cd ..<br></code></pre></td></tr></table></figure>
+<h5 id="2-使用SNAP预测基因">(2)  使用SNAP预测基因</h5>
+<p>为第二轮的maker_opts.ctl 保存副本:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp maker_opts.ctl maker_opts.ctl_backup_rnd2<br></code></pre></td></tr></table></figure>
+<p>编辑第三轮的maker_opts.ctl</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">maker_gff=pyu_rnd2.all.gff<br>snaphmm=pyu2.hmm<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">/work/bin/maker/exe/mpich2/bin/mpiexec -n 2 maker -base pyu_rnd3 &gt;&amp; log3 &amp;<br></code></pre></td></tr></table></figure>
+<p><img src="/img/image-20231022114653929.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>使用下面的命令创建最终的合并 gff 文件。 &quot; -n &quot;选项将产生一个没有基因组序列的 gff 文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">gff3_merge -n -d pyu_rnd3.maker.output/pyu_rnd3_master_datastore_index.log&gt;pyu_rnd3.noseq.gff<br>fasta_merge -d pyu_rnd3.maker.output/pyu_rnd3_master_datastore_index.log<br></code></pre></td></tr></table></figure>
+<p>在这之后，会得到一个新的 gff3 文件:pyu_rnd3.noseq.gff，以及蛋白质和转录 fasta 文件。</p>
+<h5 id="3-生成AED图">(3)  生成AED图</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">/work/bin/maker/AED_cdf_generator.pl -b 0.025 pyu_rnd2.all.gff &gt; AED_rnd2<br>/work/bin/maker/AED_cdf_generator.pl -b 0.025 pyu_rnd3.all.gff &gt; AED_rnd3<br></code></pre></td></tr></table></figure>
+<p>可以使用 Excel 绘制 AED_rnd2 和 AED_rnd3 文件的第二列，并使用第一列作为 x轴值。 x 轴标签为“AED” ， y 轴标签为“Cumulative Fraction of Annotations”</p>
+<p><img src="/img/image-20231022145420930.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="/img/image-20231022145402231.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>AED值：maker2使用注释编辑距离（AED）来评估基因组注释的准确性，AED是一个介于 0 和 1 之间的数字，衡量注释与支持它的evidence的拟合优度，0 表示与可用证据完全一致，1 表示缺乏对注释基因模型的支持。结合Cumulative Fraction of Annotations可进行质量评估。</p>
+<h4 id="3-5-Visualize-the-gff-file-in-IGV">3.5  Visualize the gff file in IGV</h4>
+<p>以将 gff 文件与fasta文件一起加载到 IGV 中。  用FileZilla下载pyu_contig.fasta和pyu_rnd1.all.gff，pyu_rnd2.all.gff，pyu_rnd3.all.gff文件。导入IGV进行可视化：</p>
+<img src="/img/image-20231022153714959.png" srcset="/img/loading.gif" lazyload>
+<img src="/img/image-20231022165001764.png" srcset="/img/loading.gif" lazyload>
+<p>例如scf1117875582023:644,587-656,318，在第一轮结束时，Maker预测了该地区的部分短基因模型。 在第二轮之后，Maker能够预测该区域的其他基因模型。这意味着 Maker 主要使用 SNAP 的基因预测来构建此基因模型。 第三轮后，基于第二轮预测基因。训练SNAP可以完善基因结构并完善该区域发现的基因结构。</p>
+<h3 id="4-实验总结">4. 实验总结</h3>
+<h4 id="4-1-实验结论">4.1 实验结论</h4>
+<p>第二个注释与前一个注释相比，具有更多的完整单拷贝，以及更多的基因使用从头预测因子可以在EST或蛋白质比对不足以预测基因的区域找到更多的基因。</p>
+<p>第三轮训练中，Maker能够预测更复杂的基因，例如合并一些事先被认为是独立的基因，不需要超过两轮训练即可从从头预测器获得最佳结果。</p>
+<h4 id="4-2-实验收获">4.2 实验收获</h4>
+<p>学习了如何使用 Maker 注释真核基因组、训练SNAP并预测基因、如何评估注释的质量以及如何使用 IGV对结果进行可视化。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Genomics/" class="category-chain-item">Genomics</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HW/" class="print-no-link">#HW</a>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+        <a href="/tags/MAKER/" class="print-no-link">#MAKER</a>
+      
+        <a href="/tags/Genomics/" class="print-no-link">#Genomics</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>使用MAKER进行基因组注释</div>
+      <div>http://horizongazer.github.io/2024/07/08/使用MAKER进行基因组注释/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>HorizonGazer</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/08/DUT%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E4%B8%93%E5%AE%B6%E7%B3%BB%E7%BB%9F_HW4/" title="DUT人工智能与专家系统_HW4">
+                        <span class="hidden-mobile">DUT人工智能与专家系统_HW4</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"kSreM0uY5jXWPRahJhw2LDbE-gzGzoHsz","appKey":"Ux8qZ1XPuB6R9or0uKIElE9b","path":"window.location.pathname","placeholder":"留言仅限讨论，禁止广告等行为","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://ksrem0uy.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"kSreM0uY5jXWPRahJhw2LDbE-gzGzoHsz","appkey":"Ux8qZ1XPuB6R9or0uKIElE9b"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/custom.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
