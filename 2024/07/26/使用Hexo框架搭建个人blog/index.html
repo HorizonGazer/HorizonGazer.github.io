@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://horizongazer.github.io/img/bg002.jpg">
 <meta property="article:published_time" content="2024-07-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-26T06:06:47.836Z">
+<meta property="article:modified_time" content="2024-07-26T14:05:50.266Z">
 <meta property="article:author" content="HorizonGazer">
 <meta property="article:tag" content="生活记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -380,7 +380,7 @@
 <h3 id="3-3-创建blog本地目录文件夹">3.3  创建blog本地目录文件夹</h3>
 <p>后有demo，不必万丈高楼平地起，了解即可。</p>
 <p>利用命令行创建我们即将使用的 Hexo 博客的目录文件夹，里面将存放关于 Hexo 博客的各种配置文件、源码、文档、主题等。（如果在安装 Hexo 中出现任何问题，可以删除此目录文件夹，重新执行之前的步骤即可）。执行如下操作后，可在目录下看到 blog 文件夹。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 注意，请提前cd到您方便操作的路径，初始化博客文件夹</span><br><span class="hljs-comment"># 这个文件夹将来存放博客的所有内容和素材，以及所有的博客操作都会在其中完成，所以最好不要随便放。	</span><br>hexo init blog<br><span class="hljs-comment"># 切换到该路径</span><br><span class="hljs-built_in">cd</span> blog<br><span class="hljs-comment"># 安装hexo的扩展插件</span><br>npm install<br><span class="hljs-comment"># 安装部署插件，如果不进行该操作，直之后接使用 `hexo d` 部署到 `GitHub`，将会报错。</span><br>npm install hexo-deployer-git --save<br><span class="hljs-comment"># 安装其它插件</span><br>npm install hexo-server --save<br>npm install hexo-admin --save<br>npm install hexo-generator-archive --save<br>npm install hexo-generator-feed --save<br>npm install hexo-generator-search --save<br>npm install hexo-generator-tag --save<br>npm install hexo-generator-sitemap --save<br><span class="hljs-comment"># 查看已安装的插件</span><br>npm list<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 注意，请提前cd到您方便操作的路径，初始化博客文件夹</span><br><span class="hljs-comment"># 这个文件夹将来存放博客的所有内容和素材，以及所有的博客操作都会在其中完成，所以最好不要随便放。	</span><br>hexo init blog<br><span class="hljs-comment"># 切换到该路径</span><br><span class="hljs-built_in">cd</span> blog<br><span class="hljs-comment"># 安装hexo的扩展插件</span><br>npm install<br><span class="hljs-comment"># 安装部署插件，如果不进行该操作，之后直接使用 `hexo d` 部署到 `GitHub`，将会报错。</span><br>npm install hexo-deployer-git --save<br><span class="hljs-comment"># 安装其它插件</span><br>npm install hexo-server --save<br>npm install hexo-admin --save<br>npm install hexo-generator-archive --save<br>npm install hexo-generator-feed --save<br>npm install hexo-generator-search --save<br>npm install hexo-generator-tag --save<br>npm install hexo-generator-sitemap --save<br><span class="hljs-comment"># 查看已安装的插件</span><br>npm list<br></code></pre></td></tr></table></figure>
 <p>我们可以先看看刚才的blog文件夹的结构：</p>
 <p><img src="/img/image-20240726102000298.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>对于新手而言，我们主要关注<strong>配置文件</strong>和<strong>source文件夹</strong></p>
@@ -413,8 +413,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo d<br></code></pre></td></tr></table></figure>
 <p>部署成功后，打开对应的网址 <code>https://www.username.github.io</code>，如果出现了和本地预览一样的效果，那么，表明部署成功。</p>
 <h2 id="5-主题推荐与demo">5  主题推荐与demo</h2>
-<p>目前，我们将部署前本地与Github的配置解决了。</p>
-<p>Congratulations to you! 接下来仅需进行简单的操作和命令即可生成您的个人blog了。请根据您的喜好选择[主题](Themes: <a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a>)和<a target="_blank" rel="noopener" href="https://hexo.io/plugins/">插件</a>。</p>
+<p>Congratulations to you! 接下来仅需进行简单的操作和命令即可生成您的个人blog了。请根据您的喜好选择<a target="_blank" rel="noopener" href="https://hexo.io/themes/">主题</a>和<a target="_blank" rel="noopener" href="https://hexo.io/plugins/">插件</a>。</p>
 <p>这里介绍一个主题Fluid，这里提供它的<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid?tab=readme-ov-file">demo</a>和<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/">预览</a>。</p>
 <p>我们使用git将项目克隆到本地。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/fluid-dev/hexo-theme-fluid.git<br></code></pre></td></tr></table></figure>
