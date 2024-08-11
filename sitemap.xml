@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://horizongazer.github.io/2024/07/29/Genome_wide_association_study/</loc>
+    
+    <lastmod>2024-07-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://horizongazer.github.io/2024/07/26/%E4%BD%BF%E7%94%A8Hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/</loc>
     
     <lastmod>2024-07-26</lastmod>
@@ -112,7 +121,7 @@
 
   <url>
     <loc>http://horizongazer.github.io/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -120,196 +129,203 @@
   
   <url>
     <loc>http://horizongazer.github.io/tags/HW/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/Python/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%E7%B2%92%E5%AD%90%E7%BE%A4%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%E8%9A%81%E7%BE%A4%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%E6%97%85%E8%A1%8C%E5%95%86%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/BFS/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/DFS/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/AStar%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%CE%B1-%CE%B2%E5%89%AA%E6%9E%9D/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%E6%89%8B%E5%86%99%E4%BD%93%E8%AF%86%E5%88%AB/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/Linux/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/RNA-seq/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%E4%B8%8B%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%88%9D%E6%AD%A5%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%E4%B8%93%E5%AE%B6%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/R/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/scRNA-seq/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/tutorial/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/paper-reproducing/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/Genomics/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/GATK4/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/SNP/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/FOREVER/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/LOVE/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/tags/MAKER/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/GWAS/</loc>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -318,42 +334,42 @@
   
   <url>
     <loc>http://horizongazer.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E4%B8%93%E5%AE%B6%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/categories/RNA-seq/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/categories/scRNA-seq/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/categories/Genomics/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://horizongazer.github.io/categories/LOVE/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
