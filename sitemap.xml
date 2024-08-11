@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://horizongazer.github.io/2024/07/29/Genome_wide_association_study/</loc>
-    
-    <lastmod>2024-07-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://horizongazer.github.io/2024/07/26/%E4%BD%BF%E7%94%A8Hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/</loc>
     
     <lastmod>2024-07-26</lastmod>
@@ -318,13 +309,6 @@
   
   <url>
     <loc>http://horizongazer.github.io/tags/MAKER/</loc>
-    <lastmod>2024-08-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://horizongazer.github.io/tags/GWAS/</loc>
     <lastmod>2024-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

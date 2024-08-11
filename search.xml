@@ -31,35 +31,6 @@
     
     
     <entry>
-      <title>Genome-wide association study</title>
-      <link href="/2024/07/29/Genome_wide_association_study/"/>
-      <url>/2024/07/29/Genome_wide_association_study/</url>
-      
-        <content type="html"><![CDATA[<h2 id="背景">背景</h2><p>在基因组学领域，全基因组关联研究（简称GWAS）是一种观察性研究，它分析不同个体基因组中的遗传变异集，以确定是否有特定变异与某一特征相关。这类研究通常关注单核苷酸多态性（SNPs）与诸如重大人类疾病等特征之间的联系，但也适用于其他遗传变异和生物体。</p><p>在涉及人类数据的GWAS中，研究者会比较具有不同表型的个体的DNA。这些个体可能是患有特定疾病的患者（病例组）和没有该疾病的相似人群（对照组），或者是具有不同表型的个体，如血压水平不同的人群。这种研究方法被称为表型优先，即首先根据个体的临床表现进行分类，而不是基于基因型。每个参与者提供DNA样本，从中通过SNP芯片检测数百万遗传变异。如果统计证据显示某种变异（等位基因）在疾病患者中更为常见，那么这种变异就被认为是与疾病相关的。这些相关的SNPs可能标记了影响疾病风险的基因组区域。</p><p>与传统的候选基因研究不同，GWAS不针对特定的遗传区域，而是一种非候选驱动的方法，它能够在整个基因组范围内识别与疾病相关的SNPs和其他遗传变异。尽管GWAS可以识别与疾病相关的遗传变异，但它本身并不能确定哪些基因是致病的。</p><p>GWAS的首次成功应用是在2002年，研究了心肌梗死。随后，这种研究方法在2005年的一项里程碑式研究中得到应用，该研究调查了与年龄相关的黄斑变性患者，并发现了两个与健康对照组相比等位基因频率有显著差异的SNPs。到2017年，已有超过3000项GWAS研究，涉及超过1800种疾病和特征，发现了数千个SNP关联。除了罕见遗传疾病外，这些关联通常较弱，尽管每个单独的关联可能对风险的解释有限，但它们为理解关键基因和途径提供了宝贵信息，并且在综合分析时具有重要意义。</p><h2 id="方法">方法</h2><p><img src="/img/Manhattan_plot_from_a_GWAS_of_kidney_stone_disease.png" alt="Manhattan_plot_from_a_GWAS_of_kidney_stone_disease"></p><p>GWAS的曼哈顿图是一种可视化工具，用来展示与疾病风险强烈相关的遗传位点。图中的每个点代表一个SNP，X轴表示基因组的位置，Y轴表示变异与特征的关联强度。例如，一个研究肾结石疾病的GWAS可能会发现某些遗传变异在患者中更为常见。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Genomics </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> R </tag>
-            
-            <tag> Genomics </tag>
-            
-            <tag> GWAS </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>使用Hexo框架搭建个人blog</title>
       <link href="/2024/07/26/%E4%BD%BF%E7%94%A8Hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/"/>
       <url>/2024/07/26/%E4%BD%BF%E7%94%A8Hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/</url>
