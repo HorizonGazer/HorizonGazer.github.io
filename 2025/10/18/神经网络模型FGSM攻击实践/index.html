@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://horizongazer.github.io/img/attack01.jpg">
 <meta property="article:published_time" content="2025-10-18T15:32:43.759Z">
-<meta property="article:modified_time" content="2025-10-18T15:53:24.058Z">
+<meta property="article:modified_time" content="2025-10-18T16:14:27.667Z">
 <meta property="article:author" content="HorizonGazer">
 <meta property="article:tag" content="FGSM">
 <meta property="article:tag" content="ResNet-20">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.6k 字
+          7.4k 字
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          56 分钟
+          62 分钟
         
       </span>
     
@@ -317,7 +317,7 @@
             
               <div class="markdown-body">
                 
-                <p>本实践作业旨在通过实验验证深度神经网络模型对对抗攻击的脆弱性。本实验针对图像分类任务，实现了<strong>快速梯度符号法（FGSM）</strong>对抗攻击算法，并在CIFAR-10数据集上进行了系统性测试。实验结果表明，即使是微小的、人类难以察觉的扰动，也能导致神经网络模型的预测性能显著下降。</p>
+                <p>本实践作业旨在通过实验验证深度神经网络模型对对抗攻击的脆弱性。本实验针对图像分类任务，实现了快速梯度符号法（FGSM）对抗攻击算法，并在CIFAR-10数据集上进行了系统性测试。实验结果表明，即使是微小的、人类难以察觉的扰动，也能导致神经网络模型的预测性能显著下降。</p>
 <h2 id="实验目标">实验目标</h2>
 <ol type="1">
 <li>理解对抗样本的基本概念和生成原理</li>
@@ -337,9 +337,97 @@ class="math inline"><em>δ</em></span>，使得：</p>
 class="math display"><em>f</em><sub><em>θ</em></sub>(<em>x</em> + <em>δ</em>) ≠ <em>y</em>,  且  ||<em>δ</em>||<sub><em>p</em></sub> ≤ <em>ϵ</em></span></p>
 <p>其中 <span class="math inline"><em>ϵ</em></span>
 是扰动的最大允许幅度，<span
-class="math inline">∥ ⋅ ∥<sub><em>p</em></sub></span> 表示 <span
+class="math inline">|| ⋅ ||<sub><em>p</em></sub></span> 表示 <span
 class="math inline"><em>L</em><sub><em>p</em></sub></span> 范数。</p>
+<p>好，我们来简单地介绍一下范数。数学中，<strong>范数</strong>是一个函数，它为线性空间（例如向量空间）中的每个向量赋予一个非负的实数值。你可以将它理解为
+<strong>“长度”</strong> 概念的推广。</p>
+<p>对于一个向量 <strong>x</strong>，其范数通常表示为
+||<strong>x</strong>||。它必须满足以下三个性质： 1.
+<strong>非负性</strong>：||<strong>x</strong>|| ≥ 0，且
+||<strong>x</strong>|| = 0 当且仅当 <strong>x</strong> 是零向量。 2.
+<strong>齐次性</strong>：对于任意标量 α，有 ||α<strong>x</strong>|| =
+|α| · ||<strong>x</strong>||。 3.
+<strong>三角不等式</strong>：对于任意向量 <strong>x</strong>,
+<strong>y</strong>，有 ||<strong>x</strong> + <strong>y</strong>|| ≤
+||<strong>x</strong>|| + ||<strong>y</strong>||。</p>
+<p>最常见的范数族是 <strong>Lₚ 范数</strong>（读作“L-p范数”）。对于一个
+n 维向量 <strong>x</strong> = (x₁, x₂, …, xₙ)，其 Lₚ 范数定义为：</p>
+<p align="center">
+<b>||x||<sub>p</sub> = (|x₁|<sup>p</sup> + |x₂|<sup>p</sup> + … +
+|xₙ|<sup>p</sup>)<sup>1/p</sup></b>
+</p>
+<p>通过改变 p 的值，我们可以得到不同的范数。</p>
+<table>
+
+<thead>
+<tr>
+<th style="text-align: left;">范数名称</th>
+<th style="text-align: left;">符号</th>
+<th style="text-align: left;">计算公式 (对于向量 <strong>x</strong> ∈
+Rⁿ)</th>
+<th style="text-align: left;">几何意义 / 特点</th>
+<th style="text-align: left;">主要应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>L₁ 范数</strong> (曼哈顿范数)</td>
+<td style="text-align: left;">‖<strong>x</strong>‖₁</td>
+<td style="text-align: left;">‖<strong>x</strong>‖₁ = |x₁| + |x₂| + … +
+|xₙ|</td>
+<td
+style="text-align: left;">各维度坐标绝对值的和。想象在曼哈顿街区（网格状道路）上行走的总距离。</td>
+<td
+style="text-align: left;"><strong>特征选择</strong>、<strong>稀疏编码</strong>、<strong>压缩感知</strong>。因为它倾向于产生稀疏解（许多分量为零）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>L₂ 范数</strong>
+(欧几里得范数)</td>
+<td style="text-align: left;">‖<strong>x</strong>‖₂</td>
+<td style="text-align: left;">‖<strong>x</strong>‖₂ = √(x₁² + x₂² + … +
+xₙ²)</td>
+<td
+style="text-align: left;">从原点到向量点的直线距离。这是我们最熟悉的“长度”概念。</td>
+<td
+style="text-align: left;"><strong>机器学习中最常用</strong>，如：<br> •
+<strong>正则化</strong> (岭回归)<br> • <strong>度量距离</strong> (KNN,
+K-Means)<br> • <strong>模型评估</strong> (均方误差根)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lₚ 范数</strong></td>
+<td style="text-align: left;">‖<strong>x</strong>‖ₚ</td>
+<td style="text-align: left;">‖<strong>x</strong>‖ₚ = ( |x₁|ᵖ + |x₂|ᵖ +
+… + |xₙ|ᵖ )<sup>1/p</sup></td>
+<td style="text-align: left;">p
+值不同，等值线（范数相等的点集）形状不同。p=1是菱形，p=2是圆形，p&gt;2逐渐向矩形过渡。</td>
+<td style="text-align: left;">作为 L₁ 和 L₂
+的推广，在特定优化问题中使用。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>L∞ 范数</strong> <br> (极大范数 /
+切比雪夫范数)</td>
+<td style="text-align: left;">‖<strong>x</strong>‖∞</td>
+<td style="text-align: left;">‖<strong>x</strong>‖∞ = max(|x₁|, |x₂|, …,
+|xₙ|)</td>
+<td style="text-align: left;">所有维度坐标绝对值的最大值。</td>
+<td
+style="text-align: left;"><strong>误差分析</strong>，当最差情况的误差（最大误差）是关注重点时。例如，在制造中保证零件的最大公差。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>L₀ “范数”</strong></td>
+<td style="text-align: left;">‖<strong>x</strong>‖₀</td>
+<td
+style="text-align: left;">向量中<strong>非零元素</strong>的个数。</td>
+<td style="text-align: left;"><strong>注意</strong>：L₀
+“范数”实际上不满足范数的齐次性，因此不是一个真正的范数。但它非常重要。</td>
+<td
+style="text-align: left;">衡量向量的<strong>稀疏度</strong>。在理想情况下用于稀疏优化，但由于其非凸性，常被
+L₁ 范数替代。</td>
+</tr>
+</tbody>
+</table>
 <h3 id="fgsm算法原理">FGSM算法原理</h3>
+<p><img src="\img\adversarial_example.png" srcset="/img/loading.gif" lazyload /></p>
 <p>快速梯度符号法（Fast Gradient Sign Method,
 FGSM）是一种基于梯度的单步攻击方法，其更新公式为：</p>
 <p><span
@@ -347,6 +435,23 @@ class="math display"><em>x</em><sub>adv</sub> = <em>x</em> + <em>ϵ</em>
 <p>其中 <span class="math inline">ℒ</span> 是损失函数，<span
 class="math inline">sign</span> 是符号函数，<span
 class="math inline"><em>ϵ</em></span> 控制扰动幅度。</p>
+<p>攻击者需要知道目标模型的结构、参数和梯度，并且仅通过一次梯度计算生成对抗样本（无需迭代），沿梯度符号方向添加扰动，最大化损失函数，迫使模型预测错误。步骤如下</p>
+<ol type="1">
+<li>计算梯度：对输入 <span class="math inline"><em>x</em></span>
+计算损失函数 <span class="math inline"><em>L</em></span> 的梯度： <span
+class="math display">∇<sub><em>x</em></sub><em>L</em></span></li>
+<li>生成扰动：根据梯度符号和扰动幅度 <span
+class="math inline"><em>ϵ</em></span>，构造扰动： <span
+class="math display"><em>δ</em> = <em>ϵ</em> ⋅ sign(∇<sub><em>x</em></sub><em>L</em>)</span></li>
+<li>生成对抗样本：将扰动 <span class="math inline"><em>δ</em></span>
+加到原始输入 <span class="math inline"><em>x</em></span> 上： <span
+class="math display"><em>x</em><sub>adv</sub> = <em>x</em> + <em>δ</em></span></li>
+<li>裁剪输入：确保对抗样本 <span
+class="math inline"><em>x</em><sub>adv</sub></span>
+的像素值仍在合法范围内（如 <span class="math inline">[0, 1]</span>）：
+<span
+class="math display"><em>x</em><sub>adv</sub> = clip(<em>x</em><sub>adv</sub>, 0, 1)</span></li>
+</ol>
 <h3 id="cifar-10">CIFAR-10</h3>
 <p>CIFAR-10
 是计算机视觉领域经典的<strong>图像分类基准数据集</strong>，由加拿大高级研究所（CIFAR）发布，因数据规模适中、标注清晰，成为入门级图像识别任务的核心训练与测试数据，广泛用于卷积神经网络（CNN）等模型的基础研发。</p>
