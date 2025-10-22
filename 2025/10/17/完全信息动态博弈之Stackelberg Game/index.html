@@ -19,16 +19,16 @@
   <meta name="author" content="HorizonGazer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="斯塔克尔伯格模型 斯塔克尔伯格模型(Stackelberg Game)由德国经济学家Heinrich von Stackelberg于1934年提出，是寡头市场理论的重要组成部分。斯塔克尔伯格模型是一种动态博弈论模型，扩展了古诺模型，通过引入决策的时序不对称和市场角色的不对称，描述了厂商之间的竞争。 该模型适用于分析产量竞争但决策时序和市场权力不对称的场景。斯塔克尔伯格模型特别适合描述具有主">
+    <meta name="description" content="斯塔克尔伯格模型 斯塔克尔伯格模型(Stackelberg Game)由德国经济学家Heinrich von Stackelberg于1934年提出，是寡头市场理论的重要组成部分。斯塔克尔伯格模型是一种动态博弈论模型，扩展了古诺模型，通过引入决策的时序不对称和市场角色的不对称，描述了厂商之间的竞争。 该模型适用于分析产量竞争但决策时序和市场权力不对称的场景。斯塔克尔伯格模型特别适合描述具有主导厂商">
 <meta property="og:type" content="article">
 <meta property="og:title" content="完全信息动态博弈之Stackelberg Game">
 <meta property="og:url" content="http://horizongazer.github.io/2025/10/17/%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E5%8A%A8%E6%80%81%E5%8D%9A%E5%BC%88%E4%B9%8BStackelberg%20Game/index.html">
 <meta property="og:site_name" content="HorizonGazer">
-<meta property="og:description" content="斯塔克尔伯格模型 斯塔克尔伯格模型(Stackelberg Game)由德国经济学家Heinrich von Stackelberg于1934年提出，是寡头市场理论的重要组成部分。斯塔克尔伯格模型是一种动态博弈论模型，扩展了古诺模型，通过引入决策的时序不对称和市场角色的不对称，描述了厂商之间的竞争。 该模型适用于分析产量竞争但决策时序和市场权力不对称的场景。斯塔克尔伯格模型特别适合描述具有主">
+<meta property="og:description" content="斯塔克尔伯格模型 斯塔克尔伯格模型(Stackelberg Game)由德国经济学家Heinrich von Stackelberg于1934年提出，是寡头市场理论的重要组成部分。斯塔克尔伯格模型是一种动态博弈论模型，扩展了古诺模型，通过引入决策的时序不对称和市场角色的不对称，描述了厂商之间的竞争。 该模型适用于分析产量竞争但决策时序和市场权力不对称的场景。斯塔克尔伯格模型特别适合描述具有主导厂商">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://horizongazer.github.io/img/boyi02.jpg">
 <meta property="article:published_time" content="2025-10-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-10-22T07:55:02.317Z">
+<meta property="article:modified_time" content="2025-10-22T10:48:53.917Z">
 <meta property="article:author" content="HorizonGazer">
 <meta property="article:tag" content="无用之用">
 <meta property="article:tag" content="完全信息动态博弈">
@@ -319,187 +319,173 @@
               <div class="markdown-body">
                 
                 <h2 id="斯塔克尔伯格模型">斯塔克尔伯格模型</h2>
-<p>斯塔克尔伯格模型(Stackelberg Game)由德国经济学家Heinrich von
-Stackelberg于1934年提出，是寡头市场理论的重要组成部分。斯塔克尔伯格模型是一种动态博弈论模型，扩展了古诺模型，通过引入决策的时序不对称和市场角色的不对称，描述了厂商之间的竞争。</p>
+<p>斯塔克尔伯格模型(Stackelberg Game)由德国经济学家Heinrich von Stackelberg于1934年提出，是寡头市场理论的重要组成部分。斯塔克尔伯格模型是一种动态博弈论模型，扩展了古诺模型，通过引入决策的时序不对称和市场角色的不对称，描述了厂商之间的竞争。</p>
 <p>该模型适用于分析产量竞争但决策时序和市场权力不对称的场景。斯塔克尔伯格模型特别适合描述具有主导厂商的市场，例如电信、能源或航空业，其中一家大型企业（领导者）通过先发制人的产量决策影响市场价格，而其他较小的企业（追随者）则根据领导者的决策调整自己的产量。</p>
 <p>斯塔克尔伯格模型的核心假设包括：</p>
-<ol type="1">
+<ol>
 <li><strong>动态博弈</strong>：领导者先选择产量，追随者在知晓领导者产量后选择自己的产量。</li>
 <li><strong>不对称地位</strong>：领导者具有市场主导地位，可能因为规模、技术或品牌优势；追随者则处于从属地位。</li>
 <li><strong>完全信息</strong>：追随者在决策时完全了解领导者的产量决策。</li>
 <li><strong>产量竞争</strong>：与古诺模型类似，厂商以产量为决策变量，追求利润最大化。</li>
 </ol>
 <h3 id="模型设定">模型设定</h3>
-<ol type="1">
+<ol>
 <li><strong>博弈方</strong>：两个生产相同产品的厂商，厂商1为领导者，厂商2为追随者。</li>
-<li><strong>产量</strong>：厂商1产量为 <span
-class="math inline"><em>q</em><sub>1</sub></span>，厂商2产量为 <span
-class="math inline"><em>q</em><sub>2</sub></span>，市场总供给 <span
-class="math inline"><em>Q</em> = <em>q</em><sub>1</sub> + <em>q</em><sub>2</sub></span>。</li>
-<li><strong>市场需求</strong>：市场出清价格为 <span
-class="math inline"><em>P</em> = <em>P</em>(<em>Q</em>)</span>，满足：
+<li><strong>产量</strong>：厂商1产量为 $q_1$，厂商2产量为 $q_2$，市场总供给 $Q = q_1 + q_2$。</li>
+<li><strong>市场需求</strong>：市场出清价格为 $P = P(Q)$，满足：
 <ul>
-<li><span
-class="math inline"><em>P</em>′(<em>Q</em>) &lt; 0</span>（严格递减）</li>
-<li><span
-class="math inline"><em>P</em>″(<em>Q</em>) ≤ 0</span>（凹函数或线性）</li>
-</ul></li>
+<li>$P’(Q) &lt; 0$（严格递减）</li>
+<li>$P’'(Q) \leq 0$（凹函数或线性）</li>
+</ul>
+</li>
 <li><strong>成本函数</strong>：
 <ul>
-<li>厂商1：<span
-class="math inline"><em>C</em><sub>1</sub>(<em>q</em><sub>1</sub>)</span>，满足
-<span
-class="math inline"><em>C</em><sub>1</sub>″(<em>q</em><sub>1</sub>) ≥ 0</span></li>
-<li>厂商2：<span
-class="math inline"><em>C</em><sub>2</sub>(<em>q</em><sub>2</sub>)</span>，满足
-<span
-class="math inline"><em>C</em><sub>2</sub>″(<em>q</em><sub>2</sub>) ≥ 0</span></li>
-</ul></li>
+<li>厂商1：$C_1(q_1)$，满足 $C_1’'(q_1) \geq 0$</li>
+<li>厂商2：$C_2(q_2)$，满足 $C_2’'(q_2) \geq 0$</li>
+</ul>
+</li>
 <li><strong>利润函数</strong>：
 <ul>
-<li><span
-class="math inline"><em>π</em><sub>1</sub> = <em>P</em>(<em>q</em><sub>1</sub> + <em>q</em><sub>2</sub>) ⋅ <em>q</em><sub>1</sub> − <em>C</em><sub>1</sub>(<em>q</em><sub>1</sub>)</span></li>
-<li><span
-class="math inline"><em>π</em><sub>2</sub> = <em>P</em>(<em>q</em><sub>1</sub> + <em>q</em><sub>2</sub>) ⋅ <em>q</em><sub>2</sub> − <em>C</em><sub>2</sub>(<em>q</em><sub>2</sub>)</span></li>
-</ul></li>
-<li><strong>博弈时序</strong>：厂商1先选择 <span
-class="math inline"><em>q</em><sub>1</sub></span>，厂商2观测到 <span
-class="math inline"><em>q</em><sub>1</sub></span> 后选择 <span
-class="math inline"><em>q</em><sub>2</sub></span>。</li>
+<li>$\pi_1 = P(q_1 + q_2) \cdot q_1 - C_1(q_1)$</li>
+<li>$\pi_2 = P(q_1 + q_2) \cdot q_2 - C_2(q_2)$</li>
+</ul>
+</li>
+<li><strong>博弈时序</strong>：厂商1先选择 $q_1$，厂商2观测到 $q_1$ 后选择 $q_2$。</li>
 </ol>
-<h3
-id="一般形式子博弈精炼纳什均衡推导">一般形式子博弈精炼纳什均衡推导</h3>
+<h3 id="一般形式子博弈精炼纳什均衡推导">一般形式子博弈精炼纳什均衡推导</h3>
 <p>子博弈精炼纳什均衡的要求：</p>
-<ol type="1">
+<ol>
 <li>在整个博弈中构成纳什均衡</li>
 <li>在每一个子博弈中都构成纳什均衡</li>
 <li>通过逆向归纳法求解</li>
 </ol>
-<h4 id="第二阶段追随者决策">第二阶段：追随者决策</h4>
-<p>追随者在观测到 <span
-class="math inline"><em>q</em><sub>1</sub></span> 后的子博弈中求解：
-<span
-class="math display">max<sub><em>q</em><sub>2</sub></sub><em>π</em><sub>2</sub> = <em>P</em>(<em>q</em><sub>1</sub> + <em>q</em><sub>2</sub>) ⋅ <em>q</em><sub>2</sub> − <em>C</em><sub>2</sub>(<em>q</em><sub>2</sub>)</span>
-一阶条件： <span class="math display">$$
-\frac{\partial \pi_2}{\partial q_2} = P(Q) + P'(Q) \cdot q_2 - C_2'(q_2)
-= 0 \tag{1}
-$$</span> 其中 <span
-class="math inline"><em>Q</em> = <em>q</em><sub>1</sub> + <em>q</em><sub>2</sub></span>。</p>
-<p>二阶条件（确保最大值）： <span class="math display">$$
-\frac{\partial^2 \pi_2}{\partial q_2^2} = 2P'(Q) + P''(Q) \cdot q_2 -
-C_2''(q_2) &lt; 0 \tag{2}
-$$</span> 式(1)隐式定义了反应函数 <span
-class="math inline"><em>q</em><sub>2</sub> = <em>R</em><sub>2</sub>(<em>q</em><sub>1</sub>)</span>。</p>
-<p>反应函数斜率： <span class="math display">$$
-\frac{d R_2}{d q_1} = \frac{-P'(Q) - P''(Q) \cdot q_2}{2P'(Q) + P''(Q)
-\cdot q_2 - C_2''(q_2)} &lt; 0 \tag{3}
-$$</span> 表明产量之间存在战略替代关系。</p>
-<h4 id="第一阶段领导者决策">第一阶段：领导者决策</h4>
-<p>领导者预见反应函数 <span
-class="math inline"><em>q</em><sub>2</sub> = <em>R</em><sub>2</sub>(<em>q</em><sub>1</sub>)</span>，求解：
-<span
-class="math display">max<sub><em>q</em><sub>1</sub></sub><em>π</em><sub>1</sub> = <em>P</em>(<em>q</em><sub>1</sub> + <em>R</em><sub>2</sub>(<em>q</em><sub>1</sub>)) ⋅ <em>q</em><sub>1</sub> − <em>C</em><sub>1</sub>(<em>q</em><sub>1</sub>)</span>
-一阶条件： <span class="math display">$$
-\frac{\partial \pi_1}{\partial q_1} = P(Q) + P'(Q) \cdot \left( 1 +
-\frac{d R_2}{d q_1} \right) \cdot q_1 - C_1'(q_1) = 0 \tag{4}
-$$</span> 代入式(3)的反应函数斜率，联立式(1)和式(4)，可解得均衡产量
-<span
-class="math inline">(<em>q</em><sub>1</sub><sup>*</sup>, <em>q</em><sub>2</sub><sup>*</sup>)</span>。</p>
-<h3
-id="线性需求子博弈精炼纳什均衡推导">线性需求子博弈精炼纳什均衡推导</h3>
-<p>假设市场需求为 <span
-class="math inline"><em>P</em> = <em>a</em> − <em>b</em><em>Q</em></span>，其中
-<span
-class="math inline"><em>a</em>, <em>b</em> &gt; 0</span>，且成本函数为线性
-<span
-class="math inline"><em>C</em><sub>1</sub>(<em>q</em><sub>1</sub>) = <em>c</em><em>q</em><sub>1</sub></span>，<span
-class="math inline"><em>C</em><sub>2</sub>(<em>q</em><sub>2</sub>) = <em>c</em><em>q</em><sub>2</sub></span>，其中
-<span class="math inline"><em>c</em> ≥ 0</span> 为常数边际成本。</p>
-<h4 id="第二阶段追随者决策-1">第二阶段：追随者决策</h4>
-<p>追随者利润： <span
-class="math display"><em>π</em><sub>2</sub> = (<em>a</em> − <em>b</em>(<em>q</em><sub>1</sub> + <em>q</em><sub>2</sub>)) ⋅ <em>q</em><sub>2</sub> − <em>c</em><em>q</em><sub>2</sub></span>
-一阶条件： <span class="math display">$$
-\frac{\partial \pi_2}{\partial q_2} = a - b q_1 - 2b q_2 - c = 0
-$$</span> 解得反应函数： <span class="math display">$$
-q_2 = R_2(q_1) = \frac{a - c - b q_1}{2b} \tag{5}
-$$</span> 二阶条件： <span class="math display">$$
-\frac{\partial^2 \pi_2}{\partial q_2^2} = -2b &lt; 0
-$$</span> 满足最大值条件。反应函数斜率： <span class="math display">$$
-\frac{d R_2}{d q_1} = -\frac{1}{2} &lt; 0
-$$</span> 确认战略替代关系。</p>
-<h4 id="第一阶段领导者决策-1">第一阶段：领导者决策</h4>
-<p>领导者利润： <span
-class="math display"><em>π</em><sub>1</sub> = (<em>a</em> − <em>b</em>(<em>q</em><sub>1</sub> + <em>R</em><sub>2</sub>(<em>q</em><sub>1</sub>))) ⋅ <em>q</em><sub>1</sub> − <em>c</em><em>q</em><sub>1</sub></span>
-代入 <span class="math inline">$q_2 = \frac{a - c - b
-q_1}{2b}$</span>，得： <span class="math display">$$
-Q = q_1 + q_2 = q_1 + \frac{a - c - b q_1}{2b} = \frac{a - c + b
-q_1}{2b}
-$$</span></p>
-<p><span class="math display">$$
-P = a - b Q = a - b \cdot \frac{a - c + b q_1}{2b} = \frac{a + c - b
-q_1}{2}
-$$</span></p>
-<p>利润函数： <span class="math display">$$
-\pi_1 = \left( \frac{a + c - b q_1}{2} \right) \cdot q_1 - c q_1
-$$</span> 一阶条件： <span class="math display">$$
-\frac{\partial \pi_1}{\partial q_1} = \frac{a + c - b q_1}{2} - \frac{b
-q_1}{2} - c = \frac{a + c - 2b q_1 - 2c}{2} = \frac{a - c - 2b q_1}{2} =
-0
-$$</span> 解得： <span class="math display">$$
-q_1^* = \frac{a - c}{2b} \tag{6}
-$$</span> 代入反应函数(5)： <span class="math display">$$
-q_2^* = \frac{a - c - b \cdot \frac{a - c}{2b}}{2b} = \frac{a - c -
-\frac{a - c}{2}}{2b} = \frac{\frac{a - c}{2}}{2b} = \frac{a - c}{4b}
-\tag{7}
-$$</span> 均衡总产量： <span class="math display">$$
-Q^* = q_1^* + q_2^* = \frac{a - c}{2b} + \frac{a - c}{4b} = \frac{3(a -
-c)}{4b}
-$$</span> 均衡价格： <span class="math display">$$
-P^* = a - b Q^* = a - b \cdot \frac{3(a - c)}{4b} = a - \frac{3(a -
-c)}{4} = \frac{a + 3c}{4}
-$$</span> 均衡利润： <span class="math display">$$
-\pi_1^* = P^* q_1^* - c q_1^* = \frac{a + 3c}{4} \cdot \frac{a - c}{2b}
-- c \cdot \frac{a - c}{2b} = \frac{(a - c)^2}{8b}
-$$</span></p>
-<p><span class="math display">$$
-\pi_2^* = P^* q_2^* - c q_2^* = \frac{a + 3c}{4} \cdot \frac{a - c}{4b}
-- c \cdot \frac{a - c}{4b} = \frac{(a - c)^2}{16b}
-$$</span></p>
+<h4 id="第二阶段：追随者决策">第二阶段：追随者决策</h4>
+<p>追随者在观测到 $q_1$ 后的子博弈中求解：<br>
+$$<br>
+\max_{q_2} \pi_2 = P(q_1 + q_2) \cdot q_2 - C_2(q_2)<br>
+$$<br>
+一阶条件：<br>
+$$<br>
+\frac{\partial \pi_2}{\partial q_2} = P(Q) + P’(Q) \cdot q_2 - C_2’(q_2) = 0 \tag{1}<br>
+$$<br>
+其中 $Q = q_1 + q_2$。</p>
+<p>二阶条件（确保最大值）：<br>
+$$<br>
+\frac{\partial^2 \pi_2}{\partial q_2^2} = 2P’(Q) + P’‘(Q) \cdot q_2 - C_2’'(q_2) &lt; 0 \tag{2}<br>
+$$<br>
+式(1)隐式定义了反应函数 $q_2 = R_2(q_1)$。</p>
+<p>反应函数斜率：<br>
+$$<br>
+\frac{d R_2}{d q_1} = \frac{-P’(Q) - P’‘(Q) \cdot q_2}{2P’(Q) + P’‘(Q) \cdot q_2 - C_2’'(q_2)} &lt; 0 \tag{3}<br>
+$$<br>
+表明产量之间存在战略替代关系。</p>
+<h4 id="第一阶段：领导者决策">第一阶段：领导者决策</h4>
+<p>领导者预见反应函数 $q_2 = R_2(q_1)$，求解：<br>
+$$<br>
+\max_{q_1} \pi_1 = P(q_1 + R_2(q_1)) \cdot q_1 - C_1(q_1)<br>
+$$<br>
+一阶条件：<br>
+$$<br>
+\frac{\partial \pi_1}{\partial q_1} = P(Q) + P’(Q) \cdot \left( 1 + \frac{d R_2}{d q_1} \right) \cdot q_1 - C_1’(q_1) = 0 \tag{4}<br>
+$$<br>
+代入式(3)的反应函数斜率，联立式(1)和式(4)，可解得均衡产量 $(q_1^<em>, q_2^</em>)$。</p>
+<h3 id="线性需求子博弈精炼纳什均衡推导">线性需求子博弈精炼纳什均衡推导</h3>
+<p>假设市场需求为 $P = a - bQ$，其中 $a, b &gt; 0$，且成本函数为线性 $C_1(q_1) = c q_1$，$C_2(q_2) = c q_2$，其中 $c \geq 0$ 为常数边际成本。</p>
+<h4 id="第二阶段：追随者决策-2">第二阶段：追随者决策</h4>
+<p>追随者利润：<br>
+$$<br>
+\pi_2 = (a - b(q_1 + q_2)) \cdot q_2 - c q_2<br>
+$$<br>
+一阶条件：<br>
+$$<br>
+\frac{\partial \pi_2}{\partial q_2} = a - b q_1 - 2b q_2 - c = 0<br>
+$$<br>
+解得反应函数：<br>
+$$<br>
+q_2 = R_2(q_1) = \frac{a - c - b q_1}{2b} \tag{5}<br>
+$$<br>
+二阶条件：<br>
+$$<br>
+\frac{\partial^2 \pi_2}{\partial q_2^2} = -2b &lt; 0<br>
+$$<br>
+满足最大值条件。反应函数斜率：<br>
+$$<br>
+\frac{d R_2}{d q_1} = -\frac{1}{2} &lt; 0<br>
+$$<br>
+确认战略替代关系。</p>
+<h4 id="第一阶段：领导者决策-2">第一阶段：领导者决策</h4>
+<p>领导者利润：<br>
+$$<br>
+\pi_1 = (a - b(q_1 + R_2(q_1))) \cdot q_1 - c q_1<br>
+$$<br>
+代入 $q_2 = \frac{a - c - b q_1}{2b}$，得：<br>
+$$<br>
+Q = q_1 + q_2 = q_1 + \frac{a - c - b q_1}{2b} = \frac{a - c + b q_1}{2b}<br>
+$$</p>
+<p>$$<br>
+P = a - b Q = a - b \cdot \frac{a - c + b q_1}{2b} = \frac{a + c - b q_1}{2}<br>
+$$</p>
+<p>利润函数：<br>
+$$<br>
+\pi_1 = \left( \frac{a + c - b q_1}{2} \right) \cdot q_1 - c q_1<br>
+$$<br>
+一阶条件：<br>
+$$<br>
+\frac{\partial \pi_1}{\partial q_1} = \frac{a + c - b q_1}{2} - \frac{b q_1}{2} - c = \frac{a + c - 2b q_1 - 2c}{2} = \frac{a - c - 2b q_1}{2} = 0<br>
+$$<br>
+解得：<br>
+$$<br>
+q_1^* = \frac{a - c}{2b} \tag{6}<br>
+$$<br>
+代入反应函数(5)：<br>
+$$<br>
+q_2^* = \frac{a - c - b \cdot \frac{a - c}{2b}}{2b} = \frac{a - c - \frac{a - c}{2}}{2b} = \frac{\frac{a - c}{2}}{2b} = \frac{a - c}{4b} \tag{7}<br>
+$$<br>
+均衡总产量：<br>
+$$<br>
+Q^* = q_1^* + q_2^* = \frac{a - c}{2b} + \frac{a - c}{4b} = \frac{3(a - c)}{4b}<br>
+$$<br>
+均衡价格：<br>
+$$<br>
+P^* = a - b Q^* = a - b \cdot \frac{3(a - c)}{4b} = a - \frac{3(a - c)}{4} = \frac{a + 3c}{4}<br>
+$$<br>
+均衡利润：<br>
+$$<br>
+\pi_1^* = P^* q_1^* - c q_1^* = \frac{a + 3c}{4} \cdot \frac{a - c}{2b} - c \cdot \frac{a - c}{2b} = \frac{(a - c)^2}{8b}<br>
+$$</p>
+<p>$$<br>
+\pi_2^* = P^* q_2^* - c q_2^* = \frac{a + 3c}{4} \cdot \frac{a - c}{4b} - c \cdot \frac{a - c}{4b} = \frac{(a - c)^2}{16b}<br>
+$$</p>
 <h4 id="一般性结论">一般性结论</h4>
-<ol type="1">
-<li><strong>先动优势</strong>：领导者利润 <span
-class="math inline"><em>π</em><sub>1</sub><sup>*</sup> &gt; <em>π</em><sub>2</sub><sup>*</sup></span>，通过先选择产量获得战略优势</li>
-<li><strong>反应特性</strong>：追随者产量随领导者产量增加而递减 (<span
-class="math inline">$\frac{d R_2}{d q_1} &lt; 0$</span>)</li>
+<ol>
+<li><strong>先动优势</strong>：领导者利润 $\pi_1^* &gt; \pi_2^*$，通过先选择产量获得战略优势</li>
+<li><strong>反应特性</strong>：追随者产量随领导者产量增加而递减 ($\frac{d R_2}{d q_1} &lt; 0$)</li>
 <li><strong>市场效率</strong>：斯塔克尔伯格模型总产量高于古诺均衡，价格低于古诺均衡</li>
 </ol>
 <h3 id="与相关模型的比较分析">与相关模型的比较分析</h3>
 <h4 id="古诺模型">古诺模型</h4>
-<p>均衡条件（一阶条件为0的等式）： <span
-class="math display"><em>P</em>(<em>Q</em>) + <em>P</em>′(<em>Q</em>) ⋅ <em>q</em><sub><em>i</em></sub> = <em>C</em><sub><em>i</em></sub>′(<em>q</em><sub><em>i</em></sub>),  <em>i</em> = 1, 2</span>
-对于 <span
-class="math inline"><em>P</em> = <em>a</em> − <em>b</em><em>Q</em></span>，<span
-class="math inline"><em>C</em><sub><em>i</em></sub>(<em>q</em><sub><em>i</em></sub>) = <em>c</em><em>q</em><sub><em>i</em></sub></span>：
-<span class="math display">$$
-q_1^C = q_2^C = \frac{a - c}{3b}, \quad Q_C = \frac{2(a - c)}{3b}, \quad
-P_C = \frac{a + 2c}{3}
-$$</span></p>
-<p><span class="math display">$$
-\pi_i^C = \frac{(a - c)^2}{9b}
-$$</span></p>
+<p>均衡条件（一阶条件为0的等式）：<br>
+$$<br>
+P(Q) + P’(Q) \cdot q_i = C_i’(q_i), \quad i = 1, 2<br>
+$$<br>
+对于 $P = a - bQ$，$C_i(q_i) = c q_i$：<br>
+$$<br>
+q_1^C = q_2^C = \frac{a - c}{3b}, \quad Q_C = \frac{2(a - c)}{3b}, \quad P_C = \frac{a + 2c}{3}<br>
+$$</p>
+<p>$$<br>
+\pi_i^C = \frac{(a - c)^2}{9b}<br>
+$$</p>
 <h4 id="单寡头垄断模型">单寡头垄断模型</h4>
-<p>均衡条件： <span
-class="math display"><em>P</em>(<em>Q</em>) + <em>P</em>′(<em>Q</em>) ⋅ <em>Q</em> = <em>C</em>′(<em>Q</em>)</span>
-对于 <span
-class="math inline"><em>P</em> = <em>a</em> − <em>b</em><em>Q</em></span>，<span
-class="math inline"><em>C</em>(<em>Q</em>) = <em>c</em><em>Q</em></span>：
-<span class="math display">$$
-Q_M = \frac{a - c}{2b}, \quad P_M = \frac{a + c}{2}, \quad \pi_M =
-\frac{(a - c)^2}{4b}
-$$</span></p>
+<p>均衡条件：<br>
+$$<br>
+P(Q) + P’(Q) \cdot Q = C’(Q)<br>
+$$<br>
+对于 $P = a - bQ$，$C(Q) = c Q$：<br>
+$$<br>
+Q_M = \frac{a - c}{2b}, \quad P_M = \frac{a + c}{2}, \quad \pi_M = \frac{(a - c)^2}{4b}<br>
+$$</p>
 <h4 id="三模型综合比较">三模型综合比较</h4>
 <table>
-
 <thead>
 <tr>
 <th>指标</th>
@@ -511,98 +497,80 @@ $$</span></p>
 <tbody>
 <tr>
 <td><strong>领导者产量</strong></td>
-<td><span class="math inline">$Q_M = \frac{a - c}{2b}$</span></td>
-<td><span class="math inline">$q_1^C = \frac{a - c}{3b}$</span></td>
-<td><span class="math inline">$q_1^S = \frac{a - c}{2b}$</span></td>
+<td>$Q_M = \frac{a - c}{2b}$</td>
+<td>$q_1^C = \frac{a - c}{3b}$</td>
+<td>$q_1^S = \frac{a - c}{2b}$</td>
 </tr>
 <tr>
 <td><strong>追随者产量</strong></td>
 <td>-</td>
-<td><span class="math inline">$q_2^C = \frac{a - c}{3b}$</span></td>
-<td><span class="math inline">$q_2^S = \frac{a - c}{4b}$</span></td>
+<td>$q_2^C = \frac{a - c}{3b}$</td>
+<td>$q_2^S = \frac{a - c}{4b}$</td>
 </tr>
 <tr>
 <td><strong>总产量</strong></td>
-<td><span class="math inline">$Q_M = \frac{a - c}{2b}$</span></td>
-<td><span class="math inline">$Q_C = \frac{2(a - c)}{3b}$</span></td>
-<td><span class="math inline">$Q_S = \frac{3(a - c)}{4b}$</span></td>
+<td>$Q_M = \frac{a - c}{2b}$</td>
+<td>$Q_C = \frac{2(a - c)}{3b}$</td>
+<td>$Q_S = \frac{3(a - c)}{4b}$</td>
 </tr>
 <tr>
 <td><strong>价格</strong></td>
-<td><span class="math inline">$P_M = \frac{a + c}{2}$</span></td>
-<td><span class="math inline">$P_C = \frac{a + 2c}{3}$</span></td>
-<td><span class="math inline">$P_S = \frac{a + 3c}{4}$</span></td>
+<td>$P_M = \frac{a + c}{2}$</td>
+<td>$P_C = \frac{a + 2c}{3}$</td>
+<td>$P_S = \frac{a + 3c}{4}$</td>
 </tr>
 <tr>
 <td><strong>领导者利润</strong></td>
-<td><span class="math inline">$\pi_M = \frac{(a - c)^2}{4b}$</span></td>
-<td><span class="math inline">$\pi_1^C = \frac{(a -
-c)^2}{9b}$</span></td>
-<td><span class="math inline">$\pi_1^S = \frac{(a -
-c)^2}{8b}$</span></td>
+<td>$\pi_M = \frac{(a - c)^2}{4b}$</td>
+<td>$\pi_1^C = \frac{(a - c)^2}{9b}$</td>
+<td>$\pi_1^S = \frac{(a - c)^2}{8b}$</td>
 </tr>
 <tr>
 <td><strong>追随者利润</strong></td>
 <td>-</td>
-<td><span class="math inline">$\pi_2^C = \frac{(a -
-c)^2}{9b}$</span></td>
-<td><span class="math inline">$\pi_2^S = \frac{(a -
-c)^2}{16b}$</span></td>
+<td>$\pi_2^C = \frac{(a - c)^2}{9b}$</td>
+<td>$\pi_2^S = \frac{(a - c)^2}{16b}$</td>
 </tr>
 <tr>
 <td><strong>总利润</strong></td>
-<td><span class="math inline">$\pi_M = \frac{(a - c)^2}{4b}$</span></td>
-<td><span class="math inline">$\pi_C = \frac{2(a -
-c)^2}{9b}$</span></td>
-<td><span class="math inline">$\pi_S = \frac{3(a -
-c)^2}{16b}$</span></td>
+<td>$\pi_M = \frac{(a - c)^2}{4b}$</td>
+<td>$\pi_C = \frac{2(a - c)^2}{9b}$</td>
+<td>$\pi_S = \frac{3(a - c)^2}{16b}$</td>
 </tr>
 <tr>
 <td><strong>消费者剩余</strong></td>
-<td><span class="math inline">$CS_M = \frac{(a - c)^2}{8b}$</span></td>
-<td><span class="math inline">$CS_C = \frac{2(a - c)^2}{9b}$</span></td>
-<td><span class="math inline">$CS_S = \frac{9(a -
-c)^2}{32b}$</span></td>
+<td>$CS_M = \frac{(a - c)^2}{8b}$</td>
+<td>$CS_C = \frac{2(a - c)^2}{9b}$</td>
+<td>$CS_S = \frac{9(a - c)^2}{32b}$</td>
 </tr>
 </tbody>
 </table>
-<h4 id="产量结构特征">产量结构特征</h4>
-<ol type="1">
-<li><strong>领导者产量</strong>：斯塔克尔伯格 &gt; 单寡头 &gt; 古诺
-<span class="math display">$$q_1^S = \frac{a-c}{2b} &gt; Q_M =
-\frac{a-c}{2b} &gt; q_1^C = \frac{a-c}{3b}$$</span></li>
-<li><strong>市场总产量</strong>：斯塔克尔伯格 &gt; 古诺 &gt; 单寡头
-<span class="math display">$$Q_S = \frac{3(a-c)}{4b} &gt; Q_C =
-\frac{2(a-c)}{3b} &gt; Q_M = \frac{a-c}{2b}$$</span></li>
+<h5 id="产量结构特征">产量结构特征</h5>
+<ol>
+<li><strong>领导者产量</strong>：斯塔克尔伯格 &gt; 单寡头 &gt; 古诺<br>
+$$q_1^S = \frac{a-c}{2b} &gt; Q_M = \frac{a-c}{2b} &gt; q_1^C = \frac{a-c}{3b}$$</li>
+<li><strong>市场总产量</strong>：斯塔克尔伯格 &gt; 古诺 &gt; 单寡头<br>
+$$Q_S = \frac{3(a-c)}{4b} &gt; Q_C = \frac{2(a-c)}{3b} &gt; Q_M = \frac{a-c}{2b}$$</li>
 </ol>
-<h4 id="价格水平比较">价格水平比较</h4>
-<p><strong>市场价格</strong>：单寡头 &gt; 古诺 &gt; 斯塔克尔伯格 <span
-class="math display">$$P_M = \frac{a+c}{2} &gt; P_C = \frac{a+2c}{3}
-&gt; P_S = \frac{a+3c}{4}$$</span></p>
-<h4 id="利润分配格局">利润分配格局</h4>
-<ol type="1">
-<li><strong>领导者利润优势</strong>： <span
-class="math display">$$\pi_1^S = \frac{(a-c)^2}{8b} &gt; \pi_1^C =
-\frac{(a-c)^2}{9b}$$</span></li>
-<li><strong>追随者利润劣势</strong>： <span
-class="math display">$$\pi_2^S = \frac{(a-c)^2}{16b} &lt; \pi_2^C =
-\frac{(a-c)^2}{9b}$$</span></li>
+<h5 id="价格水平比较">价格水平比较</h5>
+<p><strong>市场价格</strong>：单寡头 &gt; 古诺 &gt; 斯塔克尔伯格<br>
+$$P_M = \frac{a+c}{2} &gt; P_C = \frac{a+2c}{3} &gt; P_S = \frac{a+3c}{4}$$</p>
+<h5 id="利润分配格局">利润分配格局</h5>
+<ol>
+<li><strong>领导者利润优势</strong>：<br>
+$$\pi_1^S = \frac{(a-c)^2}{8b} &gt; \pi_1^C = \frac{(a-c)^2}{9b}$$</li>
+<li><strong>追随者利润劣势</strong>：<br>
+$$\pi_2^S = \frac{(a-c)^2}{16b} &lt; \pi_2^C = \frac{(a-c)^2}{9b}$$</li>
 <li><strong>总利润排序</strong>：单寡头 &gt; 古诺 &gt; 斯塔克尔伯格</li>
 </ol>
-<h4 id="消费者福利分析">消费者福利分析</h4>
-<p><strong>消费者剩余</strong>是指消费者愿意支付的最高价格与实际支付价格之间的差额总和，衡量消费者从交易中获得的净收益。对于线性需求函数
-<span
-class="math inline"><em>P</em> = <em>a</em> − <em>b</em><em>Q</em></span>，消费者剩余的计算公式为：
-<span class="math display">$$
-CS = \frac{1}{2} \times (a - P^*) \times Q^*
-$$</span></p>
-<p>其中：<span class="math inline"><em>a</em></span>
-为需求曲线的纵截距（最高保留价格），<span
-class="math inline"><em>P</em><sup>*</sup></span> 为市场均衡价格，<span
-class="math inline"><em>Q</em><sup>*</sup></span> 为市场均衡数量。</p>
-<p><strong>消费者剩余</strong>：斯塔克尔伯格 &gt; 古诺 &gt; 单寡头 <span
-class="math display">$$CS_S = \frac{9(a-c)^2}{32b} &gt; CS_C =
-\frac{2(a-c)^2}{9b} &gt; CS_M = \frac{(a-c)^2}{8b}$$</span></p>
+<h5 id="消费者福利分析">消费者福利分析</h5>
+<p><strong>消费者剩余</strong>是指消费者愿意支付的最高价格与实际支付价格之间的差额总和，衡量消费者从交易中获得的净收益。对于线性需求函数 $P = a - bQ$，消费者剩余的计算公式为：<br>
+$$<br>
+CS = \frac{1}{2} \times (a - P^<em>) \times Q^</em><br>
+$$</p>
+<p>其中：$a$ 为需求曲线的纵截距（最高保留价格），$P^<em>$ 为市场均衡价格，$Q^</em>$ 为市场均衡数量。</p>
+<p><strong>消费者剩余</strong>：斯塔克尔伯格 &gt; 古诺 &gt; 单寡头<br>
+$$CS_S = \frac{9(a-c)^2}{32b} &gt; CS_C = \frac{2(a-c)^2}{9b} &gt; CS_M = \frac{(a-c)^2}{8b}$$</p>
 <h3 id="总结与心得">总结与心得</h3>
 <p>斯塔克尔伯格模型描述了领导者先选择产量、追随者后反应的动态博弈。子博弈完美纳什均衡通过追随者的反应函数和领导者的优化求解，均衡产量满足战略替代关系。领导者因先动优势获更高利润，总产量高于古诺模型，价格更低，消费者剩余增加。</p>
 
@@ -717,8 +685,8 @@ class="math display">$$CS_S = \frac{9(a-c)^2}{32b} &gt; CS_C =
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/16/%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E5%8A%A8%E6%80%81%E5%8D%9A%E5%BC%88%E4%B9%8BRS%E8%AE%AE%E4%BB%B7%E6%A8%A1%E5%9E%8B/" title="完全信息动态博弈之RS议价模型">
-                        <span class="hidden-mobile">完全信息动态博弈之RS议价模型</span>
+                      <a href="/2025/10/16/%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E5%8A%A8%E6%80%81%E5%8D%9A%E5%BC%88%E4%B9%8BRS%E8%AE%AE%E4%BB%B7%E6%A8%A1%E5%9E%8B/" title="完全信息动态博弈之Rubinstein议价模型">
+                        <span class="hidden-mobile">完全信息动态博弈之Rubinstein议价模型</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
