@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://horizongazer.github.io/2025/10/17/%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E5%8A%A8%E6%80%81%E5%8D%9A%E5%BC%88%E4%B9%8BStackelberg%20Game/</loc>
+    
+    <lastmod>2025-10-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/2025/10/16/%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E5%8A%A8%E6%80%81%E5%8D%9A%E5%BC%88%E4%B9%8BRS%E8%AE%AE%E4%BB%B7%E6%A8%A1%E5%9E%8B/</loc>
+    
+    <lastmod>2025-10-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://horizongazer.github.io/2025/10/22/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%8A%97%E9%98%B2%E5%BE%A1%E5%AE%9E%E8%B7%B5/</loc>
     
     <lastmod>2025-10-22</lastmod>
@@ -408,6 +426,34 @@
   
   <url>
     <loc>http://horizongazer.github.io/tags/trade-off/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E5%8A%A8%E6%80%81%E5%8D%9A%E5%BC%88/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/%E5%AD%90%E5%8D%9A%E5%BC%88%E7%B2%BE%E7%82%BC%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/RS%E8%AE%AE%E4%BB%B7%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/Stackelberg-Game/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
