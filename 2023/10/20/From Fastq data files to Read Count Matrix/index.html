@@ -19,12 +19,12 @@
   <meta name="author" content="HorizonGazer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 实验目的 练习从Fastq数据文件到Read Count矩阵的处理步骤：copy本实验的相关文件至工作目录，将Fastq文件进行质量控制和过滤，使用常见的质量控制工具FastQC来进行质量评估；使用适当的比对工具（如STAR）将Fastq文件的序列比对到参考基因组上，为每个序列分配基因信息；利用samtools软件对BAM文件建立索引，使用IGV软件来可视化BAM文件，并熟悉IGV软件操">
+    <meta name="description" content="1. 实验目的 练习从Fastq数据文件到Read Count矩阵的处理步骤：copy本实验的相关文件至工作目录，将Fastq文件进行质量控制和过滤，使用常见的质量控制工具FastQC来进行质量评估；使用适当的比对工具（如STAR）将Fastq文件的序列比对到参考基因组上，为每个序列分配基因信息；利用samtools软件对BAM文件建立索引，使用IGV软件来可视化BAM文件，并熟悉IGV软件操作与">
 <meta property="og:type" content="article">
 <meta property="og:title" content="From Fastq data files to Read Count Matrix">
 <meta property="og:url" content="http://horizongazer.github.io/2023/10/20/From%20Fastq%20data%20files%20to%20Read%20Count%20Matrix/index.html">
 <meta property="og:site_name" content="HorizonGazer">
-<meta property="og:description" content="1. 实验目的 练习从Fastq数据文件到Read Count矩阵的处理步骤：copy本实验的相关文件至工作目录，将Fastq文件进行质量控制和过滤，使用常见的质量控制工具FastQC来进行质量评估；使用适当的比对工具（如STAR）将Fastq文件的序列比对到参考基因组上，为每个序列分配基因信息；利用samtools软件对BAM文件建立索引，使用IGV软件来可视化BAM文件，并熟悉IGV软件操">
+<meta property="og:description" content="1. 实验目的 练习从Fastq数据文件到Read Count矩阵的处理步骤：copy本实验的相关文件至工作目录，将Fastq文件进行质量控制和过滤，使用常见的质量控制工具FastQC来进行质量评估；使用适当的比对工具（如STAR）将Fastq文件的序列比对到参考基因组上，为每个序列分配基因信息；利用samtools软件对BAM文件建立索引，使用IGV软件来可视化BAM文件，并熟悉IGV软件操作与">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://horizongazer.github.io/img/image-20230920192237616.png">
 <meta property="article:published_time" content="2023-10-19T16:00:00.000Z">
@@ -318,17 +318,14 @@
             
               <div class="markdown-body">
                 
-                <h3 id="实验目的">1. 实验目的</h3>
-<p>练习从Fastq数据文件到Read
-Count矩阵的处理步骤：copy本实验的相关文件至工作目录，将Fastq文件进行质量控制和过滤，使用常见的质量控制工具FastQC来进行质量评估；使用适当的比对工具（如STAR）将Fastq文件的序列比对到参考基因组上，为每个序列分配基因信息；利用samtools软件对BAM文件建立索引，使用IGV软件来可视化BAM文件，并熟悉IGV软件操作与数据意义；编写bash脚本runSTAR.sh，根据比对结果计算每个基因的Read_Count；最后利用R对Gene_Count文件使用DESeq2绘制PCA图，展示基因表达数据的样本间差异。</p>
+                <h3 id="1-实验目的">1. 实验目的</h3>
+<p>练习从Fastq数据文件到Read Count矩阵的处理步骤：copy本实验的相关文件至工作目录，将Fastq文件进行质量控制和过滤，使用常见的质量控制工具FastQC来进行质量评估；使用适当的比对工具（如STAR）将Fastq文件的序列比对到参考基因组上，为每个序列分配基因信息；利用samtools软件对BAM文件建立索引，使用IGV软件来可视化BAM文件，并熟悉IGV软件操作与数据意义；<a target="_blank" rel="noopener" href="http://xn--bashrunSTAR-cn7r175tw7vdklg.sh">编写bash脚本runSTAR.sh</a>，根据比对结果计算每个基因的Read_Count；最后利用R对Gene_Count文件使用DESeq2绘制PCA图，展示基因表达数据的样本间差异。</p>
 <p>了解perl_fork_univ.pl脚本运行STAR的多个作业的操作。</p>
-<h3 id="实验准备">2. 实验准备</h3>
-<h4 id="实验平台">2.1 实验平台</h4>
-<p>Linux JSvr01 3.10.0-1160.80.1.el7.x86_64 #1 SMP Tue Nov 8 15:48:59
-UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</p>
-<h4 id="数据简述">2.2 数据简述</h4>
+<h3 id="2-实验准备">2. 实验准备</h3>
+<h4 id="2-1-实验平台">2.1 实验平台</h4>
+<p>Linux JSvr01 3.10.0-1160.80.1.el7.x86_64 #1 SMP Tue Nov 8 15:48:59 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</p>
+<h4 id="2-2-数据简述">2.2 数据简述</h4>
 <table>
-
 <thead>
 <tr>
 <th>数据</th>
@@ -339,7 +336,7 @@ UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</p>
 <tbody>
 <tr>
 <td>R64.fa</td>
-<td>Reference genome sequence file, in fasta format.</td>
+<td>Reference  genome sequence file, in fasta format.</td>
 <td>/work/cb-data/RNAseq/exercise1</td>
 </tr>
 <tr>
@@ -384,9 +381,8 @@ UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</p>
 </tr>
 </tbody>
 </table>
-<h4 id="软件配置">2.3 软件配置</h4>
-<table style="width:100%;">
-
+<h4 id="2-3-软件配置">2.3 软件配置</h4>
+<table>
 <thead>
 <tr>
 <th>软件</th>
@@ -398,12 +394,12 @@ UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</p>
 <tr>
 <td>R</td>
 <td>R version 4.3.1</td>
-<td>https://posit.co/download/rstudio-desktop/</td>
+<td><a target="_blank" rel="noopener" href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a></td>
 </tr>
 <tr>
 <td>RStudio</td>
 <td>RStudio Version 2023.06.2+561</td>
-<td>https://posit.co/download/rstudio-desktop/ Rstudio依赖R</td>
+<td><a target="_blank" rel="noopener" href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a>   Rstudio依赖R</td>
 </tr>
 <tr>
 <td>Windows PowerShell</td>
@@ -413,226 +409,180 @@ UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</p>
 <tr>
 <td>FileZilla</td>
 <td>3.65.0</td>
-<td>https://filezilla-project.org/</td>
+<td><a target="_blank" rel="noopener" href="https://filezilla-project.org/">https://filezilla-project.org/</a></td>
 </tr>
 <tr>
 <td>IGV</td>
 <td>2.6.3</td>
-<td>https://data.broadinstitute.org/igv/projects/downloads/2.6/</td>
+<td><a target="_blank" rel="noopener" href="https://data.broadinstitute.org/igv/projects/downloads/2.6/">https://data.broadinstitute.org/igv/projects/downloads/2.6/</a></td>
 </tr>
 <tr>
 <td>notepad++</td>
 <td>8.5.7</td>
-<td><a
-target="_blank" rel="noopener" href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org/</a></td>
+<td><a target="_blank" rel="noopener" href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org/ </a></td>
 </tr>
 </tbody>
 </table>
-<h3 id="from-fastq-data-files-to-read-count-matrix">3. From Fastq data
-files to Read Count Matrix</h3>
+<h3 id="3-From-Fastq-data-files-to-Read-Count-Matrix">3. From Fastq data files to Read Count Matrix</h3>
 <p>本实验将进行RNA-Seq差异分析之前的数步操作：</p>
 <p>首先将Fastq文件进行质量控制和过滤，使用常见的质量控制工具FastQC来进行质量评估；</p>
 <p>然后使用STAR工具将Fastq文件的序列比对到参考基因组上，生成BAM格式的比对结果文件</p>
 <p>其次使用samtools软件对BAM文件进行索引，使用IGV软件可视化BAM文件；</p>
-<p>再次为每个序列分配基因信息：使用比对的结果文件（BAM文件）以及相应的基因注释文件，编写一个Bash脚本，其中包含运行比对工具（如STAR）以及计算每个基因的Read
-Count的步骤；</p>
+<p>再次为每个序列分配基因信息：使用比对的结果文件（BAM文件）以及相应的基因注释文件，编写一个Bash脚本，其中包含运行比对工具（如STAR）以及计算每个基因的Read Count的步骤；</p>
 <p>最后使用DESeq2软件包和R编程语言，对基因计数文件进行进一步的分析。可以使用DESeq2来绘制PCA图，以展示基因表达数据在样本间的差异。</p>
-<h4 id="prepare-the-working-directory">3.1 Prepare the working
-directory</h4>
+<h4 id="3-1-Prepare-the-working-directory">3.1 Prepare the working directory</h4>
 <p>copy实验所需的数据至本人目录下，并创建工作空间。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir 20213281022<br>mv exercise1/* 20213281022<br>ls -al 20213281022<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230920172812696.png" srcset="/img/loading.gif" lazyload /></p>
-<h4 id="examine-the-quality-of-the-fastq-data-files">3.2 Examine the
-quality of the fastq data files</h4>
+<p><img src="/img/image-20230920172812696.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h4 id="3-2-Examine-the-quality-of-the-fastq-data-files">3.2 Examine the quality of the fastq data files</h4>
 <p>QC过程，对数据进行质量评估</p>
-<h5 id="对fastq文件使用命令fastqc">(1)对fastq文件使用命令fastqc</h5>
+<h5 id="1-对fastq文件使用命令fastqc">(1)对fastq文件使用命令fastqc</h5>
 <p>使用质量控制工具FastQC来进行质量评估</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">fastqc ERR458493.fastq.gz<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230920173331935.png" srcset="/img/loading.gif" lazyload /></p>
-<h5
-id="使用filezilla下载生成的err458493_fastqc.html查看分析结果">(2)使用Filezilla下载生成的ERR458493_fastqc.html，查看分析结果</h5>
-<p><img src="/img/image-20230920190653902.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/image-20230920173331935.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="2-使用Filezilla下载生成的ERR458493-fastqc-html，查看分析结果">(2)使用Filezilla下载生成的ERR458493_fastqc.html，查看分析结果</h5>
+<p><img src="/img/image-20230920190653902.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">start</span> .\ERR458493_fastqc.html<br></code></pre></td></tr></table></figure>
 <blockquote>
-<p><img src="/img/image-20230920190758012.png" srcset="/img/loading.gif" lazyload></p>
-<p>由Per base sequence
-quality分析可知，整体质量不错，得分总体处于28以上，当序列长度为2，3，4bp时，误差较大，建议舍去。</p>
-<p><img src="/img/image-20230922214303935.png" srcset="/img/loading.gif" lazyload></p>
+<img src="/img/image-20230920190758012.png" srcset="/img/loading.gif" lazyload>
+<p>由Per base sequence quality分析可知，整体质量不错，得分总体处于28以上，当序列长度为2，3，4bp时，误差较大，建议舍去。</p>
+<img src="/img/image-20230922214303935.png" srcset="/img/loading.gif" lazyload>
 <p>对于每个tile的测序质量，用热图进行展示，蓝色表明该tile的测序质量好，红色表明该tile的测序质量差。</p>
-<p><img src="/img/image-20230922214330764.png" srcset="/img/loading.gif" lazyload></p>
+<img src="/img/image-20230922214330764.png" srcset="/img/loading.gif" lazyload>
 <p>横坐标为reads的平均测序质量，纵坐标为序列数，峰值在39处，测序质量好</p>
-<p><img src="/img/image-20230922214347945.png" srcset="/img/loading.gif" lazyload></p>
+<img src="/img/image-20230922214347945.png" srcset="/img/loading.gif" lazyload>
 <p>横坐标为序列长度，纵坐标为各碱基的百分比，可以看出序列长度较短时，碱基分布的偏倚，文库的构建过程存在问题。</p>
-<p><img src="/img/image-20230922214357949.png" srcset="/img/loading.gif" lazyload></p>
+<img src="/img/image-20230922214357949.png" srcset="/img/loading.gif" lazyload>
 <p>横坐标为GC含量，纵坐标为序列，数图中红色的线是实际的GC含量分布，蓝色的线是理论上的正态分布曲线，可知CG含量总体符合正态分布。<img src="/img/image-20230922214408502.png" srcset="/img/loading.gif" lazyload></p>
-<p>这部分内容给出N碱基的比例分布图，横坐标为序列长度，纵坐标为N碱基的比例，当测序仪无法识别具体是哪种碱基时，就会给出N,
-N比例越小越好。该图质量较好。</p>
-<p><img src="/img/image-20230922214417658.png" srcset="/img/loading.gif" lazyload></p>
+<p>这部分内容给出N碱基的比例分布图，横坐标为序列长度，纵坐标为N碱基的比例，当测序仪无法识别具体是哪种碱基时，就会给出N,  N比例越小越好。该图质量较好。</p>
+<img src="/img/image-20230922214417658.png" srcset="/img/loading.gif" lazyload>
 <p>这部分内容给出序列的长度分布，横坐标为序列长度，纵坐标为序列条数，峰值在51bp处。</p>
-<p><img src="/img/image-20230922214426964.png" srcset="/img/loading.gif" lazyload></p>
+<img src="/img/image-20230922214426964.png" srcset="/img/loading.gif" lazyload>
 <p>这部分给出重复序列分布图，横坐标为重复的次数，纵坐标为序列所占百分比。基因组覆盖度越高，测序得到的序列重复比例会越低；在文库构建过程中，如果某些片段PCR扩增的比例大于随机扩增的比例，会导致重复序列比例高。</p>
-<p><img src="/img/image-20230922214438736.png" srcset="/img/loading.gif" lazyload></p>
+<img src="/img/image-20230922214438736.png" srcset="/img/loading.gif" lazyload>
 <p>这部分内容给出序列中包含的adapter 序列的情况。</p>
 </blockquote>
-<h4 id="run-read-mapping-software">3.2 Run read mapping software</h4>
+<h4 id="3-2-Run-read-mapping-software">3.2 Run read mapping software</h4>
 <p>使用STAR工具将Fastq文件的序列比对到参考基因组上</p>
-<h5 id="检查文件及文件基本信息">(1)检查文件及文件基本信息</h5>
+<h5 id="1-检查文件及文件基本信息">(1)检查文件及文件基本信息</h5>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls -al<br></code></pre></td></tr></table></figure>
-<figure>
-<img src="/img/image-20230920191741282.png" srcset="/img/loading.gif" lazyload
-alt="image-20230920191741282" />
-<figcaption aria-hidden="true">image-20230920191741282</figcaption>
-</figure>
+<p><img src="/img/image-20230920191741282.png" srcset="/img/loading.gif" lazyload alt="image-20230920191741282"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">gunzip -c ERR458493.fastq.gz | head<br>gunzip -c ERR458493.fastq.gz | wc -l<br>less R64.fa<br>less R64.gtf<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230920192237616.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/img/image-20230920192716224.png" srcset="/img/loading.gif" lazyload /></p>
+<img src="/img/image-20230920192237616.png" srcset="/img/loading.gif" lazyload>
+<p><img src="/img/image-20230920192716224.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
-<p>由于每个序列读取在 Fastq 文件中占用 4 行，因此行号除以 4
-给出了文件中的排序读取数。reads数为：4375828/4=1093957</p>
+<p>由于每个序列读取在 Fastq 文件中占用 4 行，因此行号除以 4 给出了文件中的排序读取数。reads数为：4375828/4=1093957</p>
 </blockquote>
-<p><img src="/img/image-20230920192837398.png" srcset="/img/loading.gif" lazyload></p>
+<img src="/img/image-20230920192837398.png" srcset="/img/loading.gif" lazyload>
 <blockquote>
 <p>展现fa格式文件，共202645行，仅展现前5行</p>
 </blockquote>
-<p><img src="/img/image-20230920193014610.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/image-20230920193014610.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>展现gtf格式文件共41884行，仅展现前5行，以下为各列含义：</p>
-<ol type="1">
+<ol>
 <li><strong>seq_id</strong>：序列的编号，一般为chr或者scanfold编号，每条染色体拥有一个唯一的ID。</li>
-<li><strong>source</strong>:
-注释的来源，代表基因结构的来源，可以是数据库的名称，比如来自<code>RefSeq</code>数据库，也可以是软件的名称，比如用<code>GeneScan</code>软件预测得到，当然，也可以为空，用<code>.</code>点号填充。</li>
+<li><strong>source</strong>: 注释的来源，代表基因结构的来源，可以是数据库的名称，比如来自<code>RefSeq</code>数据库，也可以是软件的名称，比如用<code>GeneScan</code>软件预测得到，当然，也可以为空，用<code>.</code>点号填充。</li>
 <li><strong>type</strong>: 代表区间对应的特征类型</li>
 <li><strong>start</strong>:该基因或转录本在参考序列上的起始位置。</li>
 <li><strong>end</strong>: 该基因或转录本在参考序列上的终止位置。</li>
-<li><strong>score</strong>:
-得分，软件提供了统计值，是注释信息可能性的说明，可以是序列相似性比对时的E-values值或者基因预测是的P-values值，“.”表示为空。</li>
-<li><strong>strand</strong>:
-代表正负链的信息,<code>+</code>表示正链，<code>-</code>表示负链，<code>?</code>表示不清楚正负链的信息，当正负链信息没有意义时，可以用<code>.</code>填充。</li>
-<li><strong>phase</strong>:
-仅对注释类型为“<strong>CDS</strong>”有效，表示起始编码的位置，有效值为0、1、2</li>
+<li><strong>score</strong>: 得分，软件提供了统计值，是注释信息可能性的说明，可以是序列相似性比对时的E-values值或者基因预测是的P-values值，“.”表示为空。</li>
+<li><strong>strand</strong>: 代表正负链的信息,<code>+</code>表示正链，<code>-</code>表示负链，<code>?</code>表示不清楚正负链的信息，当正负链信息没有意义时，可以用<code>.</code>填充。</li>
+<li><strong>phase</strong>: 仅对注释类型为“<strong>CDS</strong>”有效，表示起始编码的位置，有效值为0、1、2</li>
 </ol>
 </blockquote>
-<h5
-id="使用star将读段映射到参考基因组">(2)使用STAR将读段映射到参考基因组</h5>
+<h5 id="2-使用STAR将读段映射到参考基因组">(2)使用STAR将读段映射到参考基因组</h5>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-variable">$PATH</span>命令会将 STAR 置于当前路径中。只需键入命令“STAR”即可运行该软件。</span><br>export PATH=/programs/STAR:$PATH<br></code></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">用STAR索引参考基因组</span><br>STAR --runMode genomeGenerate --runThreadN 2 --genomeDir genome --genomeFastaFiles R64.fa --sjdbGTFfile R64.gtf --sjdbOverhang 50<br><span class="hljs-meta prompt_">#</span><span class="language-bash">--runMode genomeGenerate：将 runMode 设置为 “genomeGenerate” 来索引基因组;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--runThreadN：CPU 内核数;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--genomeDir：索引基因组数据库的输出目录;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--genomeFastaFiles：参考基因组文件</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--sjdbGTFfile：基因组注释文件，它应该是GTF格式；</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--sjdbOverhang：使用值 （reads_length -1），本练习的读取长度为 51。</span><br>ls genome<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230920195024332.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/image-20230920195024332.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">将测序读数与索引基因组比对</span><br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458493.fastq.gz --readFilesCommand zcat --outFileNamePrefix wt1_ --outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate<br><span class="hljs-meta prompt_">#</span><span class="language-bash">--quantMode GeneCounts：输出一个包含每个基因读取计数的文件;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--genomeDir：参考基因组索引目录;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--runThreadN：CPU 内核数;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--readFilesIn：序列数据文件;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--readFilesCommand zcat：输入文件是解压缩的.gz文件;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--outFileNamePrefix：输出文件名的前缀;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--outFilterMismatchNmax 2 ：仅报告每次读取最多 2 个不匹配的比对;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">--outSAMtype BAM SortedByCoordinate：输出排序的 bam 文件。</span><br>ls<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230920195720016.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/image-20230920195720016.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">检查文件</span><br>less wt1_Log.final.out<br>less wt1_ReadsPerGene.out.tab<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230920200132676.png" srcset="/img/loading.gif" lazyload /></p>
-<p><img src="/img/image-20230920200240579.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/image-20230920200132676.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="/img/image-20230920200240579.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>共7131行，仅展现前5行</p>
 </blockquote>
-<h4 id="visualize-the-bam-file-with-igv">3.4<strong>Visualize the BAM
-file with IGV</strong></h4>
+<h4 id="3-4Visualize-the-BAM-file-with-IGV">3.4<strong>Visualize the BAM file with IGV</strong></h4>
 <p>利用samtools软件对BAM文件建立索引，使用IGV软件来可视化BAM文件</p>
-<h5
-id="为bam文件编制索引我们将使用igv软件来可视化bam文件为了让igv读取bam文件需要对.bam文件进行索引我们将使用samtools软件">(1)为bam文件编制索引：我们将使用IGV软件来可视化bam文件。为了让IGV读取BAM文件，需要对“.BAM”文件进行索引。我们将使用samtools软件</h5>
+<h5 id="1-为bam文件编制索引：我们将使用IGV软件来可视化bam文件。为了让IGV读取BAM文件，需要对“-BAM”文件进行索引。我们将使用samtools软件">(1)为bam文件编制索引：我们将使用IGV软件来可视化bam文件。为了让IGV读取BAM文件，需要对“.BAM”文件进行索引。我们将使用samtools软件</h5>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">samtools index wt1_Aligned.sortedByCoord.out.bam<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230920202631095.png" srcset="/img/loading.gif" lazyload /></p>
-<h5
-id="使用filezilla将.bam.bair64.fa和r64.gtf文件下载到笔记本电脑">(2)使用FILEZILLA将“<em>.bam”、“</em>.bai”、“R64.fa”和“R64.gtf”文件下载到笔记本电脑。</h5>
-<p><img src="/img/image-20230920203259710.png" srcset="/img/loading.gif" lazyload /></p>
-<h5 id="安装igv_2.6.3">(3)安装IGV_2.6.3</h5>
-<p>https://data.broadinstitute.org/igv/projects/downloads/2.6/</p>
-<h5 id="创建自己的基因组">(4)创建自己的基因组</h5>
-<p><img src="/img/image-20230920210221672.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/img/image-20230920202631095.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="2-使用FILEZILLA将“-bam”、“-bai”、“R64-fa”和“R64-gtf”文件下载到笔记本电脑。">(2)使用FILEZILLA将“<em>.bam”、“</em>.bai”、“R64.fa”和“R64.gtf”文件下载到笔记本电脑。</h5>
+<p><img src="/img/image-20230920203259710.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="3-安装IGV-2-6-3">(3)安装IGV_2.6.3</h5>
+<p><a target="_blank" rel="noopener" href="https://data.broadinstitute.org/igv/projects/downloads/2.6/">https://data.broadinstitute.org/igv/projects/downloads/2.6/</a></p>
+<h5 id="4-创建自己的基因组">(4)创建自己的基因组</h5>
+<img src="/img/image-20230920210221672.png" srcset="/img/loading.gif" lazyload>
 <blockquote>
 <p>生成R64.genome文件</p>
 </blockquote>
-<h5
-id="导入文件后检测区域ii265593-282726">(5)导入文件后，检测区域II:265,593-282,726</h5>
-<p><img src="/img/image-20230920211616804.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="5-导入文件后，检测区域II-265-593-282-726">(5)导入文件后，检测区域II:265,593-282,726</h5>
+<img src="/img/image-20230920211616804.png" srcset="/img/loading.gif" lazyload>
 <blockquote>
-<p>展现了II号染色体上的265,593至282,726区域的基因与reads数。峰值位于268kb与270.5kb处，可知YBR016W_mRMA与MNN2表达量较其他基因高，同时考虑外显子长度，YBR016W_mRMA较短故可认为表达量极高，而YBR020W_mRMA,
-YBR019C_mRMA,
-YBR018C_mRMA，YBR017C_mRMA长度长但reads数很少，可认为表达水平较低。同时reads除了match部分，还有较多的SNP位点、插入与缺失位点，大多处于reads的边缘。处于正链的基因箭头向右，处于负链的基因箭头向左。</p>
+<p>展现了II号染色体上的265,593至282,726区域的基因与reads数。峰值位于268kb与270.5kb处，可知YBR016W_mRMA与MNN2表达量较其他基因高，同时考虑外显子长度，YBR016W_mRMA较短故可认为表达量极高，而YBR020W_mRMA, YBR019C_mRMA, YBR018C_mRMA，YBR017C_mRMA长度长但reads数很少，可认为表达水平较低。同时reads除了match部分，还有较多的SNP位点、插入与缺失位点，大多处于reads的边缘。处于正链的基因箭头向右，处于负链的基因箭头向左。</p>
 </blockquote>
-<h4 id="run-the-commands-in-a-shell-script">3.5 <strong>Run the commands
-in a shell script</strong></h4>
-<p>在典型的RNA-seq实验中，有许多样品，可能需要数小时才能完成比对。可以做两件事来加快计算速度：
-创建一个批处理命令（shell script）来处理所有文件; 使用 STAR
-的“共享内存”功能。</p>
-<h5 id="下载文本编辑器">(1)下载文本编辑器</h5>
-<p>http://notepad-plus-plus.org/</p>
-<h5 id="创建脚本runstar.sh">(2)创建脚本runSTAR.sh</h5>
+<h4 id="3-5-Run-the-commands-in-a-shell-script">3.5 <strong>Run the commands in a shell script</strong></h4>
+<p>在典型的RNA-seq实验中，有许多样品，可能需要数小时才能完成比对。可以做两件事来加快计算速度： 创建一个批处理命令（shell script）来处理所有文件; 使用 STAR 的“共享内存”功能。</p>
+<h5 id="1-下载文本编辑器">(1)下载文本编辑器</h5>
+<p><a target="_blank" rel="noopener" href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org/</a></p>
+<h5 id="2-创建脚本runSTAR-sh">(2)<a target="_blank" rel="noopener" href="http://xn--runSTAR-dp0lt07gperhg9d.sh">创建脚本runSTAR.sh</a></h5>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sh">STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458493.fastq.gz --readFilesCommand zcat --outFileNamePrefix wt1_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate<br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458494.fastq.gz --readFilesCommand zcat --outFileNamePrefix wt2_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate<br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458495.fastq.gz --readFilesCommand zcat --outFileNamePrefix wt3_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate<br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458500.fastq.gz --readFilesCommand zcat --outFileNamePrefix mu1_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate<br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458501.fastq.gz --readFilesCommand zcat --outFileNamePrefix mu2_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate<br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458502.fastq.gz --readFilesCommand zcat --outFileNamePrefix mu3_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate<br></code></pre></td></tr></table></figure>
 <blockquote>
-<p>–quantMode GeneCounts:
-这个参数告诉STAR使用基因计数模式进行分析，即生成基因计数信息。</p>
-<p>–genomeDir genome:
-这个参数指定基因组目录的路径，STAR将在该目录中查找索引文件和其他相关文件。</p>
-<p>–runThreadN 2:
-这个参数指定并行处理的线程数。在这种情况下，STAR将使用2个线程进行处理。</p>
+<p>–quantMode GeneCounts: 这个参数告诉STAR使用基因计数模式进行分析，即生成基因计数信息。</p>
+<p>–genomeDir genome: 这个参数指定基因组目录的路径，STAR将在该目录中查找索引文件和其他相关文件。</p>
+<p>–runThreadN 2: 这个参数指定并行处理的线程数。在这种情况下，STAR将使用2个线程进行处理。</p>
 <p>–readFilesIn: 这个参数指定输入的FASTQ文件的路径。</p>
-<p>–readFilesCommand zcat`:
-这个参数告诉STAR使用zcat命令解压缩输入的FASTQ文件。在这个例子中，它使用zcat命令来解压缩。</p>
+<p>–readFilesCommand zcat`: 这个参数告诉STAR使用zcat命令解压缩输入的FASTQ文件。在这个例子中，它使用zcat命令来解压缩。</p>
 <p>–outFileNamePrefix : 这个参数指定输出文件的前缀。</p>
-<p>–outFilterMultimapNmax 1:
-这个参数指定最大允许的多映射数。在这个例子中，允许的最大多映射数为1。</p>
-<p>–outFilterMismatchNmax 2:
-这个参数指定最大允许的错配数。在这个例子中，允许的最大错配数为2。</p>
-<p>–outSAMtype BAM SortedByCoordinate:
-这个参数指定输出的SAM/BAM文件类型以及按坐标排序。在这个例子中，输出将是按坐标排序的BAM文件。</p>
+<p>–outFilterMultimapNmax 1: 这个参数指定最大允许的多映射数。在这个例子中，允许的最大多映射数为1。</p>
+<p>–outFilterMismatchNmax 2: 这个参数指定最大允许的错配数。在这个例子中，允许的最大错配数为2。</p>
+<p>–outSAMtype BAM SortedByCoordinate: 这个参数指定输出的SAM/BAM文件类型以及按坐标排序。在这个例子中，输出将是按坐标排序的BAM文件。</p>
 </blockquote>
 <p>通过运行这个STAR命令，您将得到基因计数信息和按坐标排序的BAM文件，这对于后续的基因表达分析非常有用。请确保您已经正确安装和配置了STAR软件，并且已经生成了相应的基因组索引。</p>
-<p><img src="/img/image-20230920213222686.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/image-20230920213222686.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>然后利用FileZilla拷贝文件至服务器</p>
-<h5 id="启用screen运行脚本">(3)启用screen,运行脚本</h5>
+<h5 id="3-启用screen-运行脚本">(3)启用screen,运行脚本</h5>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">screen<br>export PATH=/programs/STAR:$PATH<br>sh runSTAR.sh &gt;&amp; log &amp;<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230920214531391.png" srcset="/img/loading.gif" lazyload /></p>
-<p><img src="/img/image-20230920214339813.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/image-20230920214531391.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="/img/image-20230920214339813.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">命令将产生与上一个命令相同的结果，但由于它一次运行两个作业，速度将是上一个的两倍</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">但缺少perl_fork_univ.pl脚本！</span><br>export PATH=/programs/STAR:$PATH<br>perl_fork_univ.pl runSTAR.sh 2 &gt;&amp; log &amp;<br></code></pre></td></tr></table></figure>
 <p>(4)每个样本一个文件（*_ReadsPerGene.out.tab）。将这6个文件合并为一个文件进行统计分析。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">这段代码的作用是将几个文件（wt1_ReadsPerGene.out.tab, wt2_ReadsPerGene.out.tab, wt3_ReadsPerGene.out.tab, mu1_ReadsPerGene.out.tab, mu2_ReadsPerGene.out.tab, mu3_ReadsPerGene.out.tab）合并成一个文件，并从中提取特定的列（第1列, 第2列, 第6列, 第10列, 第14列, 第18列, 第22列），然后将结果保存到gene_count.txt文件中。而<span class="hljs-string">&quot;nano gene_count.txt&quot;</span>命令是在文本编辑器中打开gene_count.txt文件，以便查看或编辑其内容。</span><br>paste wt1_ReadsPerGene.out.tab wt2_ReadsPerGene.out.tab wt3_ReadsPerGene.out.tab mu1_ReadsPerGene.out.tab mu2_ReadsPerGene.out.tab mu3_ReadsPerGene.out.tab | cut -f1,2,6,10,14,18,22 | tail -n +5 &gt; gene_count.txt<br>nano gene_count.txt<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230921193908886.png" srcset="/img/loading.gif" lazyload></p>
+<img src="/img/image-20230921193908886.png" srcset="/img/loading.gif" lazyload>
 <blockquote>
 <p>共7127行。</p>
 </blockquote>
-<h4 id="load-the-matrix-into-r-and-make-pca-plot-with-deseq2">3.6
-<strong>Load the matrix into R and make PCA Plot with
-DESeq2</strong></h4>
-<p>PCA（Principal Component
-Analysis）是一种常用的多变量数据分析方法，可以帮助我们理解和解释生物学数据的特征和变异。PCA可以从数据中找出主要的变异模式，并将原始数据映射到新的低维空间中，使得数据的变异尽可能地集中在少数几个主成分上。</p>
-<h5 id="练习打开sample文件">(1)练习打开sample文件</h5>
+<h4 id="3-6-Load-the-matrix-into-R-and-make-PCA-Plot-with-DESeq2">3.6 <strong>Load the matrix into R and make PCA Plot with DESeq2</strong></h4>
+<p>PCA（Principal Component Analysis）是一种常用的多变量数据分析方法，可以帮助我们理解和解释生物学数据的特征和变异。PCA可以从数据中找出主要的变异模式，并将原始数据映射到新的低维空间中，使得数据的变异尽可能地集中在少数几个主成分上。</p>
+<h5 id="1-练习打开sample文件">(1)练习打开sample文件</h5>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">less samples.txt<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230921194324641.png" srcset="/img/loading.gif" lazyload /></p>
-<h5
-id="用filezilla传输gene_count.txt和samples.txt文件在rstudio上导入文件使用deseq2绘制pca图">(2)用Filezilla传输gene_count.txt和samples.txt文件，在RStudio上导入文件，使用DESeq2绘制PCA图</h5>
+<p><img src="/img/image-20230921194324641.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="2-用Filezilla传输gene-count-txt和samples-txt文件，在RStudio上导入文件，使用DESeq2绘制PCA图">(2)用Filezilla传输gene_count.txt和samples.txt文件，在RStudio上导入文件，使用DESeq2绘制PCA图</h5>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment"># 已提前使用setwd()设置工作目录,gene_count.txt和samples.txt在工作目录下</span><br>library<span class="hljs-punctuation">(</span>DESeq2<span class="hljs-punctuation">)</span><br>library<span class="hljs-punctuation">(</span>ggplot2<span class="hljs-punctuation">)</span><br>cts <span class="hljs-operator">&lt;-</span> as.matrix<span class="hljs-punctuation">(</span>read.csv<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;gene_count.txt&quot;</span><span class="hljs-punctuation">,</span> sep<span class="hljs-operator">=</span><span class="hljs-string">&quot;\t&quot;</span><span class="hljs-punctuation">,</span> row.names<span class="hljs-operator">=</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span> header<span class="hljs-operator">=</span><span class="hljs-literal">FALSE</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br>coldata <span class="hljs-operator">&lt;-</span> read.csv<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;samples.txt&quot;</span><span class="hljs-punctuation">,</span> sep<span class="hljs-operator">=</span><span class="hljs-string">&quot;\t&quot;</span><span class="hljs-punctuation">,</span> row.names<span class="hljs-operator">=</span><span class="hljs-number">1</span><span class="hljs-punctuation">)</span><br>colnames<span class="hljs-punctuation">(</span>cts<span class="hljs-punctuation">)</span> <span class="hljs-operator">&lt;-</span> rownames<span class="hljs-punctuation">(</span>coldata<span class="hljs-punctuation">)</span><br>dds <span class="hljs-operator">&lt;-</span> DESeqDataSetFromMatrix<span class="hljs-punctuation">(</span>countData <span class="hljs-operator">=</span> cts<span class="hljs-punctuation">,</span><br>                              colData <span class="hljs-operator">=</span> coldata<span class="hljs-punctuation">,</span><br>                              design <span class="hljs-operator">=</span><span class="hljs-operator">~</span> Genotype<span class="hljs-punctuation">)</span><br>vsd <span class="hljs-operator">&lt;-</span> vst<span class="hljs-punctuation">(</span>dds<span class="hljs-punctuation">,</span> blind<span class="hljs-operator">=</span><span class="hljs-literal">FALSE</span><span class="hljs-punctuation">)</span><br>pcaData <span class="hljs-operator">&lt;-</span> plotPCA<span class="hljs-punctuation">(</span>vsd<span class="hljs-punctuation">,</span> intgroup<span class="hljs-operator">=</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;Genotype&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> returnData<span class="hljs-operator">=</span><span class="hljs-literal">TRUE</span><span class="hljs-punctuation">)</span><br>percentVar <span class="hljs-operator">&lt;-</span> <span class="hljs-built_in">round</span><span class="hljs-punctuation">(</span><span class="hljs-number">100</span> <span class="hljs-operator">*</span> <span class="hljs-built_in">attr</span><span class="hljs-punctuation">(</span>pcaData<span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;percentVar&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br>ggplot<span class="hljs-punctuation">(</span>pcaData<span class="hljs-punctuation">,</span> aes<span class="hljs-punctuation">(</span>PC1<span class="hljs-punctuation">,</span> PC2<span class="hljs-punctuation">,</span> color<span class="hljs-operator">=</span>Genotype<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  geom_point<span class="hljs-punctuation">(</span>size<span class="hljs-operator">=</span><span class="hljs-number">3</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  xlim<span class="hljs-punctuation">(</span><span class="hljs-operator">-</span><span class="hljs-number">2.5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">2.5</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  ylim<span class="hljs-punctuation">(</span><span class="hljs-operator">-</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  xlab<span class="hljs-punctuation">(</span>paste0<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;PC1: &quot;</span><span class="hljs-punctuation">,</span>percentVar<span class="hljs-punctuation">[</span><span class="hljs-number">1</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><span class="hljs-string">&quot;% variance&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  ylab<span class="hljs-punctuation">(</span>paste0<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;PC2: &quot;</span><span class="hljs-punctuation">,</span>percentVar<span class="hljs-punctuation">[</span><span class="hljs-number">2</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><span class="hljs-string">&quot;% variance&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  geom_text<span class="hljs-punctuation">(</span>aes<span class="hljs-punctuation">(</span>label<span class="hljs-operator">=</span>name<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>vjust<span class="hljs-operator">=</span><span class="hljs-number">2</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>我们使用散点图来表示PCA的结果。选择前两个主成分，第一主成分具有最大的方差，可以看到PC1将mu与wt分得很开，具有良好的区分效果，而PC2则难以将其区分。类内较为紧密，类间间距大，数据质量较好。</p>
 </blockquote>
-<h4 id="use-the-shared-memory-feature-load-of-star">3.7 <strong>Use the
-“shared memory” feature</strong> load <strong>of STAR</strong></h4>
+<h4 id="3-7-Use-the-“shared-memory”-feature-load-of-STAR">3.7 <strong>Use the “shared memory” feature</strong> load <strong>of STAR</strong></h4>
 <p>STAR提供了一个功能，允许将基因组数据库预加载到共享内存空间中，所有STAR比对作业都可以使用该空间。</p>
-<h5
-id="将基因组加载到数据库中并保存">(1)将基因组加载到数据库中并保存</h5>
+<h5 id="1-将基因组加载到数据库中并保存">(1)将基因组加载到数据库中并保存</h5>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">STAR --genomeLoad LoadAndExit --genomeDir genome<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230921203224576.png" srcset="/img/loading.gif" lazyload /></p>
-<h5 id="创建脚本">(2)创建脚本</h5>
-<p>像在步骤3.5中那样，使用STAR比对命令制作一个shell脚本。将这两个参数添加到每个STAR命令中：“–genomeLoad
-LoadAndKeep–limitBAMsortRAM
-400000000”。genomeLoad指示STAR使用共享内存，limitBAMsortRAM指示STAR限制4GB用于bam排序步骤。</p>
+<p><img src="/img/image-20230921203224576.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="2-创建脚本">(2)创建脚本</h5>
+<p>像在步骤3.5中那样，使用STAR比对命令制作一个shell脚本。将这两个参数添加到每个STAR命令中：“–genomeLoad LoadAndKeep–limitBAMsortRAM 400000000”。genomeLoad指示STAR使用共享内存，limitBAMsortRAM指示STAR限制4GB用于bam排序步骤。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458493.fastq.gz --readFilesCommand zcat --outFileNamePrefix wt1_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate --genomeLoad LoadAndKeep --limitBAMsortRAM 4000000000<br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458494.fastq.gz --readFilesCommand zcat --outFileNamePrefix wt2_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate --genomeLoad LoadAndKeep --limitBAMsortRAM 4000000000<br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458495.fastq.gz --readFilesCommand zcat --outFileNamePrefix wt3_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate --genomeLoad LoadAndKeep --limitBAMsortRAM 4000000000<br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458500.fastq.gz --readFilesCommand zcat --outFileNamePrefix mu1_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate --genomeLoad LoadAndKeep --limitBAMsortRAM 4000000000<br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458501.fastq.gz --readFilesCommand zcat --outFileNamePrefix mu2_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate --genomeLoad LoadAndKeep --limitBAMsortRAM 4000000000<br>STAR --quantMode GeneCounts --genomeDir genome --runThreadN 2 --readFilesIn ERR458502.fastq.gz --readFilesCommand zcat --outFileNamePrefix mu3_ -- outFilterMultimapNmax 1 --outFilterMismatchNmax 2 --outSAMtype BAM SortedByCoordinate --genomeLoad LoadAndKeep --limitBAMsortRAM 4000000000<br></code></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">export PATH=/programs/STAR:$PATH<br>sh new_runSTAR.sh 2 &gt;&amp; log &amp;<br>top -u S20213281022<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230923203821516.png" srcset="/img/loading.gif" lazyload /></p>
-<h5
-id="完成后确保从共享内存中删除基因组数据库否则它会留在那里">(3)完成后，确保从共享内存中删除基因组数据库。否则它会留在那里。</h5>
+<p><img src="/img/image-20230923203821516.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="3-完成后，确保从共享内存中删除基因组数据库。否则它会留在那里。">(3)完成后，确保从共享内存中删除基因组数据库。否则它会留在那里。</h5>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">STAR --genomeLoad Remove --genomeDir genome<br></code></pre></td></tr></table></figure>
-<p><img src="/img/image-20230923203900178.png" srcset="/img/loading.gif" lazyload /></p>
-<h3 id="实验总结">4. 实验总结</h3>
-<h4 id="实验结论">4.1 实验结论</h4>
-<p>(1)使用FastQC对Fastq文件来进行质量评估，由Per base sequence
-quality分析可知，整体质量不错，得分总体处于28以上，当序列长度为2，3，4bp时，误差较大，建议舍去。</p>
+<p><img src="/img/image-20230923203900178.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="4-实验总结">4. 实验总结</h3>
+<h4 id="4-1-实验结论">4.1 实验结论</h4>
+<p>(1)使用FastQC对Fastq文件来进行质量评估，由Per base sequence quality分析可知，整体质量不错，得分总体处于28以上，当序列长度为2，3，4bp时，误差较大，建议舍去。</p>
 <p>(2)使用STAR将测序读数与索引基因组比对输出排序的 bam 文件</p>
-<p>(3)使用IGV软件来可视化bam文件，需要对“.BAM”文件进行索引。可由IGV可视化BAM文件可知知YBR016W_mRMA与MNN2表达量较其他基因高，同时考虑外显子长度，YBR016W_mRMA较短故可认为表达量极高，而YBR020W_mRMA,
-YBR019C_mRMA,
-YBR018C_mRMA，YBR017C_mRMA长度长但reads数很少，可认为表达水平较低。</p>
+<p>(3)使用IGV软件来可视化bam文件，需要对“.BAM”文件进行索引。可由IGV可视化BAM文件可知知YBR016W_mRMA与MNN2表达量较其他基因高，同时考虑外显子长度，YBR016W_mRMA较短故可认为表达量极高，而YBR020W_mRMA, YBR019C_mRMA, YBR018C_mRMA，YBR017C_mRMA长度长但reads数很少，可认为表达水平较低。</p>
 <p>（4）利用R对Gene_Count文件使用DESeq2绘制PCA图，展示基因表达数据的样本间差异。可以看到PC1将mu与wt分得很开，具有良好的区分效果。类内较为紧密，类间间距大，数据质量较好。</p>
-<h4 id="实验收获">4.2 实验收获</h4>
+<h4 id="4-2-实验收获">4.2 实验收获</h4>
 <p>注意到数据分析前的QC过程。学会使用STAR将Fastq文件的序列比对到参考基因组上，为每个序列分配基因信息。学会利用samtools软件对BAM文件建立索引。学会使用IGV软件来可视化BAM文件，并熟悉IGV软件操作与数据意义。了解PCA图的绘制流程与其中的生物学意义。</p>
 
                 

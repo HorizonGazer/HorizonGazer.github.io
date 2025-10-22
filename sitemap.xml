@@ -196,34 +196,6 @@
   </url>
   
   <url>
-    <loc>http://horizongazer.github.io/tags/BFS/</loc>
-    <lastmod>2025-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://horizongazer.github.io/tags/DFS/</loc>
-    <lastmod>2025-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://horizongazer.github.io/tags/AStar%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2025-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://horizongazer.github.io/tags/%CE%B1-%CE%B2%E5%89%AA%E6%9E%9D/</loc>
-    <lastmod>2025-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://horizongazer.github.io/tags/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -273,6 +245,34 @@
   </url>
   
   <url>
+    <loc>http://horizongazer.github.io/tags/BFS/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/DFS/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/AStar%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/%CE%B1-%CE%B2%E5%89%AA%E6%9E%9D/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://horizongazer.github.io/tags/Linux/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -280,14 +280,21 @@
   </url>
   
   <url>
-    <loc>http://horizongazer.github.io/tags/RNA-seq/</loc>
+    <loc>http://horizongazer.github.io/tags/Genomics/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://horizongazer.github.io/tags/%E4%B8%8B%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%88%9D%E6%AD%A5%E5%A4%84%E7%90%86/</loc>
+    <loc>http://horizongazer.github.io/tags/GATK4/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/SNP/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -329,28 +336,14 @@
   </url>
   
   <url>
-    <loc>http://horizongazer.github.io/tags/Genomics/</loc>
+    <loc>http://horizongazer.github.io/tags/RNA-seq/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://horizongazer.github.io/tags/GATK4/</loc>
-    <lastmod>2025-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://horizongazer.github.io/tags/SNP/</loc>
-    <lastmod>2025-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://horizongazer.github.io/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/</loc>
+    <loc>http://horizongazer.github.io/tags/%E4%B8%8B%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%88%9D%E6%AD%A5%E5%A4%84%E7%90%86/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -358,6 +351,13 @@
   
   <url>
     <loc>http://horizongazer.github.io/tags/MAKER/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -441,6 +441,20 @@
   </url>
   
   <url>
+    <loc>http://horizongazer.github.io/tags/FOREVER/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://horizongazer.github.io/tags/LOVE/</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://horizongazer.github.io/tags/FGSM/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -456,20 +470,6 @@
   
   <url>
     <loc>http://horizongazer.github.io/tags/CIFAR-10/</loc>
-    <lastmod>2025-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://horizongazer.github.io/tags/FOREVER/</loc>
-    <lastmod>2025-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://horizongazer.github.io/tags/LOVE/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -499,7 +499,7 @@
   </url>
   
   <url>
-    <loc>http://horizongazer.github.io/categories/RNA-seq/</loc>
+    <loc>http://horizongazer.github.io/categories/Genomics/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -513,7 +513,7 @@
   </url>
   
   <url>
-    <loc>http://horizongazer.github.io/categories/Genomics/</loc>
+    <loc>http://horizongazer.github.io/categories/RNA-seq/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -541,14 +541,14 @@
   </url>
   
   <url>
-    <loc>http://horizongazer.github.io/categories/AI%E6%94%BB%E9%98%B2/</loc>
+    <loc>http://horizongazer.github.io/categories/LOVE/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://horizongazer.github.io/categories/LOVE/</loc>
+    <loc>http://horizongazer.github.io/categories/AI%E6%94%BB%E9%98%B2/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

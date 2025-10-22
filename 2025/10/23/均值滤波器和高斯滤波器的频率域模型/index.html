@@ -19,16 +19,16 @@
   <meta name="author" content="HorizonGazer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="均值滤波器和高斯滤波器的频率域模型 简单而言，图像细节对应于高频信号。图像的大尺度特征对应于低频信号。值得注意的是随机的图像噪声通常对应于高频信号。 矩形函数的频率域模型  空间域模型 二维矩形函数 f(t, z) 定义为： $$ f(t, z) &#x3D; \begin{cases} A, &amp; -\frac{T}{2} \leq t \leq \frac{T}{2}, \qu">
+    <meta name="description" content="均值滤波器和高斯滤波器的频率域模型 简单而言，图像细节对应于高频信号。图像的大尺度特征对应于低频信号。值得注意的是随机的图像噪声通常对应于高频信号。 矩形函数的频率域模型  空间域模型 二维矩形函数 $f(t, z)$ 定义为： $$ f(t, z) &#x3D; \begin{cases} A, &amp; -\frac{T}{2} \leq t \leq \frac{T}{2}, \quad -\fra">
 <meta property="og:type" content="article">
 <meta property="og:title" content="均值滤波器和高斯滤波器的频率域模型">
 <meta property="og:url" content="http://horizongazer.github.io/2025/10/23/%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2%E5%99%A8%E5%92%8C%E9%AB%98%E6%96%AF%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%9A%84%E9%A2%91%E7%8E%87%E5%9F%9F%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="HorizonGazer">
-<meta property="og:description" content="均值滤波器和高斯滤波器的频率域模型 简单而言，图像细节对应于高频信号。图像的大尺度特征对应于低频信号。值得注意的是随机的图像噪声通常对应于高频信号。 矩形函数的频率域模型  空间域模型 二维矩形函数 f(t, z) 定义为： $$ f(t, z) &#x3D; \begin{cases} A, &amp; -\frac{T}{2} \leq t \leq \frac{T}{2}, \qu">
+<meta property="og:description" content="均值滤波器和高斯滤波器的频率域模型 简单而言，图像细节对应于高频信号。图像的大尺度特征对应于低频信号。值得注意的是随机的图像噪声通常对应于高频信号。 矩形函数的频率域模型  空间域模型 二维矩形函数 $f(t, z)$ 定义为： $$ f(t, z) &#x3D; \begin{cases} A, &amp; -\frac{T}{2} \leq t \leq \frac{T}{2}, \quad -\fra">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://horizongazer.github.io/img/image-20251023013307280.png">
 <meta property="article:published_time" content="2025-10-22T18:32:01.793Z">
-<meta property="article:modified_time" content="2025-10-22T19:28:12.883Z">
+<meta property="article:modified_time" content="2025-10-22T19:38:29.120Z">
 <meta property="article:author" content="HorizonGazer">
 <meta property="article:tag" content="滤波器">
 <meta property="article:tag" content="频率域模型">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          2.7k 字
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          22 分钟
+          23 分钟
         
       </span>
     
@@ -317,326 +317,259 @@
             
               <div class="markdown-body">
                 
-                <h2
-id="均值滤波器和高斯滤波器的频率域模型">均值滤波器和高斯滤波器的频率域模型</h2>
+                <h2 id="均值滤波器和高斯滤波器的频率域模型">均值滤波器和高斯滤波器的频率域模型</h2>
 <p>简单而言，图像细节对应于高频信号。图像的大尺度特征对应于低频信号。值得注意的是随机的图像噪声通常对应于高频信号。</p>
 <h3 id="矩形函数的频率域模型">矩形函数的频率域模型</h3>
-<p><img src="\img\image-20251023013307280.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
+<img src="\img\image-20251023013307280.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" />
 <h4 id="空间域模型">空间域模型</h4>
-<p>二维矩形函数 <span
-class="math inline"><em>f</em>(<em>t</em>, <em>z</em>)</span>
-定义为：</p>
-<p><span class="math display">$$
-f(t, z) =
-\begin{cases}
-A, &amp; -\frac{T}{2} \leq t \leq \frac{T}{2}, \quad -\frac{Z}{2} \leq z
-\leq \frac{Z}{2} \\
-0, &amp; \text{otherwise}
-\end{cases}
-$$</span></p>
-<p>其中 <span class="math inline"><em>A</em></span> 是幅度，<span
-class="math inline"><em>T</em></span> 和 <span
-class="math inline"><em>Z</em></span> 分别为 <span
-class="math inline"><em>t</em></span> 与 <span
-class="math inline"><em>z</em></span> 方向的宽度。若<span
-class="math inline"><em>T</em> &gt; <em>Z</em></span>，则矩形在 <span
-class="math inline"><em>t</em></span> 方向上更长。</p>
+<p>二维矩形函数 $f(t, z)$ 定义为：</p>
+<p>$$<br>
+f(t, z) =<br>
+\begin{cases}<br>
+A, &amp; -\frac{T}{2} \leq t \leq \frac{T}{2}, \quad -\frac{Z}{2} \leq z \leq \frac{Z}{2} \<br>
+0, &amp; \text{otherwise}<br>
+\end{cases}<br>
+$$</p>
+<p>其中 $A$ 是幅度，$T$ 和 $Z$ 分别为 $t$ 与 $z$ 方向的宽度。若$T &gt; Z$，则矩形在 $t$ 方向上更长。</p>
 <h4 id="频率域模型">频率域模型</h4>
-<p>二维傅里叶变换定义为：</p>
-<p><span
-class="math display"><em>F</em>(<em>μ</em>, <em>ν</em>) = ∬<em>f</em>(<em>t</em>, <em>z</em>) <em>e</em><sup>−<em>j</em>2<em>π</em>(<em>μ</em><em>t</em> + <em>ν</em><em>z</em>)</sup> <em>d</em><em>t</em> <em>d</em><em>z</em></span></p>
+<p>二维傅里叶变换定义为：<br>
+$$<br>
+F(\mu, \nu) = \iint f(t, z) , e^{-j 2\pi (\mu t + \nu z)} , dt , dz<br>
+$$</p>
 <p>将定义域代入得：</p>
-<p><span
-class="math display"><em>F</em>(<em>μ</em>, <em>ν</em>) = ∫<sub>−<em>Z</em>/2</sub><sup><em>Z</em>/2</sup>∫<sub>−<em>T</em>/2</sub><sup><em>T</em>/2</sup><em>A</em><em>e</em><sup>−<em>j</em>2<em>π</em>(<em>μ</em><em>t</em> + <em>ν</em><em>z</em>)</sup> <em>d</em><em>t</em> <em>d</em><em>z</em></span></p>
+<p>$$<br>
+F(\mu, \nu) = \int_{-Z/2}^{Z/2} \int_{-T/2}^{T/2} A e^{-j 2\pi (\mu t + \nu z)} , dt , dz<br>
+$$</p>
 <p>由于积分可分离，写为：</p>
-<p><span
-class="math display"><em>F</em>(<em>μ</em>, <em>ν</em>) = <em>A</em>(∫<sub>−<em>T</em>/2</sub><sup><em>T</em>/2</sup><em>e</em><sup>−<em>j</em>2<em>π</em><em>μ</em><em>t</em></sup> <em>d</em><em>t</em>)(∫<sub>−<em>Z</em>/2</sub><sup><em>Z</em>/2</sup><em>e</em><sup>−<em>j</em>2<em>π</em><em>ν</em><em>z</em></sup> <em>d</em><em>z</em>)</span></p>
-<p>对 <span class="math inline"><em>t</em></span> 积分：</p>
-<p><span class="math display">$$
-\int_{-T/2}^{T/2} e^{-j 2\pi \mu t} \, dt
-= \frac{e^{-j 2\pi \mu t}}{-j 2\pi \mu} \Big|_{-T/2}^{T/2}
-= \frac{e^{-j \pi \mu T} - e^{j \pi \mu T}}{-j 2\pi \mu}
-= \frac{\sin(\pi \mu T)}{\pi \mu}
-$$</span></p>
+<p>$$<br>
+F(\mu, \nu) = A<br>
+\left( \int_{-T/2}^{T/2} e^{-j 2\pi \mu t} , dt \right)<br>
+\left( \int_{-Z/2}^{Z/2} e^{-j 2\pi \nu z} , dz \right)<br>
+$$</p>
+<p>对 $t$ 积分：</p>
+<p>$$<br>
+\int_{-T/2}^{T/2} e^{-j 2\pi \mu t} , dt<br>
+= \frac{e^{-j 2\pi \mu t}}{-j 2\pi \mu} \Big|_{-T/2}^{T/2}<br>
+= \frac{e^{-j \pi \mu T} - e^{j \pi \mu T}}{-j 2\pi \mu}<br>
+= \frac{\sin(\pi \mu T)}{\pi \mu}<br>
+$$</p>
 <p>整理为：</p>
-<p><span
-class="math display">∫<sub>−<em>T</em>/2</sub><sup><em>T</em>/2</sup><em>e</em><sup>−<em>j</em>2<em>π</em><em>μ</em><em>t</em></sup> <em>d</em><em>t</em> = <em>T</em> ⋅ sinc(<em>μ</em><em>T</em>)</span></p>
-<p>对 <span class="math inline"><em>z</em></span> 积分：</p>
-<p><span class="math display">$$
-\int_{-Z/2}^{Z/2} e^{-j 2\pi \nu z} \, dz
-= \frac{e^{-j 2\pi \nu z}}{-j 2\pi \nu} \Big|_{-Z/2}^{Z/2}
-= \frac{e^{-j \pi \nu Z} - e^{j \pi \nu Z}}{-j 2\pi \nu}
-= \frac{\sin(\pi \nu Z)}{\pi \nu}
-$$</span></p>
+<p>$$<br>
+\int_{-T/2}^{T/2} e^{-j 2\pi \mu t} , dt = T \cdot \text{sinc}(\mu T)<br>
+$$</p>
+<p>对 $z$ 积分：</p>
+<p>$$<br>
+\int_{-Z/2}^{Z/2} e^{-j 2\pi \nu z} , dz<br>
+= \frac{e^{-j 2\pi \nu z}}{-j 2\pi \nu} \Big|_{-Z/2}^{Z/2}<br>
+= \frac{e^{-j \pi \nu Z} - e^{j \pi \nu Z}}{-j 2\pi \nu}<br>
+= \frac{\sin(\pi \nu Z)}{\pi \nu}<br>
+$$</p>
 <p>整理为：</p>
-<p><span
-class="math display">∫<sub>−<em>Z</em>/2</sub><sup><em>Z</em>/2</sup><em>e</em><sup>−<em>j</em>2<em>π</em><em>ν</em><em>z</em></sup> <em>d</em><em>z</em> = <em>Z</em> ⋅ sinc(<em>ν</em><em>Z</em>)</span></p>
+<p>$$<br>
+\int_{-Z/2}^{Z/2} e^{-j 2\pi \nu z} , dz = Z \cdot \text{sinc}(\nu Z)<br>
+$$</p>
 <p>将两个积分结果相乘：</p>
-<p><span
-class="math display"><em>F</em>(<em>μ</em>, <em>ν</em>) = <em>A</em>[<em>T</em> ⋅ sinc(<em>μ</em><em>T</em>)][<em>Z</em> ⋅ sinc(<em>ν</em><em>Z</em>)] = <em>A</em><em>T</em><em>Z</em> ⋅ sinc(<em>μ</em><em>T</em>) ⋅ sinc(<em>ν</em><em>Z</em>)</span></p>
+<p>$$<br>
+F(\mu, \nu)<br>
+= A \left[ T \cdot \text{sinc}(\mu T) \right] \left[ Z \cdot \text{sinc}(\nu Z) \right]<br>
+= A T Z \cdot \text{sinc}(\mu T) \cdot \text{sinc}(\nu Z)<br>
+$$</p>
 <p>因此，二维矩形函数的傅里叶变换为：</p>
-<p><span class="math display">$$
-\boxed{
-F(\mu, \nu) = A T Z \cdot \text{sinc}(\mu T) \cdot \text{sinc}(\nu Z)
-}
-$$</span></p>
+<p>$$<br>
+\boxed{<br>
+F(\mu, \nu) = A T Z \cdot \text{sinc}(\mu T) \cdot \text{sinc}(\nu Z)<br>
+}<br>
+$$</p>
 <p>其中：</p>
 <ul>
-<li><span class="math inline"><em>A</em></span> 控制整体幅度；</li>
-<li><span class="math inline"><em>T</em></span> 与 <span
-class="math inline"><em>Z</em></span> 分别决定频谱在 <span
-class="math inline"><em>μ</em></span> 与 <span
-class="math inline"><em>ν</em></span> 方向的主瓣宽度；</li>
-<li>频谱的形状由两个 <span class="math inline">sinc</span>
-函数控制，且主瓣宽度 <span
-class="math inline"> ∝ 1/<em>T</em></span>、<span
-class="math inline">1/<em>Z</em></span>；</li>
+<li>$A$ 控制整体幅度；</li>
+<li>$T$ 与 $Z$ 分别决定频谱在 $\mu$ 与 $\nu$ 方向的主瓣宽度；</li>
+<li>频谱的形状由两个 $\text{sinc}$ 函数控制，且主瓣宽度 $\propto 1/T$、$1/Z$；</li>
 </ul>
 <p>其幅度谱为：</p>
-<p><span
-class="math display">|<em>F</em>(<em>μ</em>, <em>ν</em>)| = <em>A</em><em>T</em><em>Z</em> ⋅ |sinc(<em>μ</em><em>T</em>)| ⋅ |sinc(<em>ν</em><em>Z</em>)|</span></p>
-<p>由于 <span
-class="math inline"><em>T</em> &gt; <em>Z</em></span>，<span
-class="math inline">sinc(<em>μ</em><em>T</em>)</span>
-的主瓣宽度（零点间距为 <span class="math inline">1/<em>T</em></span>）比
-<span class="math inline">sinc(<em>ν</em><em>Z</em>)</span>
-更窄，因此在频率域中谱在 <span class="math inline"><em>μ</em></span>
-方向更”收缩”（contracted）。</p>
+<p>$$<br>
+|F(\mu, \nu)| = A T Z \cdot |\text{sinc}(\mu T)| \cdot |\text{sinc}(\nu Z)|<br>
+$$</p>
+<p>由于 $T &gt; Z$，$\text{sinc}(\mu T)$ 的主瓣宽度（零点间距为 $1/T$）比 $\text{sinc}(\nu Z)$ 更窄，因此在频率域中谱在 $\mu$ 方向更&quot;收缩&quot;（contracted）。</p>
 <h3 id="均值滤波器的频率域模型">均值滤波器的频率域模型</h3>
-<h4 id="空间域模型-1">空间域模型</h4>
-<p>二维均值滤波器的核 <span
-class="math inline"><em>h</em>(<em>x</em>, <em>y</em>)</span>
-可以看作一个矩形窗口函数：</p>
-<p><span class="math display">$$
-h(x, y) =
-\begin{cases}
-\frac{1}{M^2}, &amp; -\frac{M-1}{2} \leq x, y \leq \frac{M-1}{2} \\
-0, &amp; \text{otherwise}
-\end{cases}
-$$</span></p>
-<p>它与矩形函数类似，只是进行了归一化（总能量为 1）。当核为方形时，<span
-class="math inline"><em>T</em> = <em>Z</em> = <em>M</em></span>；若为非方形（<span
-class="math inline"><em>M</em><sub><em>x</em></sub> × <em>M</em><sub><em>y</em></sub></span>），则可类比为
-<span
-class="math inline"><em>T</em> = <em>M</em><sub><em>x</em></sub>, <em>Z</em> = <em>M</em><sub><em>y</em></sub></span>。</p>
-<h4 id="频率域模型-1">频率域模型</h4>
+<h4 id="空间域模型-2">空间域模型</h4>
+<p>二维均值滤波器的核 $h(x, y)$ 可以看作一个矩形窗口函数：</p>
+<p>$$<br>
+h(x, y) =<br>
+\begin{cases}<br>
+\frac{1}{M^2}, &amp; -\frac{M-1}{2} \leq x, y \leq \frac{M-1}{2} \<br>
+0, &amp; \text{otherwise}<br>
+\end{cases}<br>
+$$</p>
+<p>它与矩形函数类似，只是进行了归一化（总能量为 1）。当核为方形时，$T = Z = M$；若为非方形（$M_x \times M_y$），则可类比为 $T = M_x, Z = M_y$。</p>
+<h4 id="频率域模型-2">频率域模型</h4>
 <p>离散二维傅里叶变换可表示为：</p>
-<p><span class="math display">$$
-H(u, v) = \frac{1}{M^2}
-\sum_{x=-\frac{M-1}{2}}^{\frac{M-1}{2}}
-\sum_{y=-\frac{M-1}{2}}^{\frac{M-1}{2}}
-e^{-j 2\pi (ux/M + vy/M)}
-$$</span></p>
+<p>$$<br>
+H(u, v) = \frac{1}{M^2}<br>
+\sum_{x=-\frac{M-1}{2}}^{\frac{M-1}{2}} \sum_{y=-\frac{M-1}{2}}^{\frac{M-1}{2}}<br>
+e^{-j 2\pi (ux/M + vy/M)}<br>
+$$</p>
 <p>由于可分离性：</p>
-<p><span class="math display">$$
-H(u, v) =
-\left( \frac{1}{M} \sum_{x=-\frac{M-1}{2}}^{\frac{M-1}{2}} e^{-j 2\pi
-ux/M} \right)
-\left( \frac{1}{M} \sum_{y=-\frac{M-1}{2}}^{\frac{M-1}{2}} e^{-j 2\pi
-vy/M} \right)
-$$</span></p>
+<p>$$<br>
+H(u, v) =<br>
+\left( \frac{1}{M} \sum_{x=-\frac{M-1}{2}}^{\frac{M-1}{2}} e^{-j 2\pi ux/M} \right)<br>
+\left( \frac{1}{M} \sum_{y=-\frac{M-1}{2}}^{\frac{M-1}{2}} e^{-j 2\pi vy/M} \right)<br>
+$$</p>
 <p>每个一维求和结果为：</p>
-<p><span class="math display">$$
-\sum_{x=-\frac{M-1}{2}}^{\frac{M-1}{2}} e^{-j 2\pi ux/M}
-= \frac{\sin(\pi u)}{\sin(\pi u / M)}
-$$</span></p>
+<p>$$<br>
+\sum_{x=-\frac{M-1}{2}}^{\frac{M-1}{2}} e^{-j 2\pi ux/M}<br>
+= \frac{\sin(\pi u)}{\sin(\pi u / M)}<br>
+$$</p>
 <p>因此：</p>
-<p><span class="math display">$$
-H(u, v) =
-\frac{1}{M^2}
-\cdot
-\frac{\sin(\pi u)}{\sin(\pi u / M)}
-\cdot
-\frac{\sin(\pi v)}{\sin(\pi v / M)}
-$$</span></p>
-<p>其中<span class="math inline">$\frac{\sin(\pi u)}{\sin(\pi u /
-M)}$</span> 是离散傅里叶变换中的 <strong>Dirichlet 核</strong>，它是连续
-<span class="math inline">sinc</span>
-函数在离散情况下的对应物。<strong>它具有与连续 <span
-class="math inline">sinc</span>
-函数相似的性质：</strong>低通特性，周期性零点，主瓣和旁瓣结构，幅度随频率增加而衰减等。</p>
+<p>$$<br>
+H(u, v) =<br>
+\frac{1}{M^2}<br>
+\cdot<br>
+\frac{\sin(\pi u)}{\sin(\pi u / M)}<br>
+\cdot<br>
+\frac{\sin(\pi v)}{\sin(\pi v / M)}<br>
+$$</p>
+<p>其中$\frac{\sin(\pi u)}{\sin(\pi u / M)}$ 是离散傅里叶变换中的 <strong>Dirichlet 核</strong>，它是连续 $\text{sinc}$ 函数在离散情况下的对应物。**它具有与连续 $\text{sinc}$ 函数相似的性质：**低通特性，周期性零点，主瓣和旁瓣结构，幅度随频率增加而衰减等。</p>
 <h4 id="与图像特征的联系">与图像特征的联系</h4>
 <ul>
-<li><p><strong>矩形函数的非方形性</strong>：当 <span
-class="math inline"><em>T</em> &gt; <em>Z</em></span> 时，频谱在 <span
-class="math inline"><em>μ</em></span> 方向更窄、在 <span
-class="math inline"><em>ν</em></span>
-方向更宽。这反映出空间域与频率域的反比关系（宽的函数 →
-窄的谱）。</p></li>
-<li><p><strong>均值滤波器的方形性</strong>：标准均值滤波器通常为方形核（<span
-class="math inline"><em>T</em> = <em>Z</em> = <em>M</em></span>），其频率响应
-<span class="math inline"><em>H</em>(<em>u</em>, <em>v</em>)</span>
-对称，主瓣宽度在 <span class="math inline"><em>u</em></span> 和 <span
-class="math inline"><em>v</em></span> 方向相同。若使用非方形核（<span
-class="math inline"><em>M</em><sub><em>x</em></sub> × <em>M</em><sub><em>y</em></sub></span>），则：</p>
-<p><span
-class="math display"><em>H</em>(<em>u</em>, <em>v</em>) ∝ sinc(<em>u</em><em>M</em><sub><em>x</em></sub>) ⋅ sinc(<em>v</em><em>M</em><sub><em>y</em></sub>)</span></p>
-<p>主瓣宽度分别为 <span
-class="math inline">1/<em>M</em><sub><em>x</em></sub></span> 与 <span
-class="math inline">1/<em>M</em><sub><em>y</em></sub></span>，这与矩形函数
-<span class="math inline"><em>f</em>(<em>t</em>, <em>z</em>)</span>
-的频谱形状完全一致。</p></li>
+<li>
+<p><strong>矩形函数的非方形性</strong>：当 $T &gt; Z$ 时，频谱在 $\mu$ 方向更窄、在 $\nu$ 方向更宽。这反映出空间域与频率域的反比关系（宽的函数 → 窄的谱）。</p>
+</li>
+<li>
+<p><strong>均值滤波器的方形性</strong>：标准均值滤波器通常为方形核（$T = Z = M$），其频率响应 $H(u, v)$ 对称，主瓣宽度在 $u$ 和 $v$ 方向相同。若使用非方形核（$M_x \times M_y$），则：</p>
+<p>$$<br>
+H(u, v) \propto \text{sinc}(u M_x) \cdot \text{sinc}(v M_y)<br>
+$$</p>
+<p>主瓣宽度分别为 $1/M_x$ 与 $1/M_y$，这与矩形函数 $f(t, z)$ 的频谱形状完全一致。</p>
+</li>
 </ul>
 <h3 id="高斯滤波器的频率域模型">高斯滤波器的频率域模型</h3>
 <h4 id="空间域定义">空间域定义</h4>
 <p>高斯滤波器的空间域核基于二维高斯函数，其定义为：</p>
-<p><span class="math display">$$
-h(x, y) = A e^{-\frac{x^2 + y^2}{2\sigma^2}}
-$$</span></p>
+<p>$$<br>
+h(x, y) = A e^{-\frac{x^2 + y^2}{2\sigma^2}}<br>
+$$</p>
 <p>其中：</p>
 <ul>
-<li><span class="math inline">(<em>x</em>, <em>y</em>)</span>
-为空间坐标；</li>
-<li><span class="math inline"><em>σ</em></span>
-为标准差，控制平滑程度；</li>
-<li><span class="math inline"><em>A</em></span>
-为归一化因子，确保滤波核的总和为 1。</li>
+<li>$(x, y)$ 为空间坐标；</li>
+<li>$\sigma$ 为标准差，控制平滑程度；</li>
+<li>$A$ 为归一化因子，确保滤波核的总和为 1。</li>
 </ul>
 <p>通常取：</p>
-<p><span class="math display">$$
-A = \frac{1}{2\pi\sigma^2}
-$$</span></p>
+<p>$$<br>
+A = \frac{1}{2\pi\sigma^2}<br>
+$$</p>
 <p>因此：</p>
-<p><span class="math display">$$
-h(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}
-$$</span></p>
+<p>$$<br>
+h(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}<br>
+$$</p>
 <p>在离散情况下，核通常截取在有限窗口内并进行归一化。</p>
-<h4 id="频率域模型-2">频率域模型</h4>
-<h5 id="二维傅里叶变换">(1) 二维傅里叶变换</h5>
+<h4 id="频率域模型-3">频率域模型</h4>
+<h5 id="1-二维傅里叶变换">(1) 二维傅里叶变换</h5>
 <p>二维傅里叶变换定义为：</p>
-<p><span
-class="math display"><em>H</em>(<em>u</em>, <em>v</em>) = ∫<sub>−∞</sub><sup>∞</sup>∫<sub>−∞</sub><sup>∞</sup><em>h</em>(<em>x</em>, <em>y</em>) <em>e</em><sup>−<em>j</em>2<em>π</em>(<em>u</em><em>x</em> + <em>v</em><em>y</em>)</sup> <em>d</em><em>x</em> <em>d</em><em>y</em></span></p>
+<p>$$<br>
+H(u, v) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} h(x, y) , e^{-j 2\pi (u x + v y)} , dx , dy<br>
+$$</p>
 <p>代入高斯核：</p>
-<p><span class="math display">$$
-H(u, v) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
-\frac{1}{2\pi\sigma^2}
-e^{-\frac{x^2 + y^2}{2\sigma^2}}
-e^{-j 2\pi (u x + v y)}
-\, dx \, dy
-$$</span></p>
-<p>由于高斯函数在 <span class="math inline"><em>x</em></span> 与 <span
-class="math inline"><em>y</em></span> 方向上可分离，可写为：</p>
-<p><span class="math display">$$
-H(u, v) = \frac{1}{2\pi\sigma^2}
-\left( \int_{-\infty}^{\infty} e^{-\frac{x^2}{2\sigma^2}} e^{-j 2\pi u
-x} \, dx \right)
-\left( \int_{-\infty}^{\infty} e^{-\frac{y^2}{2\sigma^2}} e^{-j 2\pi v
-y} \, dy \right)
-$$</span></p>
-<h5 id="一维高斯函数的傅里叶变换">(2) 一维高斯函数的傅里叶变换</h5>
-<p>已知一维高斯函数 <span
-class="math inline"><em>e</em><sup>−<em>a</em><em>x</em><sup>2</sup></sup></span>
-的傅里叶变换为：</p>
-<p><span class="math display">$$
-\int_{-\infty}^{\infty} e^{-a x^2} e^{-j 2\pi u x} \, dx =
-\sqrt{\frac{\pi}{a}} \, e^{-\frac{\pi^2 u^2}{a}}
-$$</span></p>
-<p>这里 <span class="math inline">$a =
-\frac{1}{2\sigma^2}$</span>，代入得：</p>
-<p><span class="math display">$$
-\int_{-\infty}^{\infty} e^{-\frac{x^2}{2\sigma^2}} e^{-j 2\pi u x} \, dx
-= \sqrt{2\pi\sigma^2} \, e^{-2\pi^2 \sigma^2 u^2}
-$$</span></p>
+<p>$$<br>
+H(u, v) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}<br>
+\frac{1}{2\pi\sigma^2}<br>
+e^{-\frac{x^2 + y^2}{2\sigma^2}}<br>
+e^{-j 2\pi (u x + v y)}<br>
+, dx , dy<br>
+$$</p>
+<p>由于高斯函数在 $x$ 与 $y$ 方向上可分离，可写为：</p>
+<p>$$<br>
+H(u, v) = \frac{1}{2\pi\sigma^2}<br>
+\left( \int_{-\infty}^{\infty} e^{-\frac{x^2}{2\sigma^2}} e^{-j 2\pi u x} , dx \right)<br>
+\left( \int_{-\infty}^{\infty} e^{-\frac{y^2}{2\sigma^2}} e^{-j 2\pi v y} , dy \right)<br>
+$$</p>
+<h5 id="2-一维高斯函数的傅里叶变换">(2) 一维高斯函数的傅里叶变换</h5>
+<p>已知一维高斯函数 $e^{-a x^2}$ 的傅里叶变换为：</p>
+<p>$$<br>
+\int_{-\infty}^{\infty} e^{-a x^2} e^{-j 2\pi u x} , dx = \sqrt{\frac{\pi}{a}} , e^{-\frac{\pi^2 u^2}{a}}<br>
+$$</p>
+<p>这里 $a = \frac{1}{2\sigma^2}$，代入得：</p>
+<p>$$<br>
+\int_{-\infty}^{\infty} e^{-\frac{x^2}{2\sigma^2}} e^{-j 2\pi u x} , dx<br>
+= \sqrt{2\pi\sigma^2} , e^{-2\pi^2 \sigma^2 u^2}<br>
+$$</p>
 <p>同理：</p>
-<p><span class="math display">$$
-\int_{-\infty}^{\infty} e^{-\frac{y^2}{2\sigma^2}} e^{-j 2\pi v y} \, dy
-= \sqrt{2\pi\sigma^2} \, e^{-2\pi^2 \sigma^2 v^2}
-$$</span></p>
-<h5 id="合并结果">(3) 合并结果</h5>
+<p>$$<br>
+\int_{-\infty}^{\infty} e^{-\frac{y^2}{2\sigma^2}} e^{-j 2\pi v y} , dy<br>
+= \sqrt{2\pi\sigma^2} , e^{-2\pi^2 \sigma^2 v^2}<br>
+$$</p>
+<h5 id="3-合并结果">(3) 合并结果</h5>
 <p>代入两方向积分结果：</p>
-<p><span class="math display">$$
-H(u, v) = \frac{1}{2\pi\sigma^2}
-\cdot \sqrt{2\pi\sigma^2} \, e^{-2\pi^2 \sigma^2 u^2}
-\cdot \sqrt{2\pi\sigma^2} \, e^{-2\pi^2 \sigma^2 v^2}
-$$</span></p>
+<p>$$<br>
+H(u, v) = \frac{1}{2\pi\sigma^2}<br>
+\cdot \sqrt{2\pi\sigma^2} , e^{-2\pi^2 \sigma^2 u^2}<br>
+\cdot \sqrt{2\pi\sigma^2} , e^{-2\pi^2 \sigma^2 v^2}<br>
+$$</p>
 <p>化简得：</p>
-<p><span
-class="math display"><em>H</em>(<em>u</em>, <em>v</em>) = <em>e</em><sup>−2<em>π</em><sup>2</sup><em>σ</em><sup>2</sup>(<em>u</em><sup>2</sup> + <em>v</em><sup>2</sup>)</sup></span></p>
-<h5 id="引入截止频率参数-d_0">(4) 引入截止频率参数 <span
-class="math inline"><em>D</em><sub>0</sub></span></h5>
+<p>$$<br>
+H(u, v) = e^{-2\pi^2 \sigma^2 (u^2 + v^2)}<br>
+$$</p>
+<h5 id="4-引入截止频率参数-D-0">(4) 引入截止频率参数 $D_0$</h5>
 <p>设截止频率参数定义为：</p>
-<p><span class="math display">$$
-D_0 = \frac{1}{\sigma}
-$$</span></p>
+<p>$$<br>
+D_0 = \frac{1}{\sigma}<br>
+$$</p>
 <p>代入上式得：</p>
-<p><span class="math display">$$
-H(u, v) = e^{-2\pi^2 \cdot \frac{1}{D_0^2} (u^2 + v^2)}
-= e^{-\frac{2\pi^2 (u^2 + v^2)}{D_0^2}}
-$$</span></p>
-<p>为简化表示，通常将 <span
-class="math inline">2<em>π</em><sup>2</sup></span>
-吸收进归一化项中，并定义径向频率距离：</p>
-<p><span class="math display">$$
-D(u, v) = \sqrt{u^2 + v^2}
-$$</span></p>
+<p>$$<br>
+H(u, v) = e^{-2\pi^2 \cdot \frac{1}{D_0^2} (u^2 + v^2)}<br>
+= e^{-\frac{2\pi^2 (u^2 + v^2)}{D_0^2}}<br>
+$$</p>
+<p>为简化表示，通常将 $2\pi^2$ 吸收进归一化项中，并定义径向频率距离：</p>
+<p>$$<br>
+D(u, v) = \sqrt{u^2 + v^2}<br>
+$$</p>
 <p>则标准化形式为：</p>
-<p><span class="math display">$$
-\boxed{
-H(u, v) = e^{-\frac{D(u, v)^2}{D_0^2}}
-}
-$$</span></p>
-<p>该表达式表明 <span
-class="math inline"><em>H</em>(<em>u</em>, <em>v</em>)</span>
-在原点处最大，随 <span
-class="math inline"><em>D</em>(<em>u</em>, <em>v</em>)</span>
-增大而指数衰减。</p>
+<p>$$<br>
+\boxed{<br>
+H(u, v) = e^{-\frac{D(u, v)^2}{D_0^2}}<br>
+}<br>
+$$</p>
+<p>该表达式表明 $H(u, v)$ 在原点处最大，随 $D(u, v)$ 增大而指数衰减。</p>
 <h4 id="特性分析">特性分析</h4>
-<p><img src="\img\image-20251023021401530.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
-<h5 id="低通特性">(1) <strong>低通特性</strong></h5>
+<img src="\img\image-20251023021401530.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" />
+<h5 id="1-低通特性">(1) <strong>低通特性</strong></h5>
 <ul>
-<li>当 <span
-class="math inline"><em>D</em>(<em>u</em>, <em>v</em>) = 0</span>
-时，<span class="math inline"><em>H</em>(0, 0) = 1</span>；</li>
-<li>随着 <span
-class="math inline"><em>D</em>(<em>u</em>, <em>v</em>)</span>
-增大，<span
-class="math inline"><em>H</em>(<em>u</em>, <em>v</em>)</span>
-快速衰减；</li>
+<li>当 $D(u, v) = 0$ 时，$H(0, 0) = 1$；</li>
+<li>随着 $D(u, v)$ 增大，$H(u, v)$ 快速衰减；</li>
 <li>有效抑制高频噪声与纹理。</li>
 </ul>
-<h5 id="平滑性">(2) <strong>平滑性</strong></h5>
+<h5 id="2-平滑性">(2) <strong>平滑性</strong></h5>
 <ul>
 <li>高斯函数在空间域和频率域中均为高斯形式；</li>
-<li>其响应平滑、无振铃效应（无旁瓣），不同于矩形窗口引起的 <span
-class="math inline">sinc</span> 振荡。</li>
+<li>其响应平滑、无振铃效应（无旁瓣），不同于矩形窗口引起的 $\text{sinc}$ 振荡。</li>
 </ul>
-<h5 id="可调性">(3) <strong>可调性</strong></h5>
+<h5 id="3-可调性">(3) <strong>可调性</strong></h5>
 <ul>
-<li>参数 <span class="math inline">$D_0 = \frac{1}{\sigma}$</span>
-控制截止频率：
+<li>参数 $D_0 = \frac{1}{\sigma}$ 控制截止频率：
 <ul>
-<li><span class="math inline"><em>D</em><sub>0</sub></span>
-<strong>越大</strong> → 滤波范围越宽 → 保留更多高频信息；</li>
-<li><span class="math inline"><em>D</em><sub>0</sub></span>
-<strong>越小</strong> → 滤波范围越窄 → 平滑效果更强。</li>
-</ul></li>
+<li>$D_0$ <strong>越大</strong> → 滤波范围越宽 → 保留更多高频信息；</li>
+<li>$D_0$ <strong>越小</strong> → 滤波范围越窄 → 平滑效果更强。</li>
+</ul>
+</li>
 </ul>
 <p>因此，高斯滤波器是一种在频率域上具有<strong>理想平滑特性</strong>的低通滤波器，是图像去噪与模糊处理中常用的核函数。</p>
-<h3
-id="使用高斯滤波核下噪声压制与导数计算的简化">使用高斯滤波核下噪声压制与导数计算的简化</h3>
+<h3 id="使用高斯滤波核下噪声压制与导数计算的简化">使用高斯滤波核下噪声压制与导数计算的简化</h3>
 <h4 id="图像梯度的近似">图像梯度的近似</h4>
-<p>如何应在离散像素点间计算图像梯度？图像梯度的近似实现定义了水平和垂直方向的梯度
-<span class="math inline"><em>F</em><sub><em>x</em></sub></span> 和
-<span class="math inline"><em>F</em><sub><em>y</em></sub></span>：</p>
+<p>如何应在离散像素点间计算图像梯度？图像梯度的近似实现定义了水平和垂直方向的梯度 $F_x$ 和 $F_y$：</p>
 <p><strong>水平梯度：</strong></p>
-<p><span class="math display">$$
-F_x(i, j) = \frac{F(i+1, j) - F(i-1, j)}{2}
-$$</span></p>
+<p>$$<br>
+F_x(i, j) = \frac{F(i+1, j) - F(i-1, j)}{2}<br>
+$$</p>
 <p><strong>垂直梯度：</strong></p>
-<p><span class="math display">$$
-F_y(i, j) = \frac{F(i, j+1) - F(i, j-1)}{2}
-$$</span></p>
-<p><span class="math inline"><em>F</em>(<em>i</em>, <em>j</em>)</span>
-表示图像在位置 <span class="math inline">(<em>i</em>, <em>j</em>)</span>
-的像素值，可以是原始图像 <span class="math inline"><em>I</em></span>
-或平滑后的图像 <span class="math inline"><em>J</em></span>。该式采用
-<strong>中心差分法（central difference method）</strong>
-近似一阶偏导数：</p>
-<p><span class="math display">$$
-\frac{\partial F}{\partial x} \approx \frac{F(i+1, j) - F(i-1, j)}{2},
-\quad
-\frac{\partial F}{\partial y} \approx \frac{F(i, j+1) - F(i, j-1)}{2}
-$$</span></p>
+<p>$$<br>
+F_y(i, j) = \frac{F(i, j+1) - F(i, j-1)}{2}<br>
+$$</p>
+<p>$F(i, j)$ 表示图像在位置 $(i, j)$ 的像素值，可以是原始图像 $I$ 或平滑后的图像 $J$。该式采用 <strong>中心差分法（central difference method）</strong> 近似一阶偏导数：</p>
+<p>$$<br>
+\frac{\partial F}{\partial x} \approx \frac{F(i+1, j) - F(i-1, j)}{2}, \quad<br>
+\frac{\partial F}{\partial y} \approx \frac{F(i, j+1) - F(i, j-1)}{2}<br>
+$$</p>
 <p>中心差分比前向差分或后向差分更准确，因为它同时利用两侧邻域的信息，<strong>能有效抵消一阶误差</strong>，在噪声存在时表现更稳定。</p>
 <p>该梯度计算方法广泛应用于：</p>
 <ul>
@@ -654,27 +587,24 @@ $$</span></p>
 </thead>
 <tbody>
 <tr>
-<td><span class="math inline"><em>I</em></span></td>
+<td>$I$</td>
 <td>原始图像（raw image）</td>
 </tr>
 <tr>
-<td><span class="math inline"><em>G</em></span></td>
+<td>$G$</td>
 <td>高斯核（Gaussian kernel）</td>
 </tr>
 <tr>
-<td><span
-class="math inline"><em>J</em> = <em>I</em> ⊗ <em>G</em></span></td>
+<td>$J = I \otimes G$</td>
 <td>高斯滤波后的图像（filtered image）</td>
 </tr>
 </tbody>
 </table>
 <p>高斯核的定义为：</p>
-<p><span class="math display">$$
-G(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}
-$$</span></p>
-<p>其中 <span class="math inline"><em>σ</em></span> 控制平滑程度。卷积
-<span class="math inline"><em>J</em> = <em>I</em> ⊗ <em>G</em></span>
-的作用是：</p>
+<p>$$<br>
+G(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}<br>
+$$</p>
+<p>其中 $\sigma$ 控制平滑程度。卷积 $J = I \otimes G$ 的作用是：</p>
 <ul>
 <li>抑制高频噪声；</li>
 <li>保留低频结构；</li>
@@ -682,105 +612,100 @@ $$</span></p>
 </ul>
 <h4 id="卷积的导数性质">卷积的导数性质</h4>
 <p>卷积运算满足导数可交换性，即：</p>
-<p><span class="math display">$$
-\frac{\partial (G \otimes I)}{\partial x}
-= \frac{\partial G}{\partial x} \otimes I
-$$</span></p>
-<p><span class="math display">$$
-\frac{\partial (G \otimes I)}{\partial y}
-= \frac{\partial G}{\partial y} \otimes I
-$$</span></p>
+<p>$$<br>
+\frac{\partial (G \otimes I)}{\partial x}<br>
+= \frac{\partial G}{\partial x} \otimes I<br>
+$$</p>
+<p>$$<br>
+\frac{\partial (G \otimes I)}{\partial y}<br>
+= \frac{\partial G}{\partial y} \otimes I<br>
+$$</p>
 <p>证明如下</p>
 <p>设：</p>
-<p><span
-class="math display"><em>J</em>(<em>x</em>, <em>y</em>) = (<em>G</em> ⊗ <em>I</em>)(<em>x</em>, <em>y</em>) = ∫<sub>−∞</sub><sup>∞</sup>∫<sub>−∞</sub><sup>∞</sup><em>G</em>(<em>x</em> − <em>x</em>′, <em>y</em> − <em>y</em>′)<em>I</em>(<em>x</em>′, <em>y</em>′) <em>d</em><em>x</em>′ <em>d</em><em>y</em>′</span></p>
-<p>对 <span class="math inline"><em>x</em></span> 求偏导：</p>
-<p><span class="math display">$$
-\frac{\partial J}{\partial x}
-= \frac{\partial}{\partial x}
-\left[
-\int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
-G(x - x', y - y') I(x', y') \, dx' \, dy'
-\right]
-$$</span></p>
+<p>$$<br>
+J(x, y) = (G \otimes I)(x, y)<br>
+= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}<br>
+G(x - x’, y - y’) I(x’, y’) , dx’ , dy’<br>
+$$</p>
+<p>对 $x$ 求偏导：</p>
+<p>$$<br>
+\frac{\partial J}{\partial x}<br>
+= \frac{\partial}{\partial x}<br>
+\left[<br>
+\int_{-\infty}^{\infty} \int_{-\infty}^{\infty}<br>
+G(x - x’, y - y’) I(x’, y’) , dx’ , dy’<br>
+\right]<br>
+$$</p>
 <p>根据积分与微分可交换性（假设函数连续可导）：</p>
-<p><span class="math display">$$
-\frac{\partial J}{\partial x}
-= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
-\frac{\partial G(x - x', y - y')}{\partial x} I(x', y') \, dx' \, dy'
-$$</span></p>
-<p>定义 <span class="math inline">$G_x = \frac{\partial G}{\partial
-x}$</span>，则：</p>
-<p><span class="math display">$$
-\frac{\partial J}{\partial x} = G_x \otimes I
-$$</span></p>
+<p>$$<br>
+\frac{\partial J}{\partial x}<br>
+= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}<br>
+\frac{\partial G(x - x’, y - y’)}{\partial x} I(x’, y’) , dx’ , dy’<br>
+$$</p>
+<p>定义 $G_x = \frac{\partial G}{\partial x}$，则：</p>
+<p>$$<br>
+\frac{\partial J}{\partial x} = G_x \otimes I<br>
+$$</p>
 <p>同理：</p>
-<p><span class="math display">$$
-\frac{\partial J}{\partial y} = G_y \otimes I
-$$</span></p>
+<p>$$<br>
+\frac{\partial J}{\partial y} = G_y \otimes I<br>
+$$</p>
 <h4 id="高斯核的导数">高斯核的导数</h4>
 <p>已知：</p>
-<p><span class="math display">$$
-G(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}
-$$</span></p>
+<p>$$<br>
+G(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}<br>
+$$</p>
 <p>其偏导数为：</p>
-<p><span class="math display">$$
-\frac{\partial G}{\partial x} = G(x, y) \left( -\frac{x}{\sigma^2}
-\right)
-$$</span></p>
-<p><span class="math display">$$
-\frac{\partial G}{\partial y} = G(x, y) \left( -\frac{y}{\sigma^2}
-\right)
-$$</span></p>
-<p>由此得到高斯梯度滤波器（Gradient of Gaussian,
-<strong>GoG</strong>）：</p>
+<p>$$<br>
+\frac{\partial G}{\partial x} = G(x, y) \left( -\frac{x}{\sigma^2} \right)<br>
+$$</p>
+<p>$$<br>
+\frac{\partial G}{\partial y} = G(x, y) \left( -\frac{y}{\sigma^2} \right)<br>
+$$</p>
+<p>由此得到高斯梯度滤波器（Gradient of Gaussian, <strong>GoG</strong>）：</p>
 <ul>
-<li><span class="math inline"><em>G</em><sub><em>x</em></sub></span>
-对应水平方向的边缘响应；</li>
-<li><span class="math inline"><em>G</em><sub><em>y</em></sub></span>
-对应垂直方向的边缘响应。</li>
+<li>$G_x$ 对应水平方向的边缘响应；</li>
+<li>$G_y$ 对应垂直方向的边缘响应。</li>
 </ul>
-<p><img src="\img\image-20251023022747434.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
+<img src="\img\image-20251023022747434.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" />
 <p>导数核同样平滑、连续且无振铃效应，比简单的差分算子更抗噪。</p>
 <h4 id="综合应用流程">综合应用流程</h4>
-<p><strong>梯度计算：</strong> <span class="math display">$$
-J_x = \frac{\partial J}{\partial x} = G_x \otimes I
-$$</span></p>
-<p><span class="math display">$$
-J_y = \frac{\partial J}{\partial y} = G_y \otimes I
-$$</span></p>
+<p><strong>梯度计算：</strong><br>
+$$<br>
+J_x = \frac{\partial J}{\partial x} = G_x \otimes I<br>
+$$</p>
+<p>$$<br>
+J_y = \frac{\partial J}{\partial y} = G_y \otimes I<br>
+$$</p>
 <p>等价于<strong>先求高斯核导数再卷积原图</strong>。</p>
-<p><strong>边缘提取：</strong> 计算梯度幅值与方向： <span
-class="math display">$$
-|\nabla J| = \sqrt{J_x^2 + J_y^2}
-$$</span></p>
-<p><span class="math display">$$
-\theta = \tan^{-1}\left( \frac{J_y}{J_x} \right)
-$$</span></p>
+<p><strong>边缘提取：</strong><br>
+计算梯度幅值与方向：<br>
+$$<br>
+|\nabla J| = \sqrt{J_x^2 + J_y^2}<br>
+$$</p>
+<p>$$<br>
+\theta = \tan^{-1}\left( \frac{J_y}{J_x} \right)<br>
+$$</p>
 <h4 id="总结">总结</h4>
 <table>
-
 <thead>
 <tr>
 <th>项目</th>
-<th>内容</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>实现</strong></td>
-<td>使用中心差分法近似图像梯度：<span
-class="math inline"><em>F</em><sub><em>x</em></sub>, <em>F</em><sub><em>y</em></sub></span></td>
+<td>使用中心差分法近似图像梯度：$F_x, F_y$</td>
 </tr>
 <tr>
 <td><strong>符号</strong></td>
-<td><span class="math inline"><em>I</em></span>：原始图像，<span
-class="math inline"><em>J</em> = <em>G</em> ⊗ <em>I</em></span>：高斯平滑结果</td>
+<td>$I$：原始图像，$J = G \otimes I$：高斯平滑结果</td>
 </tr>
 <tr>
 <td><strong>性质</strong></td>
-<td>卷积与导数可交换：<span class="math inline">$\frac{\partial
-J}{\partial x} = G_x \otimes I$</span></td>
+<td>卷积与导数可交换：$\frac{\partial J}{\partial x} = G_x \otimes I$</td>
 </tr>
 <tr>
 <td><strong>优势</strong></td>
@@ -789,14 +714,14 @@ J}{\partial x} = G_x \otimes I$</span></td>
 </tbody>
 </table>
 <p><strong>核心结论：</strong></p>
-<p><span class="math display">$$
-\boxed{
-\frac{\partial (G \otimes I)}{\partial x} =
-\left( \frac{\partial G}{\partial x} \right) \otimes I, \quad
-\frac{\partial (G \otimes I)}{\partial y} =
-\left( \frac{\partial G}{\partial y} \right) \otimes I
-}
-$$</span></p>
+<p>$$<br>
+\boxed{<br>
+\frac{\partial (G \otimes I)}{\partial x} =<br>
+\left( \frac{\partial G}{\partial x} \right) \otimes I, \quad<br>
+\frac{\partial (G \otimes I)}{\partial y} =<br>
+\left( \frac{\partial G}{\partial y} \right) \otimes I<br>
+}<br>
+$$</p>
 <p>这一定律为高斯梯度滤波、Canny 算子等边缘检测算法提供了理论基础。</p>
 
                 
