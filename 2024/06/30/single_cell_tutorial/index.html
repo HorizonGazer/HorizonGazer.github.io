@@ -31,8 +31,8 @@
 <meta property="article:modified_time" content="2024-07-09T01:52:22.544Z">
 <meta property="article:author" content="HorizonGazer">
 <meta property="article:tag" content="Python">
-<meta property="article:tag" content="scRNA-seq">
 <meta property="article:tag" content="R">
+<meta property="article:tag" content="scRNA-seq">
 <meta property="article:tag" content="tutorial">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://horizongazer.github.io/img/%E8%B5%9B%E5%8D%9Abg.jpg">
@@ -103,7 +103,35 @@
 
 
   
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="HorizonGazer" type="application/atom+xml">
+<!-- hexo injector head_end start -->
+  <!-- 仅注入 MathJax 核心库，不重复配置（Pandoc 已生成标记） -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- 简化配置：仅确保 MathJax 识别 Pandoc 生成的标记 -->
+  <script>
+    MathJax.config = {
+      tex: {
+        // 保留基础分隔符（兼容 Pandoc 未覆盖的场景）
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true  // 支持转义 $（如 $ 显示为普通美元符号）
+      },
+      startup: {
+        pageReady: function() {
+          return MathJax.startup.defaultPageReady().then(function() {
+            console.log("MathJax 加载完成，已准备解析 Pandoc 生成的公式");
+          }).catch(function(error) {
+            console.error("MathJax 初始化失败：", error);
+          });
+        }
+      },
+      // 关键：启用对 Pandoc 生成的 MathML 标记的支持
+      mml: {
+        allowUnknownAttributes: true  // 兼容 Pandoc 可能添加的自定义属性
+      }
+    };
+  </script>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="HorizonGazer" type="application/atom+xml">
 </head>
 
 
@@ -409,9 +437,9 @@ Python。通过支持常见的磁盘数据格式和内存中数据结构，开�
       
         <a href="/tags/Python/" class="print-no-link">#Python</a>
       
-        <a href="/tags/scRNA-seq/" class="print-no-link">#scRNA-seq</a>
-      
         <a href="/tags/R/" class="print-no-link">#R</a>
+      
+        <a href="/tags/scRNA-seq/" class="print-no-link">#scRNA-seq</a>
       
         <a href="/tags/tutorial/" class="print-no-link">#tutorial</a>
       

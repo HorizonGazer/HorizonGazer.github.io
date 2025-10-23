@@ -109,9 +109,9 @@
             
             <tag> FGSM </tag>
             
-            <tag> ResNet-20 </tag>
-            
             <tag> CIFAR-10 </tag>
+            
+            <tag> ResNet-20 </tag>
             
         </tags>
       
@@ -281,9 +281,9 @@
             
             <tag> Python </tag>
             
-            <tag> scRNA-seq </tag>
-            
             <tag> R </tag>
+            
+            <tag> scRNA-seq </tag>
             
             <tag> tutorial </tag>
             
@@ -310,11 +310,11 @@
       
         <tags>
             
-            <tag> paper-reproducing </tag>
+            <tag> R </tag>
             
             <tag> scRNA-seq </tag>
             
-            <tag> R </tag>
+            <tag> paper-reproducing </tag>
             
         </tags>
       
