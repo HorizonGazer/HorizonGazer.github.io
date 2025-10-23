@@ -19,12 +19,12 @@
   <meta name="author" content="HorizonGazer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="关于升学竞争的一点思考 精英主义者似乎热衷于制造所谓的“稀缺性”，往往伴随着对于“人”本身的忽视及贬低，例如各种基于单因素的歧视。 挥刀向更弱者的人具有充分的理由辩称：非我也，刀也。 终于，有一把刀向我砍来，我手中的刀也似乎想要维护着它们所谓的正义性，向那人挥去。 “你配吗？”，众人哄笑。 我当然不配，向我砍来的刀被人赋予的引领者的光环，甚至比我的血高贵。 我无力反抗，这是规则。对比起那把带血的刀">
+    <meta name="description" content="关于升学竞争的一点思考 精英主义者似乎热衷于制造所谓的“稀缺性”，往往伴随着对于“人”本身的忽视及贬低，例如各种基于单因素的歧视。 挥刀向更弱者的人具有充分的理由辩称：非我也，刀也。 终于，有一把刀向我砍来，我手中的刀也似乎想要维护着它们所谓的正义性，向那人挥去。 “你配吗？”，众人哄笑。 我当然不配，向我砍来的刀被人赋予的引领者的光环，甚至比我的血高贵。 我无力反抗，这是规则。对比起">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于升学竞争的一点思考">
 <meta property="og:url" content="http://horizongazer.github.io/2024/12/14/%E5%85%B3%E4%BA%8E%E5%8D%87%E5%AD%A6%E7%AB%9E%E4%BA%89%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/index.html">
 <meta property="og:site_name" content="HorizonGazer">
-<meta property="og:description" content="关于升学竞争的一点思考 精英主义者似乎热衷于制造所谓的“稀缺性”，往往伴随着对于“人”本身的忽视及贬低，例如各种基于单因素的歧视。 挥刀向更弱者的人具有充分的理由辩称：非我也，刀也。 终于，有一把刀向我砍来，我手中的刀也似乎想要维护着它们所谓的正义性，向那人挥去。 “你配吗？”，众人哄笑。 我当然不配，向我砍来的刀被人赋予的引领者的光环，甚至比我的血高贵。 我无力反抗，这是规则。对比起那把带血的刀">
+<meta property="og:description" content="关于升学竞争的一点思考 精英主义者似乎热衷于制造所谓的“稀缺性”，往往伴随着对于“人”本身的忽视及贬低，例如各种基于单因素的歧视。 挥刀向更弱者的人具有充分的理由辩称：非我也，刀也。 终于，有一把刀向我砍来，我手中的刀也似乎想要维护着它们所谓的正义性，向那人挥去。 “你配吗？”，众人哄笑。 我当然不配，向我砍来的刀被人赋予的引领者的光环，甚至比我的血高贵。 我无力反抗，这是规则。对比起">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://horizongazer.github.io/img/cover01.jpg">
 <meta property="article:published_time" content="2024-12-14T13:59:51.877Z">
@@ -101,9 +101,35 @@
 
 
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/[email protected]/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+<!-- hexo injector head_end start -->
+  <!-- 仅注入 MathJax 核心库，不重复配置（Pandoc 已生成标记） -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="HorizonGazer" type="application/atom+xml">
+  <!-- 简化配置：仅确保 MathJax 识别 Pandoc 生成的标记 -->
+  <script>
+    MathJax.config = {
+      tex: {
+        // 保留基础分隔符（兼容 Pandoc 未覆盖的场景）
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true  // 支持转义 $（如 $ 显示为普通美元符号）
+      },
+      startup: {
+        pageReady: function() {
+          return MathJax.startup.defaultPageReady().then(function() {
+            console.log("MathJax 加载完成，已准备解析 Pandoc 生成的公式");
+          }).catch(function(error) {
+            console.error("MathJax 初始化失败：", error);
+          });
+        }
+      },
+      // 关键：启用对 Pandoc 生成的 MathML 标记的支持
+      mml: {
+        allowUnknownAttributes: true  // 兼容 Pandoc 可能添加的自定义属性
+      }
+    };
+  </script>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="HorizonGazer" type="application/atom+xml">
 </head>
 
 
@@ -316,7 +342,7 @@
             
               <div class="markdown-body">
                 
-                <h1>关于升学竞争的一点思考</h1>
+                <h1 id="关于升学竞争的一点思考">关于升学竞争的一点思考</h1>
 <p>精英主义者似乎热衷于制造所谓的“稀缺性”，往往伴随着对于“人”本身的忽视及贬低，例如各种基于单因素的歧视。</p>
 <p>挥刀向更弱者的人具有充分的理由辩称：非我也，刀也。</p>
 <p>终于，有一把刀向我砍来，我手中的刀也似乎想要维护着它们所谓的正义性，向那人挥去。</p>
@@ -606,22 +632,6 @@
   
 </div>
 
-    <script defer src="https://cdn.jsdelivr.net/npm/[email protected]/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/[email protected]/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-          strict: false,
-          delimiters: [
-            {left: "$$", right: "$$", display: true},
-            {left: "\(", right: "\)", display: false},
-            {left: "$", right: "$", display: false},
-            {left: "\[", right: "\]", display: true}
-          ]
-        });
-      });
-    </script>
-  
   </footer>
 
   <!-- Scripts -->

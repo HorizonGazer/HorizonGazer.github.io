@@ -87,9 +87,35 @@
 
 
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/[email protected]/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+<!-- hexo injector head_end start -->
+  <!-- 仅注入 MathJax 核心库，不重复配置（Pandoc 已生成标记） -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="HorizonGazer" type="application/atom+xml">
+  <!-- 简化配置：仅确保 MathJax 识别 Pandoc 生成的标记 -->
+  <script>
+    MathJax.config = {
+      tex: {
+        // 保留基础分隔符（兼容 Pandoc 未覆盖的场景）
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true  // 支持转义 $（如 $ 显示为普通美元符号）
+      },
+      startup: {
+        pageReady: function() {
+          return MathJax.startup.defaultPageReady().then(function() {
+            console.log("MathJax 加载完成，已准备解析 Pandoc 生成的公式");
+          }).catch(function(error) {
+            console.error("MathJax 初始化失败：", error);
+          });
+        }
+      },
+      // 关键：启用对 Pandoc 生成的 MathML 标记的支持
+      mml: {
+        allowUnknownAttributes: true  // 兼容 Pandoc 可能添加的自定义属性
+      }
+    };
+  </script>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="HorizonGazer" type="application/atom+xml">
 </head>
 
 
@@ -371,22 +397,6 @@
   
 </div>
 
-    <script defer src="https://cdn.jsdelivr.net/npm/[email protected]/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/[email protected]/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-          strict: false,
-          delimiters: [
-            {left: "$$", right: "$$", display: true},
-            {left: "\(", right: "\)", display: false},
-            {left: "$", right: "$", display: false},
-            {left: "\[", right: "\]", display: true}
-          ]
-        });
-      });
-    </script>
-  
   </footer>
 
   <!-- Scripts -->

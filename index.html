@@ -87,9 +87,35 @@
 
 
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/[email protected]/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+<!-- hexo injector head_end start -->
+  <!-- 仅注入 MathJax 核心库，不重复配置（Pandoc 已生成标记） -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="HorizonGazer" type="application/atom+xml">
+  <!-- 简化配置：仅确保 MathJax 识别 Pandoc 生成的标记 -->
+  <script>
+    MathJax.config = {
+      tex: {
+        // 保留基础分隔符（兼容 Pandoc 未覆盖的场景）
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true  // 支持转义 $（如 $ 显示为普通美元符号）
+      },
+      startup: {
+        pageReady: function() {
+          return MathJax.startup.defaultPageReady().then(function() {
+            console.log("MathJax 加载完成，已准备解析 Pandoc 生成的公式");
+          }).catch(function(error) {
+            console.error("MathJax 初始化失败：", error);
+          });
+        }
+      },
+      // 关键：启用对 Pandoc 生成的 MathML 标记的支持
+      mml: {
+        allowUnknownAttributes: true  // 兼容 Pandoc 可能添加的自定义属性
+      }
+    };
+  </script>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="HorizonGazer" type="application/atom+xml">
 </head>
 
 
@@ -271,7 +297,7 @@
       
       <a class="index-excerpt " href="/9999/09/09/%E7%8C%AE%E7%BB%99%E6%8C%9A%E7%88%B1%E7%9A%84%E5%B0%8F%E7%8B%97/" target="_self">
         <div>
-          When age chills the blood, when our pleasures are past 当岁月让热血冷却，让欢乐远去 For years fleet away with the wings of the dove 年月就像白鸽的翅膀般飞走 The dearest remembrance will still be the last 然而，最深切的记忆则会永存 Our swee
+          When age chills the blood, when our pleasures are past   当岁月让热血冷却，让欢乐远去   For years fleet away with the wings of the dove   年月就像白鸽的翅膀般飞走   The dearest remembrance will still be the last
         </div>
       </a>
 
@@ -340,7 +366,7 @@
       
       <a class="index-excerpt " href="/2025/10/23/%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2%E5%99%A8%E5%92%8C%E9%AB%98%E6%96%AF%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%9A%84%E9%A2%91%E7%8E%87%E5%9F%9F%E6%A8%A1%E5%9E%8B/" target="_self">
         <div>
-          均值滤波器和高斯滤波器的频率域模型 简单而言，图像细节对应于高频信号。图像的大尺度特征对应于低频信号。值得注意的是随机的图像噪声通常对应于高频信号。 矩形函数的频率域模型  空间域模型 二维矩形函数 $f(t, z)$ 定义为： $$ f(t, z) = \begin{cases} A, &amp; -\frac{T}{2} \leq t \leq \frac{T}{2}, \quad -\fra
+          均值滤波器和高斯滤波器的频率域模型 简单而言，图像细节对应于高频信号。图像的大尺度特征对应于低频信号。值得注意的是随机的图像噪声通常对应于高频信号。 矩形函数的频率域模型  空间域模型 二维矩形函数 f(t, z) 定义为： $$ f(t, z) = \begin{cases} A, &amp; -\frac{T}{2} \leq t \leq \frac{T}{2}, \qu
         </div>
       </a>
 
@@ -411,7 +437,7 @@
       
       <a class="index-excerpt " href="/2025/10/22/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%8A%97%E9%98%B2%E5%BE%A1%E5%AE%9E%E8%B7%B5/" target="_self">
         <div>
-          实验背景与目标 本实验旨在系统研究对抗训练对深度学习模型鲁棒性的提升效果。随着深度学习在安全敏感领域的广泛应用，模型面对对抗样本攻击时的脆弱性已成为重要安全隐患。对抗样本是通过对原始输入添加人眼难以察觉的微小扰动而生成的恶意样本，能导致模型产生错误预测。 实验以CIFAR-10数据集为基础，构建卷积神经网络分类器，通过对比标准训练与对抗训练两种策略，分析模型在面对FGSM击时的性能表现。研究目标包
+          实验背景与目标 本实验旨在系统研究对抗训练对深度学习模型鲁棒性的提升效果。随着深度学习在安全敏感领域的广泛应用，模型面对对抗样本攻击时的脆弱性已成为重要安全隐患。对抗样本是通过对原始输入添加人眼难以察觉的微小扰动而生成的恶意样本，能导致模型产生错误预测。 实验以CIFAR-10数据集为基础，构建卷积神经网络分类器，通过对比标准训练与对抗训练两种策略，分析模型在面对FGSM击时的性能表现。研究目
         </div>
       </a>
 
@@ -484,7 +510,7 @@
       
       <a class="index-excerpt " href="/2025/10/18/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8BFGSM%E6%94%BB%E5%87%BB%E5%AE%9E%E8%B7%B5/" target="_self">
         <div>
-          本实践作业旨在通过实验验证深度神经网络模型对对抗攻击的脆弱性。本实验针对图像分类任务，实现了快速梯度符号法（FGSM）对抗攻击算法，并在CIFAR-10数据集上进行了系统性测试。实验结果表明，即使是微小的、人类难以察觉的扰动，也能导致神经网络模型的预测性能显著下降。 实验目标  理解对抗样本的基本概念和生成原理 掌握FGSM攻击方法 评估对抗样本对模型性能的影响  理论基础 对抗攻击定义 给定一个
+          本实践作业旨在通过实验验证深度神经网络模型对对抗攻击的脆弱性。本实验针对图像分类任务，实现了快速梯度符号法（FGSM）对抗攻击算法，并在CIFAR-10数据集上进行了系统性测试。实验结果表明，即使是微小的、人类难以察觉的扰动，也能导致神经网络模型的预测性能显著下降。 实验目标  理解对抗样本的基本概念和生成原理 掌握FGSM攻击方法 评估对抗样本对模型性能的影响  理论基础 对抗攻
         </div>
       </a>
 
@@ -555,7 +581,7 @@
       
       <a class="index-excerpt " href="/2025/10/17/%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E5%8A%A8%E6%80%81%E5%8D%9A%E5%BC%88%E4%B9%8BStackelberg%20Game/" target="_self">
         <div>
-          Stackelberg Game 斯塔克尔伯格模型(Stackelberg Game)由德国经济学家Heinrich von Stackelberg于1934年提出，是寡头市场理论的重要组成部分。斯塔克尔伯格模型是一种动态博弈论模型，扩展了古诺模型，通过引入决策的时序不对称和市场角色的不对称，描述了厂商之间的竞争。 该模型适用于分析产量竞争但决策时序和市场权力不对称的场景。斯塔克尔伯格模型特别适合
+          Stackelberg Game 斯塔克尔伯格模型(Stackelberg Game)由德国经济学家Heinrich von Stackelberg于1934年提出，是寡头市场理论的重要组成部分。斯塔克尔伯格模型是一种动态博弈论模型，扩展了古诺模型，通过引入决策的时序不对称和市场角色的不对称，描述了厂商之间的竞争。 该模型适用于分析产量竞争但决策时序和市场权力不对称的场景。斯塔克尔伯格模型特
         </div>
       </a>
 
@@ -628,7 +654,7 @@
       
       <a class="index-excerpt " href="/2025/10/16/%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E5%8A%A8%E6%80%81%E5%8D%9A%E5%BC%88%E4%B9%8BRS%E8%AE%AE%E4%BB%B7%E6%A8%A1%E5%9E%8B/" target="_self">
         <div>
-          Rubinstein议价模型 Rubinstein（1982）议价模型是博弈论中的经典框架，用于分析两个玩家在资源分配上的动态谈判过程。其核心在于通过轮流报价和时间折现因子（δ）捕捉谈判中的耐心与时间成本。模型分为无限轮和有限轮两种形式，分别适用于无明确截止期限和有时间限制的现实场景，如劳资谈判、国际贸易协议、企业并购等。无限轮模型强调耐心（高折现因子）带来的议价优势，而有限轮模型更贴近现实，突出
+          Rubinstein议价模型 Rubinstein（1982）议价模型是博弈论中的经典框架，用于分析两个玩家在资源分配上的动态谈判过程。其核心在于通过轮流报价和时间折现因子（δ）捕捉谈判中的耐心与时间成本。模型分为无限轮和有限轮两种形式，分别适用于无明确截止期限和有时间限制的现实场景，如劳资谈判、国际贸易协议、企业并购等。无限轮模型强调耐心（高折现因子）带来的议价优势，而有限轮模型更贴近现实，突
         </div>
       </a>
 
@@ -701,7 +727,7 @@
       
       <a class="index-excerpt " href="/2025/10/15/%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E9%9D%99%E6%80%81%E5%8D%9A%E5%BC%88/" target="_self">
         <div>
-          纯策略的完全信息静态博弈之Cournot双寡头竞争模型分析 古诺模型（Cournot model）是博弈论中最具有代表性的模型之一，也是是纳什均衡最早的版本。它是法国经济学家古诺（Augustin Cournot）在1938年出版的《财富理论的数学原理研究》一书中最先提出的。而古诺的定义比纳什的定义早了一百多年。从经济学的角度，它的研究价值在于古诺模型是介于两种极端状况完全竞争和垄断之间。在古诺生
+          纯策略的完全信息静态博弈之Cournot双寡头竞争模型分析 古诺模型（Cournot model）是博弈论中最具有代表性的模型之一，也是是纳什均衡最早的版本。它是法国经济学家古诺（Augustin Cournot）在1938年出版的《财富理论的数学原理研究》一书中最先提出的。而古诺的定义比纳什的定义早了一百多年。从经济学的角度，它的研究价值在于古诺模型是介于两种极端状况完全竞争和垄断之间。在
         </div>
       </a>
 
@@ -772,7 +798,7 @@
       
       <a class="index-excerpt " href="/2024/12/14/%E5%85%B3%E4%BA%8E%E5%8D%87%E5%AD%A6%E7%AB%9E%E4%BA%89%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/" target="_self">
         <div>
-          关于升学竞争的一点思考 精英主义者似乎热衷于制造所谓的“稀缺性”，往往伴随着对于“人”本身的忽视及贬低，例如各种基于单因素的歧视。 挥刀向更弱者的人具有充分的理由辩称：非我也，刀也。 终于，有一把刀向我砍来，我手中的刀也似乎想要维护着它们所谓的正义性，向那人挥去。 “你配吗？”，众人哄笑。 我当然不配，向我砍来的刀被人赋予的引领者的光环，甚至比我的血高贵。 我无力反抗，这是规则。对比起那把带血的刀
+          关于升学竞争的一点思考 精英主义者似乎热衷于制造所谓的“稀缺性”，往往伴随着对于“人”本身的忽视及贬低，例如各种基于单因素的歧视。 挥刀向更弱者的人具有充分的理由辩称：非我也，刀也。 终于，有一把刀向我砍来，我手中的刀也似乎想要维护着它们所谓的正义性，向那人挥去。 “你配吗？”，众人哄笑。 我当然不配，向我砍来的刀被人赋予的引领者的光环，甚至比我的血高贵。 我无力反抗，这是规则。对比起
         </div>
       </a>
 
@@ -841,7 +867,7 @@
       
       <a class="index-excerpt " href="/2024/07/26/%E4%BD%BF%E7%94%A8Hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/" target="_self">
         <div>
-          1  前言 文章总结了本人在两天半内建立个人blog的经验，如有不当之处欢迎交流讨论！ 1.1  Github Pages GitHub Pages 是 GitHub 提供的一个免费的静态网站托管服务，它允许 GitHub 用户创建和托管自己的静态网站，这些网站可以通过特定的 GitHub 仓库进行管理和托管。 主要优点是：免费托管、自定义域名、自动构建。 1.2  Hexo Hexo 是一个快速
+          1 前言 文章总结了本人在两天半内建立个人blog的经验，如有不当之处欢迎交流讨论！ 1.1 Github Pages GitHub Pages 是 GitHub 提供的一个免费的静态网站托管服务，它允许 GitHub 用户创建和托管自己的静态网站，这些网站可以通过特定的 GitHub 仓库进行管理和托管。 主要优点是：免费托管、自定义域名、自动构建。 1.2 Hexo Hex
         </div>
       </a>
 
@@ -908,7 +934,7 @@
       
       <a class="index-excerpt " href="/2024/06/30/single_cell_tutorial/" target="_self">
         <div>
-          简介 人体是一个复杂的机器，严重依赖于生命的基本单位——细胞。细胞可以分为不同类型，在发育过程中甚至会发生转变，在疾病或再生时也会如此。这种细胞的异质性在形态、功能和基因表达谱上都有所体现。强烈的干扰会导致细胞类型的紊乱，从而影响整个系统，甚至引发像癌症这样严重的疾病。因此，了解细胞在正常状态和干扰下的行为对于改善我们对整个细胞系统的理解至关重要。 这项庞大的任务可以通过不同的方式来解决，其中最有
+          简介 人体是一个复杂的机器，严重依赖于生命的基本单位——细胞。细胞可以分为不同类型，在发育过程中甚至会发生转变，在疾病或再生时也会如此。这种细胞的异质性在形态、功能和基因表达谱上都有所体现。强烈的干扰会导致细胞类型的紊乱，从而影响整个系统，甚至引发像癌症这样严重的疾病。因此，了解细胞在正常状态和干扰下的行为对于改善我们对整个细胞系统的理解至关重要。 这项庞大的任务可以通过不同的方式来解决，其中
         </div>
       </a>
 
@@ -949,9 +975,9 @@
             
               <a href="/tags/Python/">#Python</a>
             
-              <a href="/tags/R/">#R</a>
-            
               <a href="/tags/scRNA-seq/">#scRNA-seq</a>
+            
+              <a href="/tags/R/">#R</a>
             
               <a href="/tags/tutorial/">#tutorial</a>
             
@@ -1048,22 +1074,6 @@
   
 </div>
 
-    <script defer src="https://cdn.jsdelivr.net/npm/[email protected]/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/[email protected]/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-          strict: false,
-          delimiters: [
-            {left: "$$", right: "$$", display: true},
-            {left: "\(", right: "\)", display: false},
-            {left: "$", right: "$", display: false},
-            {left: "\[", right: "\]", display: true}
-          ]
-        });
-      });
-    </script>
-  
   </footer>
 
   <!-- Scripts -->
