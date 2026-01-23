@@ -1,0 +1,2450 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/xd.jpg">
+  <link rel="icon" href="/img/xd.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="HorizonGazer">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1st Divide &amp; Conquer A - 区间最大值不小于和 题目 给一个长度为n的数组, 目标是判断对数组所有下标对(i, j)（1 ≤ i ≤ j ≤ n），是否都满足 max (ai, ai + 1, ⋯, aj − 1, aj) ≥ ai + ai + 1 + ⋯ + aj − 1 + aj（1 ≤ i ≤ j ≤ n）这个条件。 输入格式： 第一行包含一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UCAS卜算">
+<meta property="og:url" content="http://horizongazer.github.io/2026/01/23/FE/index.html">
+<meta property="og:site_name" content="HorizonGazer">
+<meta property="og:description" content="1st Divide &amp; Conquer A - 区间最大值不小于和 题目 给一个长度为n的数组, 目标是判断对数组所有下标对(i, j)（1 ≤ i ≤ j ≤ n），是否都满足 max (ai, ai + 1, ⋯, aj − 1, aj) ≥ ai + ai + 1 + ⋯ + aj − 1 + aj（1 ≤ i ≤ j ≤ n）这个条件。 输入格式： 第一行包含一个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://horizongazer.github.io/img/UCAS1.jpg">
+<meta property="article:published_time" content="2026-01-23T08:12:53.637Z">
+<meta property="article:modified_time" content="2026-01-23T08:19:34.159Z">
+<meta property="article:author" content="HorizonGazer">
+<meta property="article:tag" content="分治">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="LP">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://horizongazer.github.io/img/UCAS1.jpg">
+  
+  
+  
+  <title>UCAS卜算 - HorizonGazer</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"horizongazer.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"kSreM0uY5jXWPRahJhw2LDbE-gzGzoHsz","app_key":"Ux8qZ1XPuB6R9or0uKIElE9b","server_url":"https://ksrem0uy.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+  <!-- 仅注入 MathJax 核心库，不重复配置（Pandoc 已生成标记） -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- 简化配置：仅确保 MathJax 识别 Pandoc 生成的标记 -->
+  <script>
+    MathJax.config = {
+      tex: {
+        // 保留基础分隔符（兼容 Pandoc 未覆盖的场景）
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true  // 支持转义 $（如 $ 显示为普通美元符号）
+      },
+      startup: {
+        pageReady: function() {
+          return MathJax.startup.defaultPageReady().then(function() {
+            console.log("MathJax 加载完成，已准备解析 Pandoc 生成的公式");
+          }).catch(function(error) {
+            console.error("MathJax 初始化失败：", error);
+          });
+        }
+      },
+      // 关键：启用对 Pandoc 生成的 MathML 标记的支持
+      mml: {
+        allowUnknownAttributes: true  // 兼容 Pandoc 可能添加的自定义属性
+      }
+    };
+  </script>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="HorizonGazer" type="application/atom+xml">
+</head>
+
+
+<body><!-- hexo injector body_begin start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/TrymenT-ClocK/TrymenT-ClocK.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/TrymenT-ClocK/TrymenT-ClocK.min.js"></script><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HorizonGazer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/UCAS1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="UCAS卜算"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-23 16:12" pubdate>
+          2026年1月23日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          13k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          107 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">UCAS卜算</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="st-divide-conquer">1st Divide &amp; Conquer</h1>
+<h2 id="a---区间最大值不小于和"><a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-U625836">A -
+区间最大值不小于和</a></h2>
+<h3 id="题目">题目</h3>
+<p>给一个长度为<span class="math inline"><em>n</em></span>的数组,
+目标是判断对数组所有下标对<span
+class="math inline">(<em>i</em>, <em>j</em>)</span>（<span
+class="math inline">1 ≤ <em>i</em> ≤ <em>j</em> ≤ <em>n</em></span>），是否都满足
+<span
+class="math inline">max (<em>a</em><sub><em>i</em></sub>, <em>a</em><sub><em>i</em> + 1</sub>, ⋯, <em>a</em><sub><em>j</em> − 1</sub>, <em>a</em><sub><em>j</em></sub>) ≥ <em>a</em><sub><em>i</em></sub> + <em>a</em><sub><em>i</em> + 1</sub> + ⋯ + <em>a</em><sub><em>j</em> − 1</sub> + <em>a</em><sub><em>j</em></sub></span>（<span
+class="math inline">1 ≤ <em>i</em> ≤ <em>j</em> ≤ <em>n</em></span>）这个条件。</p>
+<p>输入格式：</p>
+<p>第一行包含一个整数<span class="math inline"><em>t</em></span>（<span
+class="math inline">1 ≤ <em>t</em> ≤ 10<sup>5</sup></span>），表示测试用例数量。</p>
+<p>每个测试用例包含两行:</p>
+<p>1.第一行是一个整数<span class="math inline"><em>n</em></span>（<span
+class="math inline">1 ≤ <em>n</em> ≤ 2 ⋅ 10<sup>5</sup></span>），表示数组的长度。</p>
+<p>2.第二行包含 <span class="math inline"><em>n</em></span>
+个整数，构成数组 <span
+class="math inline"><em>a</em>[1..<em>n</em>]</span>（<span
+class="math inline">−10<sup>9</sup> ≤ <em>a</em><sub><em>i</em></sub> ≤ 10<sup>9</sup></span>）。</p>
+<p>输出格式：</p>
+<p>对于每个测试用例，如果对所有下标对<span
+class="math inline">(<em>i</em>, <em>j</em>)</span>（<span
+class="math inline">1 ≤ <em>i</em> ≤ <em>j</em> ≤ <em>n</em></span>），都满足<span
+class="math inline">max (<em>a</em><sub><em>i</em></sub>, <em>a</em><sub><em>i</em> + 1</sub>, ⋯, <em>a</em><sub><em>j</em> − 1</sub>, <em>a</em><sub><em>j</em></sub>) ≥ <em>a</em><sub><em>i</em></sub> + <em>a</em><sub><em>i</em> + 1</sub> + ⋯ + <em>a</em><sub><em>j</em> − 1</sub> + <em>a</em><sub><em>j</em></sub></span>（<span
+class="math inline">1 ≤ <em>i</em> ≤ <em>j</em> ≤ <em>n</em></span>）这个条件，则输出
+“YES”，否则输出 “NO”</p>
+<h3 id="思路">思路</h3>
+<p>核心思想是将“检查所有子数组”的问题转化为“以每个元素 <span
+class="math inline"><em>a</em><sub><em>i</em></sub></span>
+作为最大值的子数组中，是否存在和大于 <span
+class="math inline"><em>a</em><sub><em>i</em></sub></span> 的情况”。</p>
+<ol type="1">
+<li><p><strong>前缀和预处理 (Prefix Sum)</strong>:</p>
+<p>计算数组 <span class="math inline"><em>a</em></span> 的前缀和数组
+<span class="math inline"><em>p</em><em>r</em><em>e</em></span>，以便在
+<span class="math inline"><em>O</em>(1)</span>
+时间内计算任意子数组的和。</p>
+<p>公式：<span
+class="math inline"><em>S</em><em>u</em><em>m</em>(<em>l</em>, <em>r</em>) = <em>p</em><em>r</em><em>e</em>[<em>r</em>] − <em>p</em><em>r</em><em>e</em>[<em>l</em> − 1]</span>。</p></li>
+<li><p><strong>确定最大值作用范围 (Monotonic Stack)</strong>:</p>
+<p>对于每个元素 <span
+class="math inline"><em>a</em><sub><em>i</em></sub></span>，利用单调栈找到它作为最大值的左右边界：</p>
+<ul>
+<li><span
+class="math inline"><em>L</em>[<em>i</em>]</span>：左侧第一个<strong>严格大于</strong>
+<span class="math inline"><em>a</em><sub><em>i</em></sub></span>
+的下标。</li>
+<li><span
+class="math inline"><em>R</em>[<em>i</em>]</span>：右侧第一个<strong>大于等于</strong>
+<span class="math inline"><em>a</em><sub><em>i</em></sub></span>
+的下标（处理相等元素防止重复计算）。</li>
+<li><span class="math inline"><em>a</em><sub><em>i</em></sub></span>
+是区间 <span
+class="math inline">(<em>L</em>[<em>i</em>], <em>R</em>[<em>i</em>])</span>
+即 <span
+class="math inline">[<em>L</em>[<em>i</em>] + 1, <em>R</em>[<em>i</em>] − 1]</span>
+内的最大值。</li>
+</ul></li>
+<li><p><strong>区间最值查询 (Segment Tree / RMQ)</strong>:</p>
+<p>在确定的范围 <span
+class="math inline">(<em>L</em>[<em>i</em>], <em>R</em>[<em>i</em>])</span>
+内，我们需要找到一个子区间 <span
+class="math inline">[<em>l</em>, <em>r</em>]</span>（必须包含 <span
+class="math inline"><em>i</em></span>），使得子数组和最大。</p>
+<p>要使 <span
+class="math inline"><em>S</em><em>u</em><em>m</em>(<em>l</em>, <em>r</em>) = <em>p</em><em>r</em><em>e</em>[<em>r</em>] − <em>p</em><em>r</em><em>e</em>[<em>l</em> − 1]</span>
+最大，需满足：</p>
+<ul>
+<li><p><span
+class="math inline"><em>p</em><em>r</em><em>e</em>[<em>r</em>]</span>
+最大，其中 <span
+class="math inline"><em>r</em> ∈ [<em>i</em>, <em>R</em>[<em>i</em>] − 1]</span>。</p></li>
+<li><p><span
+class="math inline"><em>p</em><em>r</em><em>e</em>[<em>l</em> − 1]</span>
+最小，其中 <span
+class="math inline"><em>l</em> − 1 ∈ [<em>L</em>[<em>i</em>], <em>i</em> − 1]</span>。</p>
+<p>利用线段树（或稀疏表）维护 <span
+class="math inline"><em>p</em><em>r</em><em>e</em></span>
+数组的区间最小值和最大值。</p></li>
+</ul></li>
+<li><p><strong>校验条件</strong>:</p>
+<p>遍历每个 <span class="math inline"><em>i</em></span>，计算 <span
+class="math inline"><em>m</em><em>a</em><em>x</em>_<em>s</em><em>u</em><em>m</em> = max (<em>p</em><em>r</em><em>e</em>[<em>i</em>…<em>R</em>[<em>i</em>] − 1]) − min (<em>p</em><em>r</em><em>e</em>[<em>L</em>[<em>i</em>]…<em>i</em> − 1])</span>。</p>
+<p>如果 <span
+class="math inline"><em>m</em><em>a</em><em>x</em>_<em>s</em><em>u</em><em>m</em> &gt; <em>a</em><sub><em>i</em></sub></span>，说明存在反例，输出
+NO；否则遍历结束后输出 YES。</p></li>
+</ol>
+<h3 id="伪代码">伪代码</h3>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ALGORITHM Check-Subarray-Condition<br>    INPUT: <br>        n: Integer (length of array)<br>        A: Array of integers A<span class="hljs-selector-attr">[1...n]</span><br>    OUTPUT: <br>        <span class="hljs-string">&quot;YES&quot;</span> <span class="hljs-keyword">if</span> condition holds, <span class="hljs-string">&quot;NO&quot;</span> otherwise<br><br>    <span class="hljs-comment">// 1. Prefix Sums</span><br>    P<span class="hljs-selector-attr">[0]</span> ← <span class="hljs-number">0</span><br>    FOR <span class="hljs-selector-tag">i</span> ← <span class="hljs-number">1</span> TO n DO P<span class="hljs-selector-attr">[i]</span> ← P<span class="hljs-selector-attr">[i-1]</span> + A<span class="hljs-selector-attr">[i]</span><br><br>    <span class="hljs-comment">// 2. Monotonic Stack for Boundaries</span><br>    <span class="hljs-comment">// L[i]: First index to left &gt; A[i] (or 0)</span><br>    <span class="hljs-comment">// R[i]: First index to right &gt;= A[i] (or n+1)</span><br>    L, R ← <span class="hljs-built_in">Compute-Boundaries-Stack</span>(A) <br><br>    <span class="hljs-comment">// 3. RMQ Structure (Segment Tree) on Prefix Sums</span><br>    Tree ← <span class="hljs-built_in">Build-Segment-Tree</span>(P)<br><br>    <span class="hljs-comment">// 4. Validate Condition</span><br>    FOR <span class="hljs-selector-tag">i</span> ← <span class="hljs-number">1</span> TO n DO<br>        <span class="hljs-comment">// Maximize subarray sum in valid range: P[high] - P[low]</span><br>        <span class="hljs-comment">// high ∈ [i, R[i]-1], low ∈ [L[i], i-1]</span><br>        max_P ← <span class="hljs-built_in">Query-Max</span>(Tree, <span class="hljs-selector-tag">i</span>, R<span class="hljs-selector-attr">[i]</span> - <span class="hljs-number">1</span>)<br>        min_P ← <span class="hljs-built_in">Query-Min</span>(Tree, L<span class="hljs-selector-attr">[i]</span>, <span class="hljs-selector-tag">i</span> - <span class="hljs-number">1</span>)<br><br>        IF (max_P - min_P) &gt; A<span class="hljs-selector-attr">[i]</span> THEN<br>            RETURN <span class="hljs-string">&quot;NO&quot;</span><br>        END IF<br>    END FOR<br><br>    RETURN <span class="hljs-string">&quot;YES&quot;</span><br>END ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度">复杂度</h3>
+<p><strong>时间</strong>：<span
+class="math inline"><em>O</em>(<em>N</em>log <em>N</em>)</span>：单调栈
+<span class="math inline"><em>O</em>(<em>N</em>)</span>，主循环 <span
+class="math inline"><em>N</em></span> 次，每次线段树查询 <span
+class="math inline"><em>O</em>(log <em>N</em>)</span>。</p>
+<p><strong>空间</strong>：<span
+class="math inline"><em>O</em>(<em>N</em>)</span>：前缀和、栈数组、线段树均为线性空间。</p>
+<h2 id="b---能耗最小问题"><a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-U625832">B - 能耗最小问题</a></h2>
+<h3 id="题目-1">题目</h3>
+<p>有一个长度为<span
+class="math inline">2<sup><em>n</em></sup></span>的区域，里面一共有k个目标点分布在区域内。</p>
+<p>处理区域时，可选择以下两种操作之一：</p>
+<p>1.直接处理整个区域，若区域内无目标点，能耗=A；若区域内有目标点，能耗=B×目标点数量×区域长度。</p>
+<p>2.分割区域再处理，若当前区域长度大于等于2，将其等分为两个子区域，分别计算两个子区域的最小能耗，当前区域能耗等于两个子区域能耗之和，得到的子区域同样可以用两种操作继续处理。</p>
+<p>如何处理能让能耗最小？</p>
+<p>输入：</p>
+<p>1.第一行是四个整数<span
+class="math inline"><em>n</em>, <em>k</em>, <em>A</em>, <em>B</em></span>（<span
+class="math inline">1 ≤ <em>n</em> ≤ 30, 1 ≤ <em>k</em> ≤ 10<sup>5</sup>, 1 ≤ <em>A</em>, <em>B</em> ≤ 10<sup>4</sup></span>），其中<span
+class="math inline"><em>n</em></span>表示区域的长度为<span
+class="math inline">2<sup><em>n</em></sup></span>，<span
+class="math inline"><em>k</em></span>表示一共有个<span
+class="math inline"><em>k</em></span>目标点，<span
+class="math inline"><em>A</em></span>表示当一个区域内没有目标点时，直接处理这个空区域所需的能耗，<span
+class="math inline"><em>B</em></span>表示当区域内有目标点时，计算能耗的系数。</p>
+<p>2.第二行包含<span class="math inline"><em>k</em></span>个整数，<span
+class="math inline"><em>a</em><sub>1</sub>, <em>a</em><sub>2</sub>, <em>a</em><sub>3</sub>, ⋯, <em>a</em><sub><em>k</em></sub></span>（<span
+class="math inline">1 ≤ <em>a</em><sub><em>i</em></sub> ≤ 2<sup><em>n</em></sup></span>）
+，每个<span
+class="math inline"><em>a</em><sub><em>i</em></sub></span>表示目标点的位置。</p>
+<p>输出：</p>
+<p>输出一个整数，表示处理该区域所需的最小能耗。</p>
+<h3 id="算法思路">算法思路</h3>
+<p>本题采用 <strong>分治算法 (Divide and Conquer)</strong>
+求解，核心在于利用“排序+二分查找”来加速稀疏区间的查询。</p>
+<ol type="1">
+<li><strong>预处理：排序 (Sorting)</strong>
+<ul>
+<li>将所有目标点的位置数组 <span
+class="math inline"><em>P</em><em>o</em><em>s</em></span>
+按升序排序。</li>
+<li><strong>目的</strong>：排序后，任意物理区间 <span
+class="math inline">[<em>L</em>, <em>R</em>]</span> 内的目标点在 <span
+class="math inline"><em>P</em><em>o</em><em>s</em></span>
+数组中也是连续存储的。我们可以通过维护两个下标 <span
+class="math inline"><em>i</em><em>d</em><em>x</em>_<em>s</em><em>t</em><em>a</em><em>r</em><em>t</em></span>
+和 <span
+class="math inline"><em>i</em><em>d</em><em>x</em>_<em>e</em><em>n</em><em>d</em></span>
+来标识当前区间包含的目标点范围，从而在 <span
+class="math inline"><em>O</em>(1)</span> 时间内算出点数。</li>
+</ul></li>
+<li><strong>分治递归 (Recursive Strategy)</strong>
+<ul>
+<li>定义函数 <code>Solve(L, R, idx_start, idx_end)</code> 处理物理区间
+<span class="math inline">[<em>L</em>, <em>R</em>]</span>。</li>
+<li><strong>计算点数</strong>：<span
+class="math inline"><em>c</em><em>o</em><em>u</em><em>n</em><em>t</em> = <em>i</em><em>d</em><em>x</em>_<em>e</em><em>n</em><em>d</em> − <em>i</em><em>d</em><em>x</em>_<em>s</em><em>t</em><em>a</em><em>r</em><em>t</em></span>。</li>
+</ul></li>
+<li><strong>决策逻辑 (Decision Logic)</strong>
+<ul>
+<li><strong>操作一：整体处理 (Whole Processing)</strong>
+<ul>
+<li>若 <span
+class="math inline"><em>c</em><em>o</em><em>u</em><em>n</em><em>t</em> =  = 0</span>（空区间）：能耗为
+<span class="math inline"><em>A</em></span>。</li>
+<li>若 <span
+class="math inline"><em>c</em><em>o</em><em>u</em><em>n</em><em>t</em> &gt; 0</span>（非空）：能耗为
+<span
+class="math inline"><em>B</em> × <em>c</em><em>o</em><em>u</em><em>n</em><em>t</em> × (<em>R</em> − <em>L</em> + 1)</span>。</li>
+</ul></li>
+<li><strong>操作二：分割处理 (Split Processing)</strong>
+<ul>
+<li>若区间长度为 1（叶子节点）：无法分割，返回整体处理的能耗。</li>
+<li>若区间长度 <span class="math inline"> &gt; 1</span>：
+<ul>
+<li>计算物理中点 <span
+class="math inline"><em>m</em><em>i</em><em>d</em> = ⌊(<em>L</em> + <em>R</em>)/2⌋</span>。</li>
+<li>利用 <strong>二分查找</strong> 在 <span
+class="math inline"><em>P</em><em>o</em><em>s</em>[<em>i</em><em>d</em><em>x</em>_<em>s</em><em>t</em><em>a</em><em>r</em><em>t</em>…<em>i</em><em>d</em><em>x</em>_<em>e</em><em>n</em><em>d</em> − 1]</span>
+中找到第一个大于 <span
+class="math inline"><em>m</em><em>i</em><em>d</em></span> 的下标 <span
+class="math inline"><em>i</em><em>d</em><em>x</em>_<em>m</em><em>i</em><em>d</em></span>。</li>
+<li>递归计算：<span
+class="math inline"><em>C</em><em>o</em><em>s</em><em>t</em><sub><em>s</em><em>p</em><em>l</em><em>i</em><em>t</em></sub> = <em>S</em><em>o</em><em>l</em><em>v</em><em>e</em>(<em>L</em><em>e</em><em>f</em><em>t</em>) + <em>S</em><em>o</em><em>l</em><em>v</em><em>e</em>(<em>R</em><em>i</em><em>g</em><em>h</em><em>t</em>)</span>。</li>
+</ul></li>
+</ul></li>
+<li><strong>最优解</strong>：<span
+class="math inline"><em>R</em><em>e</em><em>s</em><em>u</em><em>l</em><em>t</em> = min (<em>C</em><em>o</em><em>s</em><em>t</em><sub><em>w</em><em>h</em><em>o</em><em>l</em><em>e</em></sub>, <em>C</em><em>o</em><em>s</em><em>t</em><sub><em>s</em><em>p</em><em>l</em><em>i</em><em>t</em></sub>)</span>。</li>
+</ul></li>
+</ol>
+<h3 id="伪代码-1">伪代码</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs sql">ALGORITHM Minimize<span class="hljs-operator">-</span>Energy<br>    INPUT: <br>        n, k, A, B: Integers<br>        Pos: <span class="hljs-keyword">Array</span> <span class="hljs-keyword">of</span> target positions [<span class="hljs-number">1.</span>..k]<br>    OUTPUT: <br>        Minimum energy consumption<br><br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-number">1.</span> Sort <span class="hljs-keyword">for</span> <span class="hljs-type">binary</span> <span class="hljs-keyword">search</span> strategy<br>    Sort Pos <span class="hljs-keyword">in</span> ascending <span class="hljs-keyword">order</span><br><br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-number">2.</span> <span class="hljs-keyword">Start</span> recursion covering <span class="hljs-keyword">full</span> <span class="hljs-keyword">range</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span><span class="hljs-operator">^</span>n]<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> Index <span class="hljs-keyword">range</span> [<span class="hljs-number">1</span>, k<span class="hljs-operator">+</span><span class="hljs-number">1</span>) covers <span class="hljs-keyword">all</span> targets<br>    <span class="hljs-keyword">RETURN</span> Solve(<span class="hljs-number">1</span>, <span class="hljs-number">2</span><span class="hljs-operator">^</span>n, <span class="hljs-number">1</span>, k <span class="hljs-operator">+</span> <span class="hljs-number">1</span>)<br><br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-keyword">Recursive</span> Helper <span class="hljs-keyword">Function</span><br>    <span class="hljs-keyword">FUNCTION</span> Solve(L, R, idx_start, idx_end)<br>        count ← idx_end <span class="hljs-operator">-</span> idx_start<br>        <br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> Base <span class="hljs-keyword">Case</span> <span class="hljs-number">1</span>: <span class="hljs-keyword">Empty</span> region<br>        IF count <span class="hljs-operator">=</span> <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-keyword">RETURN</span> A<br><br>        length ← R <span class="hljs-operator">-</span> L <span class="hljs-operator">+</span> <span class="hljs-number">1</span><br>        cost_whole ← B <span class="hljs-operator">*</span> count <span class="hljs-operator">*</span> length<br><br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> Base <span class="hljs-keyword">Case</span> <span class="hljs-number">2</span>: Leaf node (cannot split)<br>        IF L <span class="hljs-operator">=</span> R <span class="hljs-keyword">THEN</span> <span class="hljs-keyword">RETURN</span> cost_whole<br><br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-keyword">Recursive</span> Step: Try splitting<br>        mid ← <span class="hljs-built_in">floor</span>((L <span class="hljs-operator">+</span> R) <span class="hljs-operator">/</span> <span class="hljs-number">2</span>)<br>        <br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> Find split index: <span class="hljs-keyword">first</span> element <span class="hljs-operator">&gt;</span> mid<br>        idx_mid ← BinarySearch_UpperBound(Pos, mid, idx_start, idx_end)<br><br>        cost_split ← Solve(L, mid, idx_start, idx_mid) <span class="hljs-operator">+</span> <br>                     Solve(mid <span class="hljs-operator">+</span> <span class="hljs-number">1</span>, R, idx_mid, idx_end)<br><br>        <span class="hljs-keyword">RETURN</span> <span class="hljs-built_in">Min</span>(cost_whole, cost_split)<br>    <span class="hljs-keyword">END</span> <span class="hljs-keyword">FUNCTION</span><br><br><span class="hljs-keyword">END</span> ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度-1">复杂度</h3>
+<ol type="1">
+<li><p><strong>时间复杂度 (Time Complexity)</strong>:</p>
+<p><span
+class="math display"><em>O</em>(<em>n</em> ⋅ <em>k</em> ⋅ log <em>k</em>)</span></p>
+<ul>
+<li><strong>排序</strong>：耗时 <span
+class="math inline"><em>O</em>(<em>k</em>log <em>k</em>)</span>。</li>
+<li><strong>递归树结构</strong>：虽然总空间大小是 <span
+class="math inline">2<sup><em>n</em></sup></span>，但这是一个<strong>稀疏递归</strong>。程序在遇到空区间时会立即返回
+<span
+class="math inline"><em>A</em></span>，不再分裂。因此，只有包含目标点的节点及其直接兄弟节点会被访问。</li>
+<li><strong>计算量</strong>：每一层（共 <span
+class="math inline"><em>n</em></span> 层）被处理的有效节点数与目标点数量
+<span class="math inline"><em>k</em></span>
+呈线性关系。每个节点内部执行一次二分查找，耗时 <span
+class="math inline"><em>O</em>(log <em>k</em>)</span>。</li>
+<li><strong>总计</strong>：<span
+class="math inline"><em>O</em>(<em>k</em>log <em>k</em> + <em>n</em> ⋅ <em>k</em>log <em>k</em>) ≈ <em>O</em>(<em>n</em><em>k</em>log <em>k</em>)</span>。</li>
+</ul></li>
+<li><p><strong>空间复杂度 (Space Complexity)</strong>:</p>
+<p><span
+class="math display"><em>O</em>(<em>n</em> + <em>k</em>)</span></p>
+<ul>
+<li><strong>辅助空间</strong>：存储 <span
+class="math inline"><em>P</em><em>o</em><em>s</em></span> 数组占用 <span
+class="math inline"><em>O</em>(<em>k</em>)</span>。</li>
+<li><strong>栈空间</strong>：递归深度最大为 <span
+class="math inline"><em>n</em></span>，占用 <span
+class="math inline"><em>O</em>(<em>n</em>)</span>。</li>
+</ul></li>
+</ol>
+<h2 id="c---稠密有向无环图的构造"><a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-P14145">C -
+稠密有向无环图的构造</a></h2>
+<h3 id="题目-2">题目</h3>
+<p>给定正整数<span
+class="math inline"><em>n</em></span>，需要构建一个包含<span
+class="math inline"><em>n</em></span>个顶点的简单有向无环图。使得距离为<span
+class="math inline">2</span>的点对的个数<span class="math inline">$k\geq
+\frac{n(n-1)}{2} - n \lceil \log_2 n \rceil$</span>。点对(<span
+class="math inline"><em>u</em></span>,<span
+class="math inline"><em>v</em></span>)之间的距离指<span
+class="math inline"><em>u</em></span>到<span
+class="math inline"><em>v</em></span>的最短路长度。</p>
+<p>示例：现有一个有向无环图，其边集为<span
+class="math inline">1 → 2、1 → 4、2 → 3、4 → 3、4 → 5、3 → 5</span>；
+则该图中距离为<span class="math inline">2</span>的点对的个数<span
+class="math inline"><em>k</em></span>为<span
+class="math inline">3</span>，分别是<span
+class="math inline">1 → 3、1 → 5、2 → 5</span>。</p>
+<h3 id="算法思路-1">算法思路</h3>
+<p>该算法采用 <strong>分治法 (Divide and Conquer)</strong>
+思想，递归地构建一个类似“二叉搜索树”结构的图，利用枢纽节点（Pivot）最大化路径长度为
+2 的点对数量。</p>
+<ol type="1">
+<li><strong>枢纽选择</strong>：在当前区间 <span
+class="math inline">[<em>L</em>, <em>R</em>]</span> 中选择中点 <span
+class="math inline"><em>m</em><em>i</em><em>d</em></span>
+作为枢纽节点（Pivot）。</li>
+<li><strong>构建桥梁</strong>：
+<ul>
+<li>将左区间 <span
+class="math inline">[<em>L</em>, <em>m</em><em>i</em><em>d</em> − 1]</span>
+中的所有节点直接指向枢纽 <span
+class="math inline"><em>m</em><em>i</em><em>d</em></span>。</li>
+<li>将枢纽 <span
+class="math inline"><em>m</em><em>i</em><em>d</em></span> 直接指向右区间
+<span
+class="math inline">[<em>m</em><em>i</em><em>d</em> + 1, <em>R</em>]</span>
+中的所有节点。</li>
+<li><strong>效果</strong>：左区间任意节点 <span
+class="math inline"><em>u</em></span> 和右区间任意节点 <span
+class="math inline"><em>v</em></span> 之间必然存在一条路径 <span
+class="math inline"><em>u</em> → <em>m</em><em>i</em><em>d</em> → <em>v</em></span>，其长度恰好为
+2。</li>
+</ul></li>
+<li><strong>递归处理</strong>：对左右子区间重复上述过程，填补内部的边。</li>
+<li><strong>结果</strong>：通过这种层级化的连接，每一层递归都建立了大量跨越左右区域的长度为
+2 的路径，从而满足题目关于 <span class="math inline"><em>k</em></span>
+的下界要求。</li>
+</ol>
+<h3 id="伪代码-2">伪代码</h3>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">ALGORITHM Construct-Dense-DAG<br>    INPUT: <br>        n: Integer (number <span class="hljs-keyword">of</span> vertices)<br>    OUTPUT: <br>        Edges: List <span class="hljs-keyword">of</span> directed edges (u, v)<br><br>    <span class="hljs-comment">// Main entry point</span><br>    <span class="hljs-keyword">FUNCTION</span> <span class="hljs-title function_">Main</span><span class="hljs-params">()</span><br>        <span class="hljs-title function_">Edges</span> ← <span class="hljs-title function_">Empty</span> <span class="hljs-title function_">List</span><br>        // <span class="hljs-title function_">Start</span> <span class="hljs-title function_">recursion</span> <span class="hljs-title function_">on</span> <span class="hljs-title function_">the</span> <span class="hljs-title function_">full</span> <span class="hljs-title function_">range</span> [1, <span class="hljs-title function_">n</span>]<br>        <span class="hljs-title function_">Solve</span><span class="hljs-params">(1, n, Edges)</span><br>        <span class="hljs-title function_">RETURN</span> <span class="hljs-title function_">Edges</span><br>    <span class="hljs-title function_">END</span> <span class="hljs-title function_">FUNCTION</span><br><br>    // <span class="hljs-title function_">Recursive</span> <span class="hljs-title function_">Divide</span> <span class="hljs-title function_">and</span> <span class="hljs-title function_">Conquer</span> <span class="hljs-title function_">Procedure</span><br>    <span class="hljs-title function_">PROCEDURE</span> <span class="hljs-title function_">Solve</span><span class="hljs-params">(L, R, Edges)</span><br>        // <span class="hljs-title function_">Base</span> <span class="hljs-title function_">Case</span>: <span class="hljs-keyword">If</span> the range <span class="hljs-keyword">has</span> less than <span class="hljs-number">2</span> nodes, no edges needed<br>        <span class="hljs-keyword">IF</span> L ≥ R <span class="hljs-keyword">THEN</span><br>            RETURN<br>        <span class="hljs-keyword">END</span> <span class="hljs-keyword">IF</span><br><br>        <span class="hljs-comment">// 1. Select Pivot (Middle element)</span><br>        mid ← floor((L + R) / <span class="hljs-number">2</span>)<br><br>        <span class="hljs-comment">// 2. Connect Left Sub-range to Pivot [L...mid-1] -&gt; mid</span><br>        <span class="hljs-keyword">FOR</span> u ← L <span class="hljs-keyword">TO</span> mid - <span class="hljs-number">1</span> <span class="hljs-keyword">DO</span><br>            Append (u, mid) <span class="hljs-keyword">to</span> Edges<br>        <span class="hljs-keyword">END</span> <span class="hljs-keyword">FOR</span><br><br>        <span class="hljs-comment">// 3. Connect Pivot to Right Sub-range mid -&gt; [mid+1...R]</span><br>        <span class="hljs-keyword">FOR</span> v ← mid + <span class="hljs-number">1</span> <span class="hljs-keyword">TO</span> R <span class="hljs-keyword">DO</span><br>            Append (mid, v) <span class="hljs-keyword">to</span> Edges<br>        <span class="hljs-keyword">END</span> <span class="hljs-keyword">FOR</span><br><br>        <span class="hljs-comment">// 4. Recursively process sub-ranges</span><br>        Solve(L, mid - <span class="hljs-number">1</span>, Edges)<br>        Solve(mid + <span class="hljs-number">1</span>, R, Edges)<br><br>    <span class="hljs-keyword">END</span> <span class="hljs-keyword">PROCEDURE</span><br><span class="hljs-title function_">END</span> <span class="hljs-title function_">ALGORITHM</span><br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析">复杂度分析</h3>
+<ol type="1">
+<li><strong>时间复杂度 (Time Complexity)</strong>: <span
+class="math inline"><em>O</em>(<em>n</em>log <em>n</em>)</span>
+<ul>
+<li><strong>递归深度</strong>：每次将区间减半，递归树深度为 <span
+class="math inline">log<sub>2</sub><em>n</em></span>。</li>
+<li><strong>每层操作</strong>：在每一层递归中，区间内的每个节点（除了枢纽自身）都会被访问一次并创建一条边。每一层的总操作量约为
+<span class="math inline"><em>O</em>(<em>n</em>)</span>。</li>
+<li><strong>总复杂度</strong>：层数 <span class="math inline">×</span>
+每层操作量 = <span
+class="math inline"><em>O</em>(<em>n</em>log <em>n</em>)</span>。</li>
+</ul></li>
+<li><strong>空间复杂度 (Space Complexity)</strong>: <span
+class="math inline"><em>O</em>(<em>n</em>log <em>n</em>)</span>
+<ul>
+<li><strong>存储边集</strong>：生成的边数等于时间复杂度，即 <span
+class="math inline"><em>O</em>(<em>n</em>log <em>n</em>)</span>，这是存储输出所需的空间。</li>
+<li><strong>递归栈</strong>：栈深度为 <span
+class="math inline"><em>O</em>(log <em>n</em>)</span>。</li>
+<li><strong>总空间</strong>：由输出规模主导，为 <span
+class="math inline"><em>O</em>(<em>n</em>log <em>n</em>)</span>。</li>
+</ul></li>
+</ol>
+<h2 id="d---中间数计数问题"><a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-U625894">D -
+“中间数”计数问题</a></h2>
+<h3 id="题目-3">题目</h3>
+<p>初始时，集合<span
+class="math inline"><em>S</em></span>中只有元素<span
+class="math inline">1</span>。给定一个正整数<span
+class="math inline"><em>N</em></span>，</p>
+<p>需要不断对<span
+class="math inline"><em>S</em></span>执行以下操作，直到不能继续为止：</p>
+<ol type="1">
+<li>在<span class="math inline">1</span>到<span
+class="math inline"><em>N</em></span>（包含<span
+class="math inline">1</span>和<span
+class="math inline"><em>N</em></span>）的范围内，找出所有的正整数<span
+class="math inline"><em>x</em></span>，使满足<span
+class="math inline">min<sub><em>y</em> ∈ <em>S</em></sub>|<em>x</em> − <em>y</em>|</span>最大且大于<span
+class="math inline">1</span>。</li>
+<li>若<span class="math inline"><em>x</em></span>唯一，将其加入<span
+class="math inline"><em>S</em></span>；</li>
+<li>若这样的<span
+class="math inline"><em>x</em></span>有多个，挑出其中最小的那个，将其加入<span
+class="math inline"><em>S</em></span>；</li>
+<li>当再也找不到符合条件的<span
+class="math inline"><em>x</em></span>时，停止操作。</li>
+</ol>
+<p>最后，求集合<span
+class="math inline"><em>S</em></span>中元素的总个数。</p>
+<p>输入格式：</p>
+<p>共一行。</p>
+<p>第一行，一个正整数<span class="math inline"><em>N</em></span>。</p>
+<p>输出格式：</p>
+<p>共一行。</p>
+<p>第一行，一个正整数表示最终集合<span
+class="math inline"><em>S</em></span>中元素的总个数。</p>
+<h3 id="算法思路-2">算法思路</h3>
+<p>本题本质是模拟<strong>区间递归分割</strong>的过程，采用
+<strong>分治法 </strong> 结合 <strong>记忆化搜索</strong> 求解。</p>
+<ol type="1">
+<li><p><strong>分治逻辑</strong>：</p>
+<ul>
+<li><p>寻找满足条件的 <span class="math inline"><em>x</em></span>
+实质上是在寻找当前区间 <span class="math inline">[1, <em>r</em>]</span>
+的中点。</p></li>
+<li><p>将长度为 <span class="math inline"><em>r</em></span>
+的区间从“中点”分为左右两段。由于“中点”同时属于左、右子区间，根据
+<strong>容斥原理</strong>，总点数计算公式为：</p>
+<p><span
+class="math display"><em>C</em><em>o</em><em>u</em><em>n</em><em>t</em>(<em>T</em><em>o</em><em>t</em><em>a</em><em>l</em>) = <em>C</em><em>o</em><em>u</em><em>n</em><em>t</em>(<em>L</em><em>e</em><em>f</em><em>t</em>) + <em>C</em><em>o</em><em>u</em><em>n</em><em>t</em>(<em>R</em><em>i</em><em>g</em><em>h</em><em>t</em>) − 1</span></p></li>
+</ul></li>
+<li><p><strong>状态转移</strong>：</p>
+<ul>
+<li>若 <span class="math inline"><em>r</em></span>
+为<strong>奇数</strong>：中点使得左右区间长度相等，均为 <span
+class="math inline">(<em>r</em> + 1)/2</span>。</li>
+<li>若 <span class="math inline"><em>r</em></span>
+为<strong>偶数</strong>：中点使得左区间长度为 <span
+class="math inline"><em>r</em>/2</span>，右区间长度为 <span
+class="math inline"><em>r</em>/2 + 1</span>。</li>
+</ul></li>
+<li><p><strong>基准情形</strong>：</p>
+<ul>
+<li>当区间长度 <span class="math inline"><em>r</em> ≤ 2</span>
+时，无法再插入满足“距离 <span
+class="math inline"> &gt; 1</span>”的点，仅含端点，返回 1。</li>
+<li>当 <span class="math inline"><em>r</em> = 3</span> 时，区间为 <span
+class="math inline">[1, 3]</span>，插入 <span
+class="math inline">2</span>，共 2 个点。</li>
+</ul></li>
+<li><p><strong>优化</strong>：</p>
+<ul>
+<li>由于递归中 <span class="math inline"><em>r</em></span>
+的值呈指数衰减，且存在大量重复子问题（如 <span
+class="math inline"><em>D</em><em>F</em><em>S</em>(100)</span> 和 <span
+class="math inline"><em>D</em><em>F</em><em>S</em>(101)</span> 都会用到
+<span
+class="math inline"><em>D</em><em>F</em><em>S</em>(50)</span>），利用<strong>哈希表</strong>记录已计算结果，将复杂度降至对数级。</li>
+</ul></li>
+</ol>
+<h3 id="伪代码-3">伪代码</h3>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs gams">ALGORITHM Count-Intermediate-Numbers<br>    INPUT: <br>        N: <span class="hljs-keyword">Positive</span> <span class="hljs-keyword">Integer</span> (Range limit)<br>    OUTPUT: <br>        Total number of elements in <span class="hljs-keyword">Set</span> S<br><br>    <span class="hljs-comment">// Global Memoization Table to store results for range length r</span><br>    GLOBAL <span class="hljs-comment">Memo</span> ← <span class="hljs-comment">Empty Hash Map</span><br><br>    FUNCTION <span class="hljs-comment">Main()</span><br>        <span class="hljs-comment">// Start recursion with the full range length N</span><br>        result ← <span class="hljs-comment">DFS(N)</span><br>        PRINT <span class="hljs-comment">result</span><br>    END <span class="hljs-comment">FUNCTION</span><br><br>    FUNCTION <span class="hljs-comment">DFS(r)</span><br>        <span class="hljs-comment">// 1. Check Memoization Cache</span><br>        IF <span class="hljs-comment">r is in Memo THEN</span><br>            RETURN <span class="hljs-comment">Memo[r]</span><br>        END <span class="hljs-comment">IF</span><br><br>        <span class="hljs-comment">// 2. Base Cases</span><br>        IF <span class="hljs-comment">r</span> ≤ <span class="hljs-comment">2 THEN</span><br>            <span class="hljs-comment">// Range too small to add intermediate points (gap &lt;= 1)</span><br>            <span class="hljs-comment">// Effectively counts the starting point of the segment</span><br>            RETURN <span class="hljs-comment">1</span><br>        ELSE <span class="hljs-comment">IF r = 3 THEN</span><br>            <span class="hljs-comment">// Special case: [1, 2, 3] -&gt; 2 points (e.g., &#123;1, 3&#125; logic in code base)</span><br>            RETURN <span class="hljs-comment">2</span><br>        END <span class="hljs-comment">IF</span><br><br>        <span class="hljs-comment">// 3. Divide Step</span><br>        <span class="hljs-comment">// Calculate split point based on parity</span><br>        mid_len ← <span class="hljs-comment">floor((r + 1)</span> / <span class="hljs-number">2</span>)<br><br>        <span class="hljs-keyword">IF</span> (r <span class="hljs-built_in">mod</span> <span class="hljs-number">2</span>) = <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span><br>            <span class="hljs-comment">// Even case: Splits into unequal halves</span><br>            <span class="hljs-comment">// e.g., 4 splits to lengths 2 and 3</span><br>            left_count  ← DFS(mid_len)<br>            right_count ← DFS(mid_len + <span class="hljs-number">1</span>)<br>            total ← left_count + right_count - <span class="hljs-number">1</span><br>        <span class="hljs-keyword">ELSE</span><br>            <span class="hljs-comment">// Odd case: Splits into equal halves</span><br>            <span class="hljs-comment">// e.g., 5 splits to lengths 3 and 3</span><br>            sub_count ← DFS(mid_len)<br>            total ← <span class="hljs-number">2</span> * sub_count - <span class="hljs-number">1</span><br>        END <span class="hljs-keyword">IF</span><br><br>        <span class="hljs-comment">// 4. Store and Return</span><br>        Memo[r] ← total<br>        RETURN total<br>    END FUNCTION<br><br>END ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-1">复杂度分析</h3>
+<ol type="1">
+<li><strong>时间复杂度 (Time Complexity)</strong>: <span
+class="math inline"><em>O</em>(log <em>N</em>)</span>
+<ul>
+<li>每次递归 <span class="math inline"><em>r</em></span>
+近似减半。在递归树中，虽然节点看似很多，但<strong>不同</strong>的参数
+<span class="math inline"><em>r</em></span> 值非常稀疏。</li>
+<li>对于输入 <span class="math inline"><em>N</em></span>，仅会出现形如
+<span class="math inline">⌊<em>N</em>/2<sup><em>k</em></sup>⌋</span> 或
+<span class="math inline">⌈<em>N</em>/2<sup><em>k</em></sup>⌉</span>
+的值。独立状态数约为 <span
+class="math inline">2log <em>N</em></span>。</li>
+<li>配合记忆化搜索，每个状态仅计算一次。</li>
+</ul></li>
+<li><strong>空间复杂度 (Space Complexity)</strong>: <span
+class="math inline"><em>O</em>(log <em>N</em>)</span>
+<ul>
+<li><strong>栈空间</strong>：递归深度为 <span
+class="math inline">log <em>N</em></span>。</li>
+<li><strong>存储空间</strong>：哈希表存储的独立状态数也为 <span
+class="math inline"><em>O</em>(log <em>N</em>)</span>。</li>
+</ul></li>
+</ol>
+<h1 id="st-dynamic-programming-1">2st Dynamic Programming 1</h1>
+<h2 id="a---前缀和非负的排序数"><a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-U630592">A -
+前缀和非负的排序数</a></h2>
+<p>有 <span class="math inline"><em>n</em></span> 个 <span
+class="math inline">+1</span> 和 <span
+class="math inline"><em>n</em></span> 个 <span
+class="math inline">−1</span> 排成一个长度为 <span
+class="math inline">2<em>n</em></span> 的序列，要求任意前缀和 <span
+class="math inline"> ≥ 0</span>​，问有多少种不同的排列。数据范围<span
+class="math display">0 ≤ <em>n</em> ≤ 20</span>。</p>
+<p>输入输出格式</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>一个整数 <span class="math inline"><em>n</em></span>，代表 <span
+class="math inline">+1</span> 和 <span class="math inline">−1</span>
+的个数</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>一个整数，代表满足条件的排列数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="算法思路-3">算法思路</h3>
+<p>该问题即求解 <strong>卡特兰数 (Catalan Number)</strong>，但通过
+<strong>动态规划 (Dynamic Programming)</strong> 求解。</p>
+<ol type="1">
+<li><strong>状态定义</strong>：设 <span
+class="math inline"><em>d</em><em>p</em>[<em>b</em>]</span>
+表示当前处理了若干个数字后，<strong>前缀和（Balance）</strong> 为 <span
+class="math inline"><em>b</em></span> 的方案数。</li>
+<li><strong>状态转移</strong>：遍历总步数 <span
+class="math inline"><em>s</em></span>（从 0 到 <span
+class="math inline">2<em>n</em> − 1</span>）。对于每一个可能的前缀和
+<span class="math inline"><em>b</em></span>：
+<ul>
+<li>计算已使用的 <span class="math inline">+1</span> 个数 (<span
+class="math inline"><em>p</em><em>l</em><em>u</em><em>s</em></span>) 和
+<span class="math inline">−1</span> 个数 (<span
+class="math inline"><em>m</em><em>i</em><em>n</em><em>u</em><em>s</em></span>)。</li>
+<li><strong>放置 +1</strong>：若 <span
+class="math inline"><em>p</em><em>l</em><em>u</em><em>s</em> &lt; <em>n</em></span>，则可以将当前状态转移到新的前缀和
+<span class="math inline"><em>b</em> + 1</span>。</li>
+<li><strong>放置 -1</strong>：若 <span
+class="math inline"><em>b</em> &gt; 0</span>（保证非负前缀和）且 <span
+class="math inline"><em>m</em><em>i</em><em>n</em><em>u</em><em>s</em> &lt; <em>n</em></span>，则可以将当前状态转移到新的前缀和
+<span class="math inline"><em>b</em> − 1</span>。</li>
+</ul></li>
+<li><strong>滚动数组</strong>：每一轮迭代生成一个新的 <span
+class="math inline"><em>n</em><em>d</em><em>p</em></span> 数组覆盖旧的
+<span
+class="math inline"><em>d</em><em>p</em></span>，以此推进步数。</li>
+<li><strong>结果</strong>：迭代 <span
+class="math inline">2<em>n</em></span> 步后，<span
+class="math inline"><em>d</em><em>p</em>[0]</span>
+即为最终回到原点（总和为 0）且过程始终非负的方案数。</li>
+</ol>
+<h3 id="伪代码-4">伪代码</h3>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs delphi">ALGORITHM Count-Valid-Permutations<br>    INPUT: n (Integer)<br>    OUTPUT: count (Integer)<br><br>    <span class="hljs-comment">// Handle edge case based on code logic</span><br>    <span class="hljs-keyword">IF</span> n = <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span><br>        RETURN <span class="hljs-number">0</span><br>    <span class="hljs-keyword">END</span> <span class="hljs-keyword">IF</span><br><br>    <span class="hljs-comment">// dp[b] stores the number of paths ending with balance b</span><br>    <span class="hljs-comment">// Size needs to accommodate max balance n</span><br>    Initialize <span class="hljs-keyword">array</span> dp[<span class="hljs-number">0</span>...<span class="hljs-number">2</span>n] <span class="hljs-keyword">with</span> <span class="hljs-number">0</span><br>    dp[<span class="hljs-number">0</span>] ← <span class="hljs-number">1</span><br><br>    <span class="hljs-comment">// Iterate through each step of the sequence</span><br>    <span class="hljs-keyword">FOR</span> s ← <span class="hljs-number">0</span> <span class="hljs-keyword">TO</span> <span class="hljs-number">2</span>n - <span class="hljs-number">1</span> <span class="hljs-keyword">DO</span><br>        Initialize <span class="hljs-keyword">array</span> ndp[<span class="hljs-number">0</span>...<span class="hljs-number">2</span>n] <span class="hljs-keyword">with</span> <span class="hljs-number">0</span><br>        <br>        <span class="hljs-comment">// Iterate through all possible balances</span><br>        <span class="hljs-keyword">FOR</span> b ← <span class="hljs-number">0</span> <span class="hljs-keyword">TO</span> s + <span class="hljs-number">1</span> <span class="hljs-keyword">DO</span><br>            <span class="hljs-keyword">IF</span> dp[b] = <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-keyword">CONTINUE</span><br><br>            <span class="hljs-comment">// Calculate used counts of +1 and -1</span><br>            plus_used ← (s + b) / <span class="hljs-number">2</span><br>            minus_used ← s - plus_used<br><br>            <span class="hljs-comment">// Transition 1: Add a +1</span><br>            <span class="hljs-keyword">IF</span> plus_used &lt; n <span class="hljs-keyword">THEN</span><br>                ndp[b + <span class="hljs-number">1</span>] ← ndp[b + <span class="hljs-number">1</span>] + dp[b]<br>            <span class="hljs-keyword">END</span> <span class="hljs-keyword">IF</span><br><br>            <span class="hljs-comment">// Transition 2: Add a -1</span><br>            <span class="hljs-comment">// Condition b &gt; 0 ensures prefix sum remains non-negative</span><br>            <span class="hljs-keyword">IF</span> b &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">AND</span> minus_used &lt; n <span class="hljs-keyword">THEN</span><br>                ndp[b - <span class="hljs-number">1</span>] ← ndp[b - <span class="hljs-number">1</span>] + dp[b]<br>            <span class="hljs-keyword">END</span> <span class="hljs-keyword">IF</span><br>        <span class="hljs-keyword">END</span> <span class="hljs-keyword">FOR</span><br><br>        <span class="hljs-comment">// Update state for next step</span><br>        dp ← ndp<br>    <span class="hljs-keyword">END</span> <span class="hljs-keyword">FOR</span><br><br>    RETURN dp[<span class="hljs-number">0</span>]<br><br><span class="hljs-keyword">END</span> ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-2">复杂度分析</h3>
+<ol type="1">
+<li><strong>时间复杂度 (Time Complexity)</strong>: <span
+class="math inline"><em>O</em>(<em>n</em><sup>2</sup>)</span>
+<ul>
+<li>外层循环遍历步数 <span class="math inline"><em>s</em></span>，执行
+<span class="math inline">2<em>n</em></span> 次。</li>
+<li>内层循环遍历前缀和 <span
+class="math inline"><em>b</em></span>，最大不超过 <span
+class="math inline"><em>n</em></span>（实际上是 <span
+class="math inline">min (<em>s</em>, <em>n</em>)</span>）。</li>
+<li>总操作次数约为 <span
+class="math inline"><em>n</em> + (<em>n</em> − 1) + … ≈ <em>n</em><sup>2</sup></span>
+量级。</li>
+<li>对于 <span
+class="math inline"><em>n</em> = 20</span>，计算量非常小。</li>
+</ul></li>
+<li><strong>空间复杂度 (Space Complexity)</strong>: <span
+class="math inline"><em>O</em>(<em>n</em>)</span>
+<ul>
+<li>需要两个数组 <code>dp</code> 和 <code>ndp</code>，长度约为 <span
+class="math inline">2<em>n</em></span>。</li>
+<li>空间消耗随 <span class="math inline"><em>n</em></span>
+线性增长。</li>
+</ul></li>
+</ol>
+<h2 id="b---最大路径权重问题"><a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-U630586">B -
+最大路径权重问题</a></h2>
+<h3 id="题目描述">题目描述</h3>
+<p>给定一个<span
+class="math inline"><em>n</em> × <em>m</em></span>的矩阵<span
+class="math inline"><em>A</em></span>，元素 <span
+class="math inline"><em>a</em><sub><em>i</em>, <em>j</em></sub> ≥ 0</span>。</p>
+<p>定义一条路径是从 <span class="math inline">(1, 1)</span> 到 <span
+class="math inline">(<em>n</em>, <em>m</em>)</span>，每一步只能向右或向下移动的点的序列。</p>
+<p>一条路径的权值是路径上所有点的 <span
+class="math inline"><em>a</em><sub><em>i</em>, <em>j</em></sub></span>
+之和。</p>
+<p>设 <span class="math inline"><em>P</em></span> 是所有路径的集合。</p>
+<p>现允许将矩阵中恰好一个元素的值改为 <span
+class="math inline">0</span>。</p>
+<p>对于任意修改方案<span
+class="math inline"><em>M</em></span>（即选择一个位置 <span
+class="math inline">(<em>p</em>, <em>q</em>)</span> 将其值置 <span
+class="math inline">0</span>），定义： <span
+class="math display"><em>F</em>(<em>M</em>) = max<sub><em>π</em> ∈ <em>P</em></sub>weight(<em>π</em> ∣ <em>M</em>)</span></p>
+<p>其中 <span class="math inline">weight(<em>π</em> ∣ <em>M</em>)</span>
+是在修改 <span class="math inline"><em>M</em></span> 下路径 <span
+class="math inline"><em>π</em></span> 的权值。</p>
+<p>请求出： <span
+class="math display">min<sub><em>M</em></sub><em>F</em>(<em>M</em>)</span></p>
+<p>输入：</p>
+<p>第一行两个整数 <span
+class="math inline"><em>n</em>, <em>m</em></span>。</p>
+<p>下面 <span class="math inline"><em>n</em></span> 行每行 <span
+class="math inline"><em>m</em></span> 个整数 <span
+class="math inline"><em>a</em><sub><em>i</em>, <em>j</em></sub></span></p>
+<p>输出：</p>
+<p>输出一个整数，表示所有修改方案中最大路径权重的最小值。</p>
+<h3 id="算法思路-4">算法思路</h3>
+<p>可利用 <strong>动态规划 (DP)</strong> 和 <strong>对角线特性</strong>
+将时间复杂度从暴力枚举的 <span
+class="math inline"><em>O</em>(<em>N</em><sup>2</sup><em>M</em><sup>2</sup>)</span>
+优化至 <span
+class="math inline"><em>O</em>(<em>N</em><em>M</em>)</span>。</p>
+<ol type="1">
+<li><strong>双向 DP 预处理</strong>：
+<ul>
+<li>计算 <span
+class="math inline"><em>F</em>[<em>i</em>][<em>j</em>]</span>：从起点
+<span class="math inline">(1, 1)</span> 到 <span
+class="math inline">(<em>i</em>, <em>j</em>)</span> 的最大路径和。</li>
+<li>计算 <span
+class="math inline"><em>G</em>[<em>i</em>][<em>j</em>]</span>：从 <span
+class="math inline">(<em>i</em>, <em>j</em>)</span> 到终点 <span
+class="math inline">(<em>n</em>, <em>m</em>)</span> 的最大路径和。</li>
+<li>经过点 <span class="math inline">(<em>i</em>, <em>j</em>)</span>
+的最大路径总权重为 <span
+class="math inline"><em>V</em><em>a</em><em>l</em>(<em>i</em>, <em>j</em>) = <em>F</em>[<em>i</em>][<em>j</em>] + <em>G</em>[<em>i</em>][<em>j</em>] − <em>A</em>[<em>i</em>][<em>j</em>]</span>。</li>
+</ul></li>
+<li><strong>对角线分组 (Diagonal Grouping)</strong>：
+<ul>
+<li>关键性质：任意从起点到终点的路径，必然经过且仅经过一次满足 <span
+class="math inline"><em>i</em> + <em>j</em> = <em>k</em></span>
+的某条对角线上的一个点。</li>
+<li>对于每个对角线和 <span class="math inline"><em>k</em></span> (<span
+class="math inline">2 ≤ <em>k</em> ≤ <em>n</em> + <em>m</em></span>)，记录该对角线上所有点对应的
+<span
+class="math inline"><em>V</em><em>a</em><em>l</em>(<em>i</em>, <em>j</em>)</span>
+中的 <strong>最大值</strong> (<span
+class="math inline"><em>D</em>1[<em>k</em>]</span>) 和
+<strong>次大值</strong> (<span
+class="math inline"><em>D</em>2[<em>k</em>]</span>)。</li>
+</ul></li>
+<li><strong>枚举与决策</strong>：
+<ul>
+<li>遍历每个点 <span class="math inline">(<em>p</em>, <em>q</em>)</span>
+作为被修改点（变 0）。</li>
+<li><strong>经过 <span
+class="math inline">(<em>p</em>, <em>q</em>)</span>
+的路径</strong>：新权重为 <span
+class="math inline"><em>V</em><em>a</em><em>l</em>(<em>p</em>, <em>q</em>) − <em>A</em>[<em>p</em>][<em>q</em>]</span>。</li>
+<li><strong>不经过 <span
+class="math inline">(<em>p</em>, <em>q</em>)</span>
+的路径</strong>：这些路径必须经过对角线 <span
+class="math inline"><em>p</em> + <em>q</em></span> 上的其他点。若 <span
+class="math inline"><em>V</em><em>a</em><em>l</em>(<em>p</em>, <em>q</em>)</span>
+是该对角线的最大值，则不经过它的最大路径为次大值 <span
+class="math inline"><em>D</em>2[<em>p</em> + <em>q</em>]</span>；否则为最大值
+<span
+class="math inline"><em>D</em>1[<em>p</em> + <em>q</em>]</span>。</li>
+<li>当前方案的最大路径为 <span
+class="math inline">max (经过, 不经过)</span>，取所有方案的最小值。</li>
+</ul></li>
+</ol>
+<h3 id="pseudo-code">Pseudo-code</h3>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs inform7">ALGORITHM Min-Max-Path-Optimized<br>    INPUT: n, m, Matrix A<span class="hljs-comment">[1...n]</span><span class="hljs-comment">[1...m]</span><br>    OUTPUT: min_ans<br>    Initialize F<span class="hljs-comment">[n+2]</span><span class="hljs-comment">[m+2]</span>, G<span class="hljs-comment">[n+2]</span><span class="hljs-comment">[m+2]</span> with -INFINITY<br>    F<span class="hljs-comment">[1]</span><span class="hljs-comment">[1]</span> ← A<span class="hljs-comment">[1]</span><span class="hljs-comment">[1]</span><br>    FOR i ← 1 TO n DO<br>        FOR j ← 1 TO m DO<br>            IF i=1 AND j=1 CONTINUE<br>            F<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> ← A<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> + MAX(F<span class="hljs-comment">[i-1]</span><span class="hljs-comment">[j]</span>, F<span class="hljs-comment">[i]</span><span class="hljs-comment">[j-1]</span>)<br>        END FOR<br>    END FOR<br>    G<span class="hljs-comment">[n]</span><span class="hljs-comment">[m]</span> ← A<span class="hljs-comment">[n]</span><span class="hljs-comment">[m]</span><br>    FOR i ← n DOWNTO 1 DO<br>        FOR j ← m DOWNTO 1 DO<br>            IF i=n AND j=m CONTINUE<br>            G<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> ← A<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> + MAX(G<span class="hljs-comment">[i+1]</span><span class="hljs-comment">[j]</span>, G<span class="hljs-comment">[i]</span><span class="hljs-comment">[j+1]</span>)<br>        END FOR<br>    END FOR<br>    Initialize D1<span class="hljs-comment">[n+m+2]</span>, D2<span class="hljs-comment">[n+m+2]</span> with 0<br>    FOR i ← 1 TO n DO<br>        FOR j ← 1 TO m DO<br>            val ← F<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> + G<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> - A<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span><br>            k ← i + j<br>            IF val &gt; D1<span class="hljs-comment">[k]</span> THEN<br>                D2<span class="hljs-comment">[k]</span> ← D1<span class="hljs-comment">[k]</span><br>                D1<span class="hljs-comment">[k]</span> ← val<br>            ELSE IF val &gt; D2<span class="hljs-comment">[k]</span> THEN<br>                D2<span class="hljs-comment">[k]</span> ← val<br>            END IF<br>        END FOR<br>    END FOR<br>    min_ans ← INFINITY<br>    FOR p ← 1 TO n DO<br>        FOR q ← 1 TO m DO<br>            pass_zero ← F<span class="hljs-comment">[p]</span><span class="hljs-comment">[q]</span> + G<span class="hljs-comment">[p]</span><span class="hljs-comment">[q]</span> - 2 * A<span class="hljs-comment">[p]</span><span class="hljs-comment">[q]</span> // Value if A<span class="hljs-comment">[p]</span><span class="hljs-comment">[q]</span> becomes 0<br>            k ← p + q<br>            orig_val ← F<span class="hljs-comment">[p]</span><span class="hljs-comment">[q]</span> + G<span class="hljs-comment">[p]</span><span class="hljs-comment">[q]</span> - A<span class="hljs-comment">[p]</span><span class="hljs-comment">[q]</span><br>            // If current point contributed to the max on diagonal, take second max<br>            no_pass ← (orig_val == D1<span class="hljs-comment">[k]</span>) ? D2<span class="hljs-comment">[k]</span> : D1<span class="hljs-comment">[k]</span><br>            min_ans ← MIN(min_ans, MAX(pass_zero, no_pass))<br>        END FOR<br>    END FOR<br>    RETURN min_ans<br>END ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-3">复杂度分析</h3>
+<ol type="1">
+<li><strong>时间复杂度 (Time Complexity)</strong>: <span
+class="math inline"><em>O</em>(<em>N</em><em>M</em>)</span>
+<ul>
+<li>计算 <span class="math inline"><em>F</em></span> 和 <span
+class="math inline"><em>G</em></span> 需要遍历矩阵两次，耗时 <span
+class="math inline"><em>O</em>(<em>N</em><em>M</em>)</span>。</li>
+<li>计算对角线最大值/次大值需要遍历矩阵一次，耗时 <span
+class="math inline"><em>O</em>(<em>N</em><em>M</em>)</span>。</li>
+<li>最终枚举 <span class="math inline">(<em>p</em>, <em>q</em>)</span>
+计算答案需要遍历矩阵一次，耗时 <span
+class="math inline"><em>O</em>(<em>N</em><em>M</em>)</span>。</li>
+<li>总时间复杂度线性于矩阵元素个数。</li>
+</ul></li>
+<li><strong>空间复杂度 (Space Complexity)</strong>: <span
+class="math inline"><em>O</em>(<em>N</em><em>M</em>)</span>
+<ul>
+<li>需要 <span class="math inline"><em>F</em></span> 和 <span
+class="math inline"><em>G</em></span> 两个辅助矩阵，以及 <span
+class="math inline"><em>A</em></span> 本身，空间为 <span
+class="math inline"><em>O</em>(<em>N</em><em>M</em>)</span>。</li>
+<li><span class="math inline"><em>D</em>1</span> 和 <span
+class="math inline"><em>D</em>2</span> 数组大小为 <span
+class="math inline"><em>O</em>(<em>N</em> + <em>M</em>)</span>，相对可忽略。</li>
+</ul></li>
+</ol>
+<h2 id="c---最小化最大值之和"><a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-P1295">C -
+最小化最大值之和</a></h2>
+<h3 id="题目-4">题目</h3>
+<p>给出一个长度为n的序列h，请将h分成若干段，满足每段数字之和都不超过m，并最小化每段的最大值之和。</p>
+<p>输入的第一行包含两个整数n和m。第2到第(n+1)行表示序列h，每行一个整数。</p>
+<p>输出一行一个整数表示答案。</p>
+<h3 id="算法思路-5">算法思路</h3>
+<p>该算法使用 <strong>动态规划 (DP)</strong> 结合
+<strong>单调队列</strong> 和 <strong>双栈优化</strong> 来解决问题。</p>
+<ol type="1">
+<li><p><strong>DP状态定义</strong>：设 <span
+class="math inline"><em>f</em>[<em>i</em>]</span> 为将前 <span
+class="math inline"><em>i</em></span> 个数分成若干段，且每段和不超过
+<span class="math inline"><em>m</em></span> 的最小“每段最大值之和”。</p>
+<p>状态转移方程为：<span
+class="math inline"><em>f</em>[<em>i</em>] = min<sub><em>j</em> &lt; <em>i</em></sub>{<em>f</em>[<em>j</em>] + max (<em>h</em>[<em>j</em> + 1…<em>i</em>])}</span>，其中
+<span class="math inline">$\sum_{k=j+1}^i h[k] \le m$</span>。</p></li>
+<li><p><strong>单调队列优化</strong>：</p>
+<ul>
+<li>维护一个存储下标的单调递减队列 <span
+class="math inline"><em>q</em></span>。对于队列中相邻的两个下标 <span
+class="math inline"><em>q</em>[<em>k</em>]</span> 和 <span
+class="math inline"><em>q</em>[<em>k</em> + 1]</span>，区间 <span
+class="math inline">(<em>q</em>[<em>k</em>], <em>q</em>[<em>k</em> + 1]]</span>
+内的最大值即为 <span
+class="math inline"><em>h</em>[<em>q</em>[<em>k</em> + 1]]</span>。</li>
+<li>这使得转移方程转化为寻找队列中某位置对应的 <span
+class="math inline"><em>f</em>[…] + <em>h</em>[<em>q</em>[<em>k</em>]]</span>
+的最小值。</li>
+</ul></li>
+<li><p><strong>双栈模拟队列 (Min-Queue)</strong>：</p>
+<ul>
+<li>为了在 <span class="math inline"><em>O</em>(1)</span>
+时间内查询队列中所有候选转移值的最小值，代码使用两个栈（左栈、右栈）来模拟队列。</li>
+<li><strong>左栈</strong>负责队头弹出，<strong>右栈</strong>负责队尾推入。当左栈为空需要弹出时，将右栈元素重构（Rebuild）倒序填入左栈。</li>
+<li>每个栈元素维护当前栈状态下的最小值，从而实现全局最小值的快速查询。</li>
+</ul></li>
+</ol>
+<h3 id="pseudo-code-1">Pseudo-code</h3>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">ALGORITHM Minimize-Max-Sum<br>    INPUT: n, m, <span class="hljs-keyword">array</span> h[<span class="hljs-number">1</span>...n]<br>    OUTPUT: f[n]<br><br>    Initialize f[<span class="hljs-number">0</span>...n] <span class="hljs-keyword">with</span> <span class="hljs-number">0</span><br>    Initialize Monotonic Queue Q <span class="hljs-keyword">with</span> Two Stacks (LeftStack, RightStack)<br>    <span class="hljs-comment">// q stores indices, tmpf stores potential transition values</span><br>    <br>    st ← <span class="hljs-number">1</span>, current_sum ← <span class="hljs-number">0</span><br><br>    <span class="hljs-keyword">FOR</span> i ← <span class="hljs-number">1</span> <span class="hljs-keyword">TO</span> n <span class="hljs-keyword">DO</span><br>        current_sum ← current_sum + h[i]<br>        <br>        <span class="hljs-comment">// 1. Maintain Window Constraint (sum &lt;= m)</span><br>        <span class="hljs-keyword">WHILE</span> current_sum &gt; m <span class="hljs-keyword">DO</span><br>            current_sum ← current_sum - h[st]<br>            st ← st + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">END</span> <span class="hljs-keyword">WHILE</span><br><br>        <span class="hljs-comment">// 2. Maintain Monotonicity (Decreasing h)</span><br>        <span class="hljs-comment">// Remove elements from back if they are smaller than current h[i]</span><br>        <span class="hljs-keyword">WHILE</span> Q <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">empty</span> <span class="hljs-keyword">AND</span> h[Q.back] ≤ h[i] <span class="hljs-keyword">DO</span><br>            PopBack(Q) <span class="hljs-comment">// Updates RightStack pointers</span><br>        <span class="hljs-keyword">END</span> <span class="hljs-keyword">WHILE</span><br><br>        <span class="hljs-comment">// 3. Calculate transition value for current element</span><br>        <span class="hljs-comment">// If Q empty, prev segment ends at st-1, else at Q.back</span><br>        prev_idx ← (Q <span class="hljs-keyword">is</span> <span class="hljs-keyword">empty</span>) ? (st - <span class="hljs-number">1</span>) : Q.back<br>        val ← f[prev_idx] + h[i]<br>        <br>        <span class="hljs-comment">// 4. Push current index and value to Queue</span><br>        PushBack(Q, i, val) <span class="hljs-comment">// Pushes to RightStack</span><br><br>        <span class="hljs-comment">// 5. Remove expired elements from front</span><br>        <span class="hljs-keyword">WHILE</span> Q.front &lt; st <span class="hljs-keyword">DO</span><br>            PopFront(Q) <span class="hljs-comment">// Updates LeftStack; Rebuilds if LeftStack empty</span><br>        <span class="hljs-keyword">END</span> <span class="hljs-keyword">WHILE</span><br><br>        <span class="hljs-comment">// 6. Calculate DP value</span><br>        <span class="hljs-comment">// Case A: Max is h[Q.front], prev segment ends at st-1</span><br>        option1 ← f[st - <span class="hljs-number">1</span>] + h[Q.front]<br>        <span class="hljs-comment">// Case B: Minimum from the optimized stacks</span><br>        option2 ← GetMin(LeftStack, RightStack)<br>        <br>        f[i] ← MIN(option1, option2)<br>    <span class="hljs-keyword">END</span> <span class="hljs-keyword">FOR</span><br><br>    RETURN f[n]<br><span class="hljs-keyword">END</span> ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-4">复杂度分析</h3>
+<ol type="1">
+<li><strong>时间复杂度 (Time Complexity):</strong> <span
+class="math inline"><em>O</em>(<em>N</em>)</span>
+<ul>
+<li><strong>遍历</strong>：主循环遍历 <span
+class="math inline"><em>i</em></span> 从 1 到 <span
+class="math inline"><em>n</em></span>。</li>
+<li><strong>窗口调整</strong>：指针 <span
+class="math inline"><em>s</em><em>t</em></span> 单调向右移动，最多移动
+<span class="math inline"><em>n</em></span> 次。</li>
+<li><strong>单调队列操作</strong>：每个元素最多进队（Push）一次，出队（Pop）一次。</li>
+<li><strong>双栈重构</strong>：虽然 <code>rebuild</code>
+看起来耗时，但在均摊分析下，每个元素只会被移动到左栈一次。因此所有栈操作的均摊复杂度为
+<span class="math inline"><em>O</em>(1)</span>。</li>
+<li>总时间复杂度为线性。</li>
+</ul></li>
+<li><strong>空间复杂度 (Space Complexity):</strong> <span
+class="math inline"><em>O</em>(<em>N</em>)</span>
+<ul>
+<li>需要数组 <span
+class="math inline"><em>h</em>, <em>f</em>, <em>q</em>, <em>t</em><em>m</em><em>p</em><em>f</em></span>
+以及栈结构，大小均与 <span class="math inline"><em>N</em></span>
+成正比。</li>
+</ul></li>
+</ol>
+<h2 id="d---合法的h序列"><a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-P8096">D - 合法的h序列</a></h2>
+<h3 id="题目-5">题目</h3>
+<p>对于某个整数序列 <span
+class="math inline"><em>h</em><sub>1</sub>, <em>h</em><sub>2</sub>, ..., <em>h</em><sub><em>n</em></sub></span>，定义一种操作：选取一个位置
+i，满足 1 ≤ i &lt; n 且 <span
+class="math inline"><em>h</em><sub><em>i</em></sub>, <em>h</em><sub>(</sub><em>i</em> + 1) ≥ 1</span>，令
+<span class="math inline"><em>h</em><sub><em>i</em></sub></span> 和
+<span class="math inline"><em>h</em><sub>(</sub><em>i</em> + 1)</span>
+同时减 1。</p>
+<p>称一个序列是合法的，当且仅当能通过若干次操作，使它所有位置上的值相等。</p>
+<p>现在给出 n 和每个位置上 <span
+class="math inline"><em>h</em><sub><em>i</em></sub></span> 的上界 <span
+class="math inline"><em>H</em><sub><em>i</em></sub></span>（即 0 ≤ <span
+class="math inline"><em>h</em><sub><em>i</em></sub></span> ≤ <span
+class="math inline"><em>H</em><sub><em>i</em></sub></span>
+），问有多少个合法的 h 序列。</p>
+<p>输入格式：</p>
+<p>输入的第一行包含 n 。第二行包含 <span
+class="math inline"><em>H</em><sub>1</sub>, <em>H</em><sub>2</sub>, ..., <em>H</em><sub><em>n</em></sub></span></p>
+<p>输出格式：</p>
+<p>输出符合条件的 n 元组数量，对 <span
+class="math inline">10<sup>9</sup> + 7</span> 取模。</p>
+<h3 id="算法思路-6">算法思路</h3>
+<ol type="1">
+<li><strong>数学模型转换</strong>
+<ul>
+<li>设 <span class="math inline"><em>x</em><sub><em>i</em></sub></span>
+为对相邻位置 <span
+class="math inline">(<em>i</em>, <em>i</em> + 1)</span>
+执行减法操作的次数。若序列 <span class="math inline"><em>h</em></span>
+最终能变为全 <span class="math inline"><em>t</em></span>
+序列，则需满足：<span
+class="math inline"><em>h</em><sub><em>i</em></sub> = <em>x</em><sub><em>i</em> − 1</sub> + <em>x</em><sub><em>i</em></sub> + <em>t</em></span>（约定
+<span
+class="math inline"><em>x</em><sub>0</sub> = <em>x</em><sub><em>n</em></sub> = 0</span>）。</li>
+<li>给定上界 <span
+class="math inline"><em>H</em><sub><em>i</em></sub></span>，即约束条件为：<span
+class="math inline">0 ≤ <em>x</em><sub><em>i</em> − 1</sub> + <em>x</em><sub><em>i</em></sub> ≤ <em>H</em><sub><em>i</em></sub> − <em>t</em></span>，且所有
+<span
+class="math inline"><em>x</em><sub><em>i</em></sub> ≥ 0</span>。</li>
+</ul></li>
+<li><strong>分类讨论</strong>
+<ul>
+<li><strong><span class="math inline"><em>n</em></span>
+为偶数</strong>：交错和 <span
+class="math inline">∑(−1)<sup><em>i</em></sup><em>h</em><sub><em>i</em></sub> = 0</span>，此时常数
+<span class="math inline"><em>t</em></span> 对合法性无独立影响。计算
+<span class="math inline"><em>t</em> = 0</span> 时满足 <span
+class="math inline"><em>x</em><sub><em>i</em> − 1</sub> + <em>x</em><sub><em>i</em></sub> ≤ <em>H</em><sub><em>i</em></sub></span>
+的序列 <span class="math inline"><em>x</em></span> 数量即可覆盖所有合法
+<span class="math inline"><em>h</em></span>。</li>
+<li><strong><span class="math inline"><em>n</em></span>
+为奇数</strong>：交错和 <span
+class="math inline">∑(−1)<sup><em>i</em></sup><em>h</em><sub><em>i</em></sub> = <em>t</em></span>，说明每个
+<span class="math inline"><em>h</em></span> 序列唯一对应一个 <span
+class="math inline"><em>t</em></span>。需遍历 <span
+class="math inline"><em>t</em> ∈ [0, min (<em>H</em>)]</span>，累加满足
+<span
+class="math inline"><em>x</em><sub><em>i</em> − 1</sub> + <em>x</em><sub><em>i</em></sub> ≤ <em>H</em><sub><em>i</em></sub> − <em>t</em></span>
+的方案数。</li>
+</ul></li>
+<li><strong>动态规划优化</strong>
+<ul>
+<li>状态 <span
+class="math inline"><em>d</em><em>p</em>[<em>v</em>]</span>
+表示当前位置操作次数为 <span class="math inline"><em>v</em></span>
+的方案数。</li>
+<li>转移方程：<span class="math inline">$dp_{new}[u] = \sum_{v=0}^{M_i -
+u} dp[v]$</span>。利用前缀和将转移优化至 <span
+class="math inline"><em>O</em>(1)</span>，总复杂度线性。</li>
+</ul></li>
+</ol>
+<h3 id="伪代码-5">伪代码</h3>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs fortran">ALGORITHM <span class="hljs-built_in">Count</span>-Legal-Sequences<br>INPUT: n, H[<span class="hljs-number">1.</span>..n]<br>OUTPUT: <span class="hljs-built_in">count</span><br><span class="hljs-function"><span class="hljs-keyword">FUNCTION</span></span> Solve-DP(M)<br>    dp ← [<span class="hljs-number">1</span>]<br>    FOR i ← <span class="hljs-number">1</span> TO n <span class="hljs-keyword">DO</span><br>        L ← M[i]<br>        <span class="hljs-keyword">IF</span> L &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-keyword">RETURN</span> <span class="hljs-number">0</span><br>        S ← PrefixSum(dp)<br>        dp_new ← Array(L + <span class="hljs-number">1</span>)<br>        FOR u ← <span class="hljs-number">0</span> TO L <span class="hljs-keyword">DO</span><br>            v_max ← <span class="hljs-built_in">MIN</span>(<span class="hljs-built_in">Size</span>(dp) - <span class="hljs-number">1</span>, L - u)<br>            <span class="hljs-keyword">IF</span> v_max &gt;= <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> dp_new[u] ← S[v_max]<br>        <span class="hljs-keyword">END</span> FOR<br>        dp ← dp_new<br>    <span class="hljs-keyword">END</span> FOR<br>    <span class="hljs-keyword">RETURN</span> dp[<span class="hljs-number">0</span>]<br><span class="hljs-keyword">IF</span> n % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span><br>    <span class="hljs-built_in">PRINT</span> Solve-DP(H)<br><span class="hljs-keyword">ELSE</span><br>    ans ← <span class="hljs-number">0</span><br>    FOR t ← <span class="hljs-number">0</span> TO <span class="hljs-built_in">MIN</span>(H) <span class="hljs-keyword">DO</span><br>        ans ← (ans + Solve-DP(H - t)) % <span class="hljs-built_in">MOD</span><br>    <span class="hljs-keyword">END</span> FOR<br>    <span class="hljs-built_in">PRINT</span> ans<br><span class="hljs-keyword">END</span> ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-5">复杂度分析</h3>
+<ul>
+<li><strong>时间复杂度</strong>
+<ul>
+<li><strong><span class="math inline"><em>n</em></span>
+为偶数</strong>：<span
+class="math inline"><em>O</em>(<em>n</em> ⋅ max (<em>H</em>))</span>。仅需执行一次
+DP，每层状态数为 <span
+class="math inline"><em>O</em>(<em>H</em>)</span>。</li>
+<li><strong><span class="math inline"><em>n</em></span>
+为奇数</strong>：<span
+class="math inline"><em>O</em>(<em>n</em> ⋅ max (<em>H</em>)<sup>2</sup>)</span>。需枚举
+<span class="math inline"><em>t</em></span>（共 <span
+class="math inline"><em>O</em>(<em>H</em>)</span> 次），每次执行 <span
+class="math inline"><em>O</em>(<em>n</em> ⋅ <em>H</em>)</span> 的
+DP。</li>
+</ul></li>
+<li><strong>空间复杂度</strong>: <span
+class="math inline"><em>O</em>(max (<em>H</em>))</span>。
+<ul>
+<li>仅需存储当前层和前缀和数组，空间随 <span
+class="math inline"><em>H</em></span> 线性增长。</li>
+</ul></li>
+</ul>
+<h1 id="st-dynamic-programming-1-1">3st Dynamic Programming 1</h1>
+<h2 id="a---最短序列长度"><a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-U638344">A - 最短序列长度</a></h2>
+<h3 id="题目描述-1">题目描述</h3>
+<p>有一个序列 <span class="math inline"><em>S</em></span> 。序列 <span
+class="math inline"><em>S</em></span> 由 <span
+class="math inline">0</span>，<span class="math inline">1</span> 和
+<span class="math inline">2</span> 构成。对序列 <span
+class="math inline"><em>S</em></span>
+可以执行任意次操作，每次操作都为以下三种操作之一：</p>
+<ul>
+<li>将任意一个 <span class="math inline">2</span> 改为 <span
+class="math inline">0</span> 或 <span
+class="math inline">1</span>。</li>
+<li>选择两个相邻的 <span class="math inline">0</span>
+删除，并将剩下的部分连接起来。</li>
+<li>选择两个相邻的 <span class="math inline">1</span>
+删除，并将剩下的部分连接起来。</li>
+</ul>
+<p>求能得到的最短序列的长度。</p>
+<p>输入：</p>
+<p>输入一个长度为 <span class="math inline"><em>n</em></span>
+的字符串（<span
+class="math inline">1 ≤ <em>n</em> ≤ 2 × 10<sup>5</sup></span>）。字符串由数字
+<span class="math inline">0</span>，<span class="math inline">1</span>
+和 <span class="math inline">2</span> 构成，表示初始序列 <span
+class="math inline"><em>S</em></span>。</p>
+<p>输出：</p>
+<p>输出一个整数，表示能得到的最短序列的长度</p>
+<h3 id="算法思路-7">算法思路</h3>
+<p>该问题可以抽象为<strong>栈消除模型</strong>。由于序列最终能通过消除相邻的
+<span class="math inline">00</span> 或 <span
+class="math inline">11</span>
+缩减，任何序列最终都会被简化为一个<strong>交替序列</strong>（如 <span
+class="math inline">0101...</span> 或 <span
+class="math inline">1010...</span>）。</p>
+<ol type="1">
+<li><strong>交替栈性质</strong>：
+<ul>
+<li>一个交替序列由其<strong>长度</strong>和<strong>末尾字符</strong>（栈顶）唯一确定。</li>
+<li>例如，末尾为 <span class="math inline">0</span> 且长度为 <span
+class="math inline">3</span> 的序列必然是 <span
+class="math inline">010</span>。</li>
+<li>当新加入字符 <span class="math inline"><em>c</em></span> 时：
+<ul>
+<li>若 <span class="math inline"><em>c</em></span>
+与栈顶相同，发生<strong>消除</strong>：长度减 <span
+class="math inline">1</span>，栈顶变为原倒数第二位字符（即 <span
+class="math inline">1 − <em>c</em></span>）。</li>
+<li>若 <span class="math inline"><em>c</em></span>
+与栈顶不同，发生<strong>增长</strong>：长度加 <span
+class="math inline">1</span>，栈顶变为 <span
+class="math inline"><em>c</em></span>。</li>
+</ul></li>
+</ul></li>
+<li><strong>通配符处理</strong>：
+<ul>
+<li>数字 <span class="math inline">2</span> 可以是 <span
+class="math inline">0</span> 或 <span
+class="math inline">1</span>。这会导致多种可能的栈状态。</li>
+<li>由于交替序列的特性，对于固定的栈顶字符，所有可能的长度具有<strong>相同的奇偶性</strong>。因此，我们可以用一个<strong>区间</strong>
+<span
+class="math inline">[<em>m</em><em>i</em><em>n</em>_<em>l</em><em>e</em><em>n</em>, <em>m</em><em>a</em><em>x</em>_<em>l</em><em>e</em><em>n</em>]</span>
+来维护每种栈顶字符对应的可能长度范围。</li>
+</ul></li>
+<li><strong>动态规划 (DP)</strong>：
+<ul>
+<li>维护状态 <code>States[top]</code> = <span
+class="math inline">[<em>L</em>, <em>H</em>]</span>，表示以
+<code>top</code> (0, 1 或 None)
+为栈顶时，交替序列长度的最小值和最大值。</li>
+<li>遍历字符串，根据当前字符的身份更新所有状态。</li>
+<li>最终结果为所有可能状态中最小长度的全局最小值。</li>
+</ul></li>
+</ol>
+<h3 id="伪代码-6">伪代码</h3>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs sas">ALGORITHM Shortest-Sequence-<span class="hljs-keyword">Length</span><br>    <span class="hljs-keyword">INPUT</span>: String S of <span class="hljs-keyword">length</span> n<br>    <span class="hljs-keyword">OUTPUT</span>: Minimum possible <span class="hljs-keyword">length</span><br>    States ← &#123;None: [0, 0]&#125;<br>    FOR each char c <span class="hljs-keyword">IN</span> S <span class="hljs-keyword">DO</span><br>        NextStates ← Empty Map<br>        Identities ← (c == <span class="hljs-string">&#x27;2&#x27;</span>) ? &#123;0, 1&#125; : &#123;Integer(c)&#125;<br>        FOR id <span class="hljs-keyword">IN</span> Identities <span class="hljs-keyword">DO</span><br>            FOR top, [low, high] <span class="hljs-keyword">IN</span> States <span class="hljs-keyword">DO</span><br>                <span class="hljs-keyword">IF</span> top == None <span class="hljs-keyword">THEN</span><br>                    <span class="hljs-keyword">Update</span><span class="hljs-meta">Range</span>(NextStates, id, 1, 1)<br>                <span class="hljs-keyword">ELSE</span> <span class="hljs-keyword">IF</span> id == top <span class="hljs-keyword">THEN</span><br>                    <span class="hljs-keyword">IF</span> low == 1 <span class="hljs-keyword">THEN</span><br>                        <span class="hljs-keyword">Update</span><span class="hljs-meta">Range</span>(NextStates, None, 0, 0)<br>                        low_next ← 2<br>                    <span class="hljs-keyword">ELSE</span><br>                        low_next ← low - 1<br>                    <span class="hljs-keyword">END</span> <span class="hljs-keyword">IF</span><br>                    high_next ← high - 1<br>                    <span class="hljs-keyword">IF</span> high_next &gt;= low_next <span class="hljs-keyword">THEN</span><br>                        <span class="hljs-keyword">Update</span><span class="hljs-meta">Range</span>(NextStates, 1 - id, low_next, high_next)<br>                    <span class="hljs-keyword">END</span> <span class="hljs-keyword">IF</span><br>                <span class="hljs-keyword">ELSE</span><br>                    <span class="hljs-keyword">Update</span><span class="hljs-meta">Range</span>(NextStates, id, low + 1, high + 1)<br>                <span class="hljs-keyword">END</span> FOR<br>            <span class="hljs-keyword">END</span> FOR<br>        <span class="hljs-keyword">END</span> FOR<br>        States ← NextStates<br>    <span class="hljs-keyword">END</span> FOR<br>    <span class="hljs-keyword">RETURN</span> <span class="hljs-meta">MIN</span>(low for all [low, high] <span class="hljs-keyword">in</span> States)<br><span class="hljs-keyword">END</span> ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-6">复杂度分析</h3>
+<ul>
+<li><strong>时间复杂度</strong>：<span
+class="math inline"><em>O</em>(<em>n</em>)</span>。我们只需遍历一次长度为
+<span class="math inline"><em>n</em></span> 的字符串。在每一步中，由于
+<code>States</code> 最多只有 <span class="math inline">3</span>
+个键（<span
+class="math inline">0, 1, <em>N</em><em>o</em><em>n</em><em>e</em></span>），更新操作是常数时间的。</li>
+<li><strong>空间复杂度</strong>：<span
+class="math inline"><em>O</em>(1)</span>。虽然输入占用了 <span
+class="math inline"><em>O</em>(<em>n</em>)</span>
+空间，但算法执行过程中仅需维护固定数量的状态变量（三个长度区间），与
+<span class="math inline"><em>n</em></span> 无关。</li>
+</ul>
+<h2 id="b---放石头"><a target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-U638533">B
+- 放石头</a></h2>
+<h3 id="题目-6">题目</h3>
+<p>有 <span class="math inline"><em>k</em></span>
+种颜色的石头，知道每种颜色的石头的数量，需要将石头放成一排，要求：</p>
+<ul>
+<li>第一块和最后一块石头的颜色为 <span
+class="math inline"><em>p</em>, <em>q</em></span></li>
+<li>相邻的石头颜色不能相同</li>
+</ul>
+<p>如果存在满足条件的排列方案，输出 <span
+class="math inline">1</span>，如果没有合法方案则输出 <span
+class="math inline">0</span>。</p>
+<p>输入格式：</p>
+<p>第一行输入三个整数 <span
+class="math inline"><em>k</em>, <em>p</em>, <em>q</em></span>
+分别代表石头有 <span class="math inline"><em>k</em></span>
+种颜色，第一块和最后一块的石头颜色分别是 <span
+class="math inline"><em>p</em>, <em>q</em></span>，第二行输入 <span
+class="math inline"><em>k</em></span> 个数，第 <span
+class="math inline"><em>j</em></span> 个数表示颜色为 <span
+class="math inline"><em>j</em></span> 的石头的数量。</p>
+<p>输出格式：</p>
+<p>整数 <span class="math inline">0</span>或 <span
+class="math inline">1</span>，有解输出 <span
+class="math inline">1</span>，无解输出 <span
+class="math inline">0</span>。</p>
+<h3 id="算法思路-8">算法思路</h3>
+<p>该问题属于<strong>组合构造的可行性判定</strong>。核心思想是利用<strong>鸽巢原理（Pigeonhole
+Principle）</strong>及其变体，判断在“相邻元素不同色”且“首尾颜色固定”的约束下，是否存在合法的排列。</p>
+<ol type="1">
+<li><p><strong>首尾预留</strong>：</p>
+<p>题目固定了第一块为颜色 <span
+class="math inline"><em>p</em></span>，最后一块为颜色 <span
+class="math inline"><em>q</em></span>。因此，我们首先从对应的颜色计数中扣除这两块石头。如果某种颜色的石头数量在扣除后变为负数，则直接不可行。</p></li>
+<li><p><strong>核心判定准则</strong>：</p>
+<p>对于 <span class="math inline"><em>n</em></span>
+个位置的排列，若要满足相邻不同色，任意颜色 <span
+class="math inline"><em>i</em></span> 的数量 <span
+class="math inline"><em>C</em><sub><em>i</em></sub></span>
+必须满足：</p>
+<p><span
+class="math display"><em>C</em><sub><em>i</em></sub> ≤ 剩余所有颜色数量之和 + 1</span></p>
+<p>或者等价于：</p>
+<p><span
+class="math display"><em>C</em><sub><em>i</em></sub> ≤ ⌈<em>n</em>/2⌉</span></p>
+<p>但在首尾固定的情况下，限制会根据颜色 <span
+class="math inline"><em>i</em></span> 是否处于边界而变化。</p></li>
+<li><p><strong>计算流程</strong>：</p>
+<ul>
+<li>统计所有石头的总数 <span
+class="math inline"><em>n</em></span>。</li>
+<li>将颜色 <span class="math inline"><em>p</em></span> 和 <span
+class="math inline"><em>q</em></span> 的计数各减 1。</li>
+<li>在剩余的石头中，找到数量最多的颜色 <span
+class="math inline"><em>m</em><em>a</em><em>x</em>_<em>c</em><em>o</em><em>l</em><em>o</em><em>r</em></span>。</li>
+<li><strong>恢复真实频次</strong>：将 <span
+class="math inline"><em>m</em><em>a</em><em>x</em>_<em>c</em><em>o</em><em>l</em><em>o</em><em>r</em></span>
+之前预留给首尾的数量加回去，得到该颜色在全序列中的总数 <span
+class="math inline"><em>C</em><sub><em>m</em><em>a</em><em>x</em></sub></span>。</li>
+<li><strong>计算隔离物</strong>：计算除了 <span
+class="math inline"><em>m</em><em>a</em><em>x</em>_<em>c</em><em>o</em><em>l</em><em>o</em><em>r</em></span>
+以外，其他所有颜色的石头总数 <span
+class="math inline"><em>r</em><em>e</em><em>s</em><em>t</em>_<em>s</em><em>u</em><em>m</em></span>。</li>
+<li><strong>最终判定</strong>：如果 <span
+class="math inline"><em>C</em><sub><em>m</em><em>a</em><em>x</em></sub> &gt; <em>r</em><em>e</em><em>s</em><em>t</em>_<em>s</em><em>u</em><em>m</em> + 1</span>，说明即使用掉所有的“隔离物”也无法完全分隔开最大频次的颜色，输出
+0；否则输出 1。</li>
+</ul></li>
+</ol>
+<h3 id="伪代码-7">伪代码</h3>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ALGORITHM Check-Stone-Arrangement<br>    INPUT: k, <span class="hljs-selector-tag">p</span>, <span class="hljs-selector-tag">q</span>, Array C<span class="hljs-selector-attr">[1...k]</span><br>    OUTPUT: <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> possible, <span class="hljs-number">0</span> otherwise<br><br>    <span class="hljs-comment">// 1. Pre-process fixed positions</span><br>    C<span class="hljs-selector-attr">[p]</span> ← C<span class="hljs-selector-attr">[p]</span> - <span class="hljs-number">1</span><br>    C<span class="hljs-selector-attr">[q]</span> ← C<span class="hljs-selector-attr">[q]</span> - <span class="hljs-number">1</span><br><br>    <span class="hljs-comment">// 2. Identify the most frequent color in remaining set</span><br>    max_idx ← <span class="hljs-number">1</span><br>    FOR <span class="hljs-selector-tag">i</span> ← <span class="hljs-number">2</span> TO k DO<br>        IF C<span class="hljs-selector-attr">[i]</span> &gt; C<span class="hljs-selector-attr">[max_idx]</span> THEN<br>            max_idx ← <span class="hljs-selector-tag">i</span><br>        END IF<br>    END FOR<br><br>    <span class="hljs-comment">// 3. Restore its global total count</span><br>    max_count ← C<span class="hljs-selector-attr">[max_idx]</span><br>    IF max_idx == <span class="hljs-selector-tag">p</span> THEN max_count ← max_count + <span class="hljs-number">1</span><br>    IF max_idx == <span class="hljs-selector-tag">q</span> THEN max_count ← max_count + <span class="hljs-number">1</span><br><br>    <span class="hljs-comment">// 4. Calculate the sum of all other colors</span><br>    total_others ← <span class="hljs-number">0</span><br>    FOR <span class="hljs-selector-tag">i</span> ← <span class="hljs-number">1</span> TO k DO<br>        IF <span class="hljs-selector-tag">i</span> != max_idx THEN<br>            <span class="hljs-comment">// If i was p or q, their modified counts are included here</span><br>            total_others ← total_others + C<span class="hljs-selector-attr">[i]</span><br>        END IF<br>    END FOR<br><br>    <span class="hljs-comment">// 5. Final validation based on separator logic</span><br>    IF max_count &gt; total_others + <span class="hljs-number">1</span> THEN<br>        RETURN <span class="hljs-number">0</span><br>    ELSE<br>        RETURN <span class="hljs-number">1</span><br>    END IF<br>END ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-7">复杂度分析</h3>
+<ul>
+<li><strong>时间复杂度</strong>: <span
+class="math inline"><em>O</em>(<em>k</em>)</span>
+<ul>
+<li>只需对长度为 <span class="math inline"><em>k</em></span>
+的颜色数组进行常数次遍历（寻找最大值和求和）。</li>
+<li>使用了排序 <span
+class="math inline"><em>O</em>(<em>k</em>log <em>k</em>)</span>，但在该逻辑下
+<span class="math inline"><em>O</em>(<em>k</em>)</span>
+遍历已足够。</li>
+</ul></li>
+<li><strong>空间复杂度</strong>: <span
+class="math inline"><em>O</em>(<em>k</em>)</span>
+<ul>
+<li>需要存储 <span class="math inline"><em>k</em></span>
+种颜色的数量。</li>
+</ul></li>
+</ul>
+<p>综上所述，该算法能在线性时间内准确判定给定的石头分布是否能构成合法的序列。</p>
+<h2 id="c---物品出售"><a target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-P1899">C
+- 物品出售</a></h2>
+<p>题目描述</p>
+<p>有 $N $件物品，每件物品属于两种类型之一：</p>
+<ol type="1">
+<li>类型 A（普通物品）： 只能直接出售，价值为 P。</li>
+<li>类型 B（可升级物品）： 有两个价格：
+<ul>
+<li>不升级时可以直接出售，价值为 <span
+class="math inline"><em>P</em><sub>1</sub></span>；</li>
+<li>若先支付固定费用$ C $对其进行升级，再出售可以得到 <span
+class="math inline"><em>P</em><sub>2</sub></span>，且 <span
+class="math inline"><em>P</em><sub>2</sub> &gt; <em>P</em><sub>1</sub></span>。</li>
+</ul></li>
+</ol>
+<p>整个过程中：</p>
+<ul>
+<li>一开始你没有任何现金。最后所有物品都需要卖完。</li>
+<li>你可以按任意顺序进行以下操作：
+<ul>
+<li>出售一件尚未出售的物品（若为类型
+B，可以选择“先升级再出售”或“不升级直接出售”）。</li>
+<li>只要当前现金<span
+class="math inline"> ≥ <em>C</em></span>，就可以为某件尚未升级的类型 B
+物品支付 <span class="math inline"><em>C</em></span>
+进行升级（升级操作本身不产生收入，收入体现在之后以 <span
+class="math inline"><em>P</em><sub>2</sub></span> 出售该物品）。</li>
+</ul></li>
+</ul>
+<p>问：在最优操作顺序和升级选择下，<strong>你最终最多能得到多少现金</strong>？</p>
+<p>输入</p>
+<ol type="1">
+<li>第一行：两个整数$ N,C$ <span
+class="math inline">(1 ≤ <em>N</em> ≤ 1000, 1 ≤ <em>C</em> ≤ 5000)</span>，分别表示物品数量和每次升级的固定费用。</li>
+</ol>
+<p>接下来 <span class="math inline"><em>N</em></span>
+行，每行描述一个物品：</p>
+<ol type="1">
+<li>若该行为一个整数 <span class="math inline"><em>P</em></span> <span
+class="math inline">(1 ≤ <em>P</em> ≤ 10000</span>，表示这是类型 A
+物品，直接出售价值为 <span class="math inline"><em>P</em></span>；</li>
+<li>若该行为两个整数<span
+class="math inline"><em>P</em><sub>1</sub>, <em>P</em><sub>2</sub></span><span
+class="math inline">(1 ≤ <em>P</em><sub>1</sub> &lt; <em>P</em><sub>2</sub> ≤ 10000)</span>，表示这是类型
+B 物品，不升级售价为 <span
+class="math inline"><em>P</em><sub>1</sub></span>，升级后售价为 <span
+class="math inline"><em>P</em><sub>2</sub></span>。</li>
+</ol>
+<p>输出</p>
+<p>输出一个整数，表示在最优策略下可以获得的最大总现金。</p>
+<h3 id="算法思路-9">算法思路</h3>
+<ol type="1">
+<li><strong>核心转化</strong>：
+<ul>
+<li>对于类型 B 物品，升级后的净收益增量为 <span
+class="math inline"><em>Δ</em> = <em>P</em><sub>2</sub> − <em>P</em><sub>1</sub> − <em>C</em></span>。</li>
+<li>若 <span
+class="math inline"><em>Δ</em> ≤ 0</span>，该物品无论何时都不应升级，视为基础价值为
+<span class="math inline"><em>P</em><sub>1</sub></span>
+的普通物品。</li>
+<li>若 <span
+class="math inline"><em>Δ</em> &gt; 0</span>，该物品为“优质物品”。在理想状态（现金充足）下应全部升级，总收益为
+<span
+class="math inline">所有物品基础价值 + ∑<em>Δ</em><sub>优质</sub></span>。</li>
+</ul></li>
+<li><strong>启动资金约束</strong>：
+<ul>
+<li>升级需要预付现金 <span
+class="math inline"><em>C</em></span>。初始现金为 0。</li>
+<li>我们首先卖出所有类型 A 和 <span
+class="math inline"><em>Δ</em> ≤ 0</span> 的类型 B 物品，积累初始资金
+<span class="math inline"><em>S</em><sub>0</sub></span>。</li>
+<li>若 <span
+class="math inline"><em>S</em><sub>0</sub> ≥ <em>C</em></span>，直接升级所有优质物品，收益最大。</li>
+<li>若 <span
+class="math inline"><em>S</em><sub>0</sub> &lt; <em>C</em></span>，存在资金缺口
+<span
+class="math inline"><em>D</em> = <em>C</em> − <em>S</em><sub>0</sub></span>。必须从优质物品中挑选一部分，不进行升级直接以
+<span class="math inline"><em>P</em><sub>1</sub></span>
+出售，用以填补缺口 <span class="math inline"><em>D</em></span>。</li>
+</ul></li>
+<li><strong>背包模型优化</strong>：
+<ul>
+<li>目标：从优质物品集合中选择一个子集“牺牲”（不升级），使得它们的 <span
+class="math inline"><em>P</em><sub>1</sub></span> 之和 <span
+class="math inline"> ≥ <em>D</em></span>，且这些物品的 <span
+class="math inline"><em>Δ</em></span> 之和最小。</li>
+<li>状态定义：<span
+class="math inline"><em>d</em><em>p</em>[<em>s</em>]</span> 表示凑齐
+<span class="math inline"><em>s</em></span> 元基础现金所损失的最小 <span
+class="math inline"><em>Δ</em></span>。</li>
+<li>这是一个 <strong>0/1 背包问题</strong>。由于 <span
+class="math inline"><em>s</em></span> 超过 <span
+class="math inline"><em>C</em></span>
+之后对开启第一笔升级没有额外贡献，可将所有 <span
+class="math inline"><em>s</em> &gt; <em>C</em></span>
+的状态统一截断处理。</li>
+</ul></li>
+</ol>
+<h3 id="pseudo-code-2">Pseudo-code</h3>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">ALGORITHM Maximize-Cash<br>    <span class="hljs-keyword">INPUT</span>: N, C, Items (<span class="hljs-keyword">Type</span> A: &#123;P&#125;, <span class="hljs-keyword">Type</span> B: &#123;P1, P2&#125;)<br>    OUTPUT: Max total cash<br>    base_total ← <span class="hljs-number">0</span>, S0 ← <span class="hljs-number">0</span>, total_profit ← <span class="hljs-number">0</span><br>    GoodItems ← Empty List<br>    <span class="hljs-keyword">FOR</span> <span class="hljs-keyword">each</span> item <span class="hljs-keyword">DO</span><br>        <span class="hljs-keyword">IF</span> item <span class="hljs-keyword">is</span> <span class="hljs-keyword">Type</span> A <span class="hljs-keyword">THEN</span><br>            base_total ← base_total + P, S0 ← S0 + P<br>        <span class="hljs-keyword">ELSE</span><br>            delta ← P2 - P1 - C<br>            base_total ← base_total + P1<br>            <span class="hljs-keyword">IF</span> delta &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span><br>                Append &#123;P1, delta&#125; <span class="hljs-keyword">to</span> GoodItems<br>                total_profit ← total_profit + delta<br>            <span class="hljs-keyword">ELSE</span><br>                S0 ← S0 + P1<br>            <span class="hljs-keyword">END</span> <span class="hljs-keyword">IF</span><br>        <span class="hljs-keyword">END</span> <span class="hljs-keyword">IF</span><br>    <span class="hljs-keyword">END</span> <span class="hljs-keyword">FOR</span><br>    <span class="hljs-keyword">IF</span> GoodItems <span class="hljs-keyword">is</span> empty <span class="hljs-keyword">OR</span> S0 &gt;= C <span class="hljs-keyword">THEN</span><br>        <span class="hljs-keyword">RETURN</span> base_total + total_profit<br>    <span class="hljs-keyword">END</span> <span class="hljs-keyword">IF</span><br>    D ← C - S0<br>    dp[<span class="hljs-number">0.</span>..C] ← <span class="hljs-keyword">INFINITY</span><br>    dp[<span class="hljs-number">0</span>] ← <span class="hljs-number">0</span><br>    <span class="hljs-keyword">FOR</span> &#123;p1, delta&#125; <span class="hljs-keyword">IN</span> GoodItems <span class="hljs-keyword">DO</span><br>        <span class="hljs-keyword">FOR</span> s <span class="hljs-keyword">FROM</span> C DOWNTO <span class="hljs-number">0</span> <span class="hljs-keyword">DO</span><br>            <span class="hljs-keyword">IF</span> dp[s] == <span class="hljs-keyword">INFINITY</span> <span class="hljs-keyword">CONTINUE</span><br>            next_s ← MIN(C, s + p1)<br>            dp[next_s] ← MIN(dp[next_s], dp[s] + delta)<br>        <span class="hljs-keyword">END</span> <span class="hljs-keyword">FOR</span><br>    <span class="hljs-keyword">END</span> <span class="hljs-keyword">FOR</span><br>    min_loss ← <span class="hljs-keyword">INFINITY</span><br>    <span class="hljs-keyword">FOR</span> s <span class="hljs-keyword">FROM</span> D <span class="hljs-keyword">TO</span> C <span class="hljs-keyword">DO</span><br>        min_loss ← MIN(min_loss, dp[s])<br>    <span class="hljs-keyword">END</span> <span class="hljs-keyword">FOR</span><br>    <span class="hljs-keyword">RETURN</span> base_total + total_profit - min_loss<br><span class="hljs-keyword">END</span> ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-8">复杂度分析</h3>
+<ol type="1">
+<li><strong>时间复杂度</strong>: <span
+class="math inline"><em>O</em>(<em>N</em> ⋅ <em>C</em>)</span>
+<ul>
+<li>预处理物品需 <span
+class="math inline"><em>O</em>(<em>N</em>)</span>。</li>
+<li>0/1 背包过程有两层循环：物品数 <span
+class="math inline"><em>N</em><sub><em>g</em><em>o</em><em>o</em><em>d</em></sub> ≤ <em>N</em></span>，现金上限
+<span class="math inline"><em>C</em></span>。总复杂度为 <span
+class="math inline"><em>O</em>(<em>N</em> ⋅ <em>C</em>)</span>。</li>
+<li>给定 <span
+class="math inline"><em>N</em> = 1000, <em>C</em> = 5000</span>，总计算量约
+<span class="math inline">5 × 10<sup>6</sup></span>，符合时限。</li>
+</ul></li>
+<li><strong>空间复杂度</strong>: <span
+class="math inline"><em>O</em>(<em>C</em>)</span>
+<ul>
+<li>使用了一维滚动数组优化背包空间，大小为 <span
+class="math inline"><em>O</em>(<em>C</em>)</span>。物品列表存储需 <span
+class="math inline"><em>O</em>(<em>N</em>)</span>。</li>
+</ul></li>
+</ol>
+<h2 id="d---环区间覆盖"><a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/洛谷-P6902">D - 环区间覆盖</a></h2>
+<h3 id="题目-7">题目</h3>
+<p>有一个由$ n $个点构成的环，这些点按顺时针依次编号为<span
+class="math inline">1, 2, …, <em>n</em></span>。 现在给出<span
+class="math inline"><em>k</em></span>个“覆盖区间”，每个区间由一对整数
+<span class="math inline">(<em>a</em>, <em>b</em>)</span>
+表示，含义如下：</p>
+<ul>
+<li>从点 <span class="math inline"><em>a</em></span>
+出发，沿顺时针方向走，到达点 <span
+class="math inline"><em>b</em></span>为止（包含端点 <span
+class="math inline"><em>a</em></span> 和 <span
+class="math inline"><em>b</em></span>），经过的所有点都被这个区间覆盖；</li>
+<li>若 <span
+class="math inline"><em>b</em> ≥ <em>a</em></span>，则覆盖的是点 <span
+class="math inline"><em>a</em>, <em>a</em> + 1, …, <em>b</em></span>；</li>
+<li>若 <span
+class="math inline"><em>b</em> &lt; <em>a</em></span>，则区间“跨过”编号<span
+class="math inline"><em>n</em></span> 又回到 1，即覆盖点$ a, a+1, , n,
+1, 2, , b$</li>
+</ul>
+<p>你可以<strong>任选若干个</strong>给定区间。
+问：是否存在一种选择方式，使得环上所有点<span
+class="math inline">1 ∼ <em>n</em></span>都至少被一个选中的区间覆盖？
+如果存在，要求输出<strong>所需区间数量的最小值</strong>；否则输出
+<code>impossible</code>。</p>
+<p>输入</p>
+<ul>
+<li>第一行两个整数 <span
+class="math inline"><em>n</em>, <em>k</em></span></li>
+<li>接下来$ k$ 行，每行两个整数 <span
+class="math inline"><em>a</em>, <em>b</em></span>表示一个区间。</li>
+</ul>
+<p>输出</p>
+<ul>
+<li>若无论如何选择都不能覆盖整个环，输出一行：
+<code>impossible</code></li>
+<li>否则输出一个整数，表示完成覆盖所需的最少区间数量</li>
+</ul>
+<h3 id="算法思路-10">算法思路</h3>
+<ol type="1">
+<li><strong>破环成链</strong>：环形结构难以直接处理，将其倍长展开为线性区间
+<span class="math inline">[1, 2<em>n</em>]</span>。若原区间 <span
+class="math inline">(<em>a</em>, <em>b</em>)</span> 满足 <span
+class="math inline"><em>a</em> ≤ <em>b</em></span>，则生成线性区间 <span
+class="math inline">[<em>a</em>, <em>b</em>]</span> 和 <span
+class="math inline">[<em>a</em> + <em>n</em>, <em>b</em> + <em>n</em>]</span>；若
+<span class="math inline"><em>a</em> &gt; <em>b</em></span>，则生成
+<span
+class="math inline">[<em>a</em>, <em>b</em> + <em>n</em>]</span>。</li>
+<li><strong>贪心预处理</strong>：定义 <span
+class="math inline"><em>f</em>[<em>i</em>]</span> 为以位置 <span
+class="math inline"><em>i</em></span> 或 <span
+class="math inline"><em>i</em></span>
+之前的位置为起点所能达到的最远右端点。通过一次 <span
+class="math inline"><em>O</em>(<em>N</em> + <em>K</em>)</span>
+的扫描，利用前缀最大值确保 <span
+class="math inline"><em>f</em>[<em>i</em>]</span> 随 <span
+class="math inline"><em>i</em></span>
+单调递增，从而满足贪心策略：每次转移都选择能跳得最远的区间。</li>
+<li><strong>倍增加速跳转</strong>：构建倍增跳转表 <span
+class="math inline"><em>t</em><em>r</em><em>a</em><em>n</em><em>s</em>[<em>j</em>][<em>i</em>]</span>，表示从位置
+<span class="math inline"><em>i</em></span> 开始，经过 <span
+class="math inline">2<sup><em>j</em></sup></span>
+个区间后能达到的“首个未覆盖位置”（即最远右端点 <span
+class="math inline">+1</span>）。</li>
+<li><strong>起点枚举与覆盖验证</strong>：遍历所有给定区间的起点 <span
+class="math inline"><em>s</em></span>。若从 <span
+class="math inline"><em>s</em></span> 出发能够覆盖到 <span
+class="math inline"><em>s</em> + <em>n</em></span>，则说明完成了一次环形覆盖。利用倍增表在
+<span class="math inline"><em>O</em>(log <em>n</em>)</span>
+时间内找出覆盖长度 <span class="math inline"><em>n</em></span>
+所需的最少区间数。</li>
+</ol>
+<h3 id="伪代码-concise-pseudo-code">伪代码 (Concise Pseudo-code)</h3>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">ALGORITHM Min-Ring-Coverage<br><span class="hljs-keyword">INPUT</span>: n, k, Intervals[(a, b)]<br>OUTPUT: Min count <span class="hljs-keyword">or</span> &quot;impossible&quot;<br>Initialize f[<span class="hljs-number">1.</span><span class="hljs-number">.2</span>n+<span class="hljs-number">1</span>] <span class="hljs-keyword">where</span> f[i] = i<span class="hljs-number">-1</span><br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">each</span> (a, b) <span class="hljs-keyword">IN</span> Intervals <span class="hljs-keyword">DO</span><br>    <span class="hljs-keyword">IF</span> a &lt;= b <span class="hljs-keyword">THEN</span><br>        f[a] ← MAX(f[a], b), f[a+n] ← MAX(f[a+n], b+n)<br>    <span class="hljs-keyword">ELSE</span><br>        f[a] ← MAX(f[a], b+n)<br><span class="hljs-keyword">FOR</span> i <span class="hljs-keyword">FROM</span> <span class="hljs-number">2</span> <span class="hljs-keyword">TO</span> <span class="hljs-number">2</span>n <span class="hljs-keyword">DO</span> f[i] ← MAX(f[i], f[i<span class="hljs-number">-1</span>])<br><span class="hljs-keyword">FOR</span> i <span class="hljs-keyword">FROM</span> <span class="hljs-number">1</span> <span class="hljs-keyword">TO</span> <span class="hljs-number">2</span>n+<span class="hljs-number">1</span> <span class="hljs-keyword">DO</span> trans[<span class="hljs-number">0</span>][i] ← MIN(<span class="hljs-number">2</span>n+<span class="hljs-number">1</span>, f[i] + <span class="hljs-number">1</span>)<br><span class="hljs-keyword">FOR</span> j <span class="hljs-keyword">FROM</span> <span class="hljs-number">1</span> <span class="hljs-keyword">TO</span> log2(<span class="hljs-number">2</span>n) <span class="hljs-keyword">DO</span><br>    <span class="hljs-keyword">FOR</span> i <span class="hljs-keyword">FROM</span> <span class="hljs-number">1</span> <span class="hljs-keyword">TO</span> <span class="hljs-number">2</span>n+<span class="hljs-number">1</span> <span class="hljs-keyword">DO</span><br>        trans[j][i] ← trans[j<span class="hljs-number">-1</span>][trans[j<span class="hljs-number">-1</span>][i]]<br>ans ← INF<br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">each</span> starting <span class="hljs-type">point</span> s <span class="hljs-keyword">IN</span> original Intervals <span class="hljs-keyword">DO</span><br>    <span class="hljs-keyword">IF</span> f[s] &lt; s <span class="hljs-keyword">CONTINUE</span><br>    curr ← s, steps ← <span class="hljs-number">0</span>, target ← s + n<br>    <span class="hljs-keyword">FOR</span> j <span class="hljs-keyword">FROM</span> log2(<span class="hljs-number">2</span>n) DOWNTO <span class="hljs-number">0</span> <span class="hljs-keyword">DO</span><br>        <span class="hljs-keyword">IF</span> trans[j][curr] &lt; target <span class="hljs-keyword">AND</span> trans[j][curr] &gt; curr <span class="hljs-keyword">THEN</span><br>            curr ← trans[j][curr]<br>            steps ← steps + (<span class="hljs-number">1</span> &lt;&lt; j)<br>    <span class="hljs-keyword">IF</span> trans[<span class="hljs-number">0</span>][curr] &gt;= target <span class="hljs-keyword">THEN</span> ans ← MIN(ans, steps + <span class="hljs-number">1</span>)<br><span class="hljs-keyword">RETURN</span> (ans == INF) ? &quot;impossible&quot; : ans<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-9">复杂度分析</h3>
+<ul>
+<li><strong>时间复杂度</strong>：<span
+class="math inline"><em>O</em>((<em>N</em> + <em>K</em>)log <em>N</em>)</span>。
+<ul>
+<li>预处理 <span class="math inline"><em>f</em></span> 数组耗时 <span
+class="math inline"><em>O</em>(<em>N</em> + <em>K</em>)</span>。</li>
+<li>构建倍增表耗时 <span
+class="math inline"><em>O</em>(<em>N</em>log <em>N</em>)</span>。</li>
+<li>枚举起点并倍增查询耗时 <span
+class="math inline"><em>O</em>(<em>K</em>log <em>N</em>)</span>。</li>
+</ul></li>
+<li><strong>空间复杂度</strong>：<span
+class="math inline"><em>O</em>(<em>N</em>log <em>N</em>)</span>。
+<ul>
+<li>主要消耗在于倍增跳转表 <span
+class="math inline"><em>t</em><em>r</em><em>a</em><em>n</em><em>s</em>[<em>j</em>][<em>i</em>]</span>，其空间规模为
+<span
+class="math inline"><em>O</em>(2<em>N</em> ⋅ log 2<em>N</em>)</span>。</li>
+</ul></li>
+</ul>
+<h1 id="st-linear-programming">4st Linear Programming</h1>
+<h2 id="a---资源调度优化">A - 资源调度优化</h2>
+<h3 id="题目-8">题目</h3>
+<p>在连续的 <span class="math inline"><em>N</em></span>
+天内，每天需要消耗一定数量的资源。第 <span
+class="math inline"><em>i</em></span> 天的需求量为 <span
+class="math inline"><em>r</em><sub><em>i</em></sub></span>。为了满足这些需求，你可以通过以下三种方式获取“可用资源”：</p>
+<p>1、直接购买： 每单位资源花费 <span
+class="math inline"><em>p</em></span> 元，购买后立即可以使用
+2、快周期回收： 将使用过的旧资源送去快修，耗时 <span
+class="math inline"><em>m</em></span> 天，每单位费用 <span
+class="math inline"><em>f</em></span> 元。 3、慢周期回收：
+将使用过的旧资源送去慢修，耗时 <span
+class="math inline"><em>n</em></span> 天，每单位费用 <span
+class="math inline"><em>s</em></span> 元。</p>
+<p><strong>补充规则：</strong></p>
+<ul>
+<li>每天使用完的旧资源可以暂时囤积，留到以后某天再送去回收。</li>
+<li>已知回收参数满足：<span
+class="math inline"><em>n</em> &gt; <em>m</em></span> 且 <span
+class="math inline"><em>s</em> &lt; <em>f</em></span>（即用时间换取更低的成本）。</li>
+</ul>
+<p><strong>编程任务：</strong> 设计一个算法，计算在满足这
+天所有资源需求的前提下，所需的<strong>最小总费用</strong>。</p>
+<p>输入格式</p>
+<ul>
+<li><p>第 1 行包含 6 个正整数：<span
+class="math inline"><em>N</em>, <em>p</em>, <em>m</em>, <em>f</em>, <em>n</em>, <em>s</em></span></p></li>
+<li><p><span class="math inline"><em>N</em></span>：计划的总天数 (<span
+class="math inline"><em>N</em> ≤ 2000</span>)。</p></li>
+<li><p><span
+class="math inline"><em>p</em></span>：单单位新资源的价格</p></li>
+<li><p><span
+class="math inline"><em>m</em>, <em>f</em></span>：快回收所需天数及单价。</p></li>
+<li><p><span
+class="math inline"><em>n</em>, <em>s</em></span>：慢回收所需天数及单价</p></li>
+<li><p>接下来的 <span class="math inline"><em>N</em></span>
+行：每行一个正整数 <span
+class="math inline"><em>r</em><sub><em>i</em></sub></span>，代表第 <span
+class="math inline"><em>i</em></span> 天的资源需求量。</p></li>
+</ul>
+<p>输出格式</p>
+<ul>
+<li>输出一个整数，表示 <span class="math inline"><em>N</em></span>
+天的最小总花费</li>
+</ul>
+<h3 id="算法逻辑概述">算法逻辑概述</h3>
+<p>本实验采用 <strong>SSP (Successive Shortest Path)</strong>
+算法求解最小费用最大流。该算法基于贪心策略，在残量网络中迭代寻找单位费用最小的增广路径，直至无法满足更多流量需求。</p>
+<h4 id="核心步骤">核心步骤</h4>
+<ol type="1">
+<li><strong>图初始化</strong>：根据拆点法构建包含源点 <span
+class="math inline"><em>S</em></span>、汇点 <span
+class="math inline"><em>T</em></span> 及 <span
+class="math inline">2<em>N</em></span> 个中间节点的流网络。</li>
+<li><strong>最短路搜索</strong>：在残量网络中运行 <strong>SPFA (Shortest
+Path Faster
+Algorithm)</strong>。由于图中存在反向边导致的负费用（用于反悔机制），Dijkstra
+算法不直接适用，SPFA 能有效处理此类负权边（无负环）。</li>
+<li><strong>流量增广与反悔</strong>：
+<ul>
+<li>计算当前最短路径上的瓶颈容量 <span
+class="math inline"><em>f</em><em>l</em><em>o</em><em>w</em></span>。</li>
+<li>累加费用：<span
+class="math inline">TotalCost+ = <em>f</em><em>l</em><em>o</em><em>w</em> × distance[<em>T</em>]</span>。</li>
+<li><strong>更新残量网络</strong>：正向边容量减少 <span
+class="math inline"><em>f</em><em>l</em><em>o</em><em>w</em></span>，反向边容量增加
+<span
+class="math inline"><em>f</em><em>l</em><em>o</em><em>w</em></span>。反向边的存在使得算法具备反悔能力，即后续决策可退回原本分配给某路径的流，将其重新分配以获得全局最优。</li>
+</ul></li>
+</ol>
+<h4 id="算法设计伪代码">算法设计伪代码</h4>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs txt">Algorithm: Minimum Cost Maximum Flow (SSP using SPFA)<br>Input: Source $S$, Sink $T$, Graph $G(V, E)$<br>Output: Minimum Total Cost<br>Function MinCostMaxFlow(S, T):<br>    Initialize min_cost = 0<br>    <br>    // Loop until no augmenting path exists from S to T<br>    // 循环直到残量网络中源点与汇点不连通<br>    While True:<br>        <br>        // Step 1: Find the shortest path based on edge costs using SPFA<br>        // 使用 SPFA 算法寻找单位费用最小的路径<br>        Initialize dist[] = INFINITY<br>        dist[S] = 0<br>        Queue Q.push(S)<br>        <br>        While Q is not empty:<br>            u = Q.pop()<br>            For each edge e(u, v) in Graph:<br>                // Relaxation: check if a cheaper path exists with available capacity<br>                // 松弛操作：若边有剩余容量且存在更低费用的路径<br>                If e.capacity &gt; 0 AND dist[v] &gt; dist[u] + e.cost:<br>                    dist[v] = dist[u] + e.cost<br>                    Record predecessor(v) = u, pre_edge(v) = e<br>                    If v is not in Q:<br>                        Q.push(v)<br>        <br>        // If Sink T is unreachable, the algorithm terminates<br>        // 若汇点不可达，说明已达到最大流或需求已满足<br>        If dist[T] == INFINITY:<br>            Break<br>            <br>        // Step 2: Calculate bottleneck capacity along the path<br>        // 回溯路径，计算瓶颈流量<br>        flow = INFINITY<br>        curr = T<br>        While curr != S:<br>            edge = pre_edge(curr)<br>            flow = min(flow, edge.capacity)<br>            curr = predecessor(curr)<br>            <br>        // Step 3: Update residual graph and accumulate cost<br>        // 更新残量网络（正向减，反向加）及总费用<br>        min_cost += flow * dist[T]<br>        curr = T<br>        While curr != S:<br>            edge = pre_edge(curr)<br>            edge.capacity -= flow<br>            // Update reverse edge capacity for potential flow redirection<br>            // 增加反向边容量以支持反悔机制<br>            reverse_edge(edge).capacity += flow<br>            curr = predecessor(curr)<br>            <br>    Return min_cost<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-10">复杂度分析</h3>
+<h4 id="空间复杂度">空间复杂度</h4>
+<ol type="1">
+<li><strong>节点规模</strong>：<span
+class="math inline"><em>V</em> = 2<em>N</em> + 2</span>（源点、汇点、<span
+class="math inline"><em>N</em></span> 个供应点、<span
+class="math inline"><em>N</em></span> 个需求点）。</li>
+<li><strong>边规模</strong>：每种策略对应一组边。购买、快洗、慢洗、囤积、源汇连接各需
+<span class="math inline"><em>N</em></span> 条边。考虑到反向边，总边数
+<span class="math inline"><em>E</em> ≈ 12<em>N</em></span>。</li>
+<li><strong>结论</strong>：采用邻接表存储，空间复杂度为 <span
+class="math inline"><em>O</em>(<em>V</em> + <em>E</em>) = <em>O</em>(<em>N</em>)</span>。对于
+<span class="math inline"><em>N</em> = 2000</span>，内存占用极低。</li>
+</ol>
+<h4 id="时间复杂度">时间复杂度</h4>
+<p>SSP 算法的时间复杂度公式为 <span
+class="math inline"><em>O</em>(<em>k</em> ⋅ <em>C</em><sub><em>S</em><em>P</em><em>F</em><em>A</em></sub>)</span>，其中
+<span class="math inline"><em>k</em></span> 为增广次数。</p>
+<ol type="1">
+<li><p><strong>增广次数 <span
+class="math inline"><em>k</em></span></strong>： 算法的主要约束在于填满
+<span class="math inline"><em>N</em></span> 条从需求点到汇点的边（容量为
+<span
+class="math inline"><em>r</em><sub><em>i</em></sub></span>）。在大多数实际算例中，增广路径的查找次数与天数
+<span class="math inline"><em>N</em></span> 呈线性相关，即 <span
+class="math inline"><em>k</em> ≈ <em>O</em>(<em>N</em>)</span>。</p></li>
+<li><p><strong>单次 SPFA 复杂度</strong>： SPFA 的平均时间复杂度为 <span
+class="math inline"><em>O</em>(<em>E</em>)</span>。在本题构建的分层图（Layered
+Graph）结构中，不存在复杂的环路，SPFA 效率接近最优。</p></li>
+<li><p><strong>综合复杂度</strong>： <span
+class="math display"><em>T</em> ≈ <em>O</em>(<em>N</em> × <em>E</em>) = <em>O</em>(<em>N</em> × 12<em>N</em>) = <em>O</em>(<em>N</em><sup>2</sup>)</span></p></li>
+<li><p><strong>数值验证</strong>： 当 <span
+class="math inline"><em>N</em> = 2000</span> 时，<span
+class="math inline"><em>N</em><sup>2</sup> = 4 × 10<sup>6</sup></span>。现代
+C++ 编译程序的执行速度约为 <span
+class="math inline">10<sup>8</sup></span>
+指令/秒，因此理论运行时间在毫秒级别，完全满足时限要求。</p></li>
+</ol>
+<h2 id="b---人员雇佣计划">B - 人员雇佣计划</h2>
+<h3 id="题目-9">题目</h3>
+<p>一项工程共需 <em>n</em> 天完成，其中第 <em>i</em> 天至少需要
+<em>ai</em> 人在岗。 现有 <em>m</em> 种雇佣方式，第 <em>j</em>
+种方式可以雇佣一名从第 <em>sj</em> 天工作到第 <em>tj</em>
+天的员工，雇佣单价为 <em>cj</em> 元。
+请问在满足每一天人数需求的前提下，最少需要支付多少费用？</p>
+<p>输入格式</p>
+<p>第一行包含两个整数
+<em>n</em>, <em>m</em>，表示总天数和雇佣方式的种类。 第二行包含
+<em>n</em> 个非负整数，表示每天至少需要的人数 <em>ai</em>。 接下来的
+<em>m</em> 行，每行包含三个整数
+<em>sj</em>, <em>tj</em>, <em>cj</em>，表示该种方式的工作起始时间、结束时间和单人费用。</p>
+<p>输出格式</p>
+<p>仅包含一个整数，表示完成工程所需的最低总费用。</p>
+<h3 id="思路最小费用最大流模型">思路：最小费用最大流模型</h3>
+<p>为了解决区间覆盖与成本最小化的问题，我们需要将问题转化为<strong>最小费用最大流
+(Minimum Cost Maximum Flow, MCMF)</strong>
+模型。利用流量守恒定律来模拟人员的在岗状态。</p>
+<p><strong>建模核心：差分约束建图</strong> 我们不直接对每天的需求 <span
+class="math inline"><em>a</em><sub><em>i</em></sub></span>
+连边，而是利用<strong>差分数组</strong> <span
+class="math inline"><em>D</em><sub><em>i</em></sub> = <em>a</em><sub><em>i</em></sub> − <em>a</em><sub><em>i</em> − 1</sub></span>
+来表示人员的<strong>变化量</strong>。</p>
+<ol type="1">
+<li><strong>节点定义</strong>：建立源点 <span
+class="math inline"><em>S</em></span>、汇点 <span
+class="math inline"><em>T</em></span> 以及代表时刻的节点 <span
+class="math inline">1, 2, …, <em>N</em> + 1</span>。</li>
+<li><strong>供需平衡 (Supply &amp; Demand)</strong>：
+<ul>
+<li>若 <span
+class="math inline"><em>D</em><sub><em>i</em></sub> &gt; 0</span>（需求增加）：表示第
+<span class="math inline"><em>i</em></span> 天比前一天多需要 <span
+class="math inline"><em>D</em><sub><em>i</em></sub></span> 人。从 <span
+class="math inline"><em>S</em></span> 向 <span
+class="math inline"><em>i</em></span> 连边，容量 <span
+class="math inline"><em>D</em><sub><em>i</em></sub></span>，费用
+0。</li>
+<li>若 <span
+class="math inline"><em>D</em><sub><em>i</em></sub> &lt; 0</span>（需求减少）：表示第
+<span class="math inline"><em>i</em></span> 天比前一天可以释放 <span
+class="math inline">|<em>D</em><sub><em>i</em></sub>|</span> 人。从
+<span class="math inline"><em>i</em></span> 向 <span
+class="math inline"><em>T</em></span> 连边，容量 <span
+class="math inline">|<em>D</em><sub><em>i</em></sub>|</span>，费用
+0。</li>
+</ul></li>
+<li><strong>雇佣操作 (Hiring)</strong>：
+<ul>
+<li>每种方案 <span
+class="math inline">(<em>s</em>, <em>t</em>, <em>c</em>)</span>
+代表一个人从第 <span class="math inline"><em>s</em></span> 天工作到第
+<span class="math inline"><em>t</em></span> 天（第 <span
+class="math inline"><em>t</em> + 1</span> 天离开）。</li>
+<li>从节点 <span class="math inline"><em>s</em></span> 向 <span
+class="math inline"><em>t</em> + 1</span> 连边，容量 <span
+class="math inline">∞</span>，费用 <span
+class="math inline"><em>c</em></span>。</li>
+</ul></li>
+<li><strong>辅助边 (Carry-over)</strong>：
+<ul>
+<li>为了允许“人手过剩”（即某天的人数超过 <span
+class="math inline"><em>a</em><sub><em>i</em></sub></span>），我们需要允许流量“流过”需求点而不立即去汇点。</li>
+<li>从节点 <span class="math inline"><em>i</em> + 1</span> 向 <span
+class="math inline"><em>i</em></span> 连边，容量 <span
+class="math inline">∞</span>，费用 0。这代表第 <span
+class="math inline"><em>i</em> + 1</span> 天多余的人手可以填补第 <span
+class="math inline"><em>i</em></span>
+天的差分需求（在数学上等价于利用长区间覆盖短区间）。</li>
+</ul></li>
+</ol>
+<p>通过求解从 <span class="math inline"><em>S</em></span> 到 <span
+class="math inline"><em>T</em></span>
+的最小费用最大流，即可得到满足所有需求前提下的最小总花费。</p>
+<h3 id="伪代码-8">伪代码</h3>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs text">Algorithm: Min-Cost Max-Flow (SSP with SPFA+SLF)<br>Input: Days N, Schemes M, Requirements a1 ... aN<br>Output: Minimum Cost*<br>Function Solve():<br>    Calculate difference array D[i] = a[i] - a[i-1]<br>    <br>    // Build Graph<br>    For i from 1 to N+1:<br>        If D[i] &gt; 0:<br>            AddEdge(Source, i, capacity=D[i], cost=0)<br>        If D[i] &lt; 0:<br>            AddEdge(i, Sink, capacity=-D[i], cost=0)<br>        If i &gt; 1:<br>            AddEdge(i, i-1, capacity=INFINITY, cost=0) // Aux edge for flow carry-over<br>            <br>    For each Scheme (s, t, cost):<br>        AddEdge(s, t+1, capacity=INFINITY, cost=cost)<br><br>    // Main Loop<br>    While SPFA_with_SLF(Source, Sink) finds a path:<br>        Calculate bottleneck flow f along the path<br>        min_cost += f * dist[Sink]<br>        <br>        Update residual graph:<br>            For each edge in path:<br>                edge.capacity -= f<br>                reverse_edge.capacity += f<br>                <br>    Return min_cost<br></code></pre></td></tr></table></figure>
+<h3 id="算法复杂度分析">算法复杂度分析</h3>
+<p>本实验采用了基于 <strong>SPFA (Shortest Path Faster
+Algorithm)</strong> 的 <strong>SSP (Successive Shortest Path)</strong>
+算法，并配合 <strong>SLF (Small Label First)</strong> 优化和
+<strong>静态数组（链式前向星）</strong> 存图。</p>
+<h4 id="时间复杂度-1">时间复杂度</h4>
+<p>SSP 算法的总复杂度公式为：<span
+class="math inline"><em>T</em> ≈ <em>O</em>(<em>K</em> ⋅ <em>C</em><sub><em>S</em><em>P</em><em>F</em><em>A</em></sub>)</span></p>
+<p>其中 <span class="math inline"><em>K</em></span>
+为最大流量（增广次数），<span
+class="math inline"><em>C</em><sub><em>S</em><em>P</em><em>F</em><em>A</em></sub></span>
+为单次寻找增广路的时间。</p>
+<ol type="1">
+<li><strong>增广次数 <span
+class="math inline"><em>K</em></span></strong>：
+在本题模型中，流量由源点流出，源点连边的总容量为 <span
+class="math inline">∑<sub><em>D</em><sub><em>i</em></sub> &gt; 0</sub><em>D</em><sub><em>i</em></sub></span>。虽然题目未给出具体流量上限，但增广次数受限于总需求人数的变化量，通常在可控范围内。</li>
+<li><strong>单次 SPFA 复杂度</strong>： SPFA 的平均复杂度为 <span
+class="math inline"><em>O</em>(<em>k</em><em>E</em>)</span>，其中 <span
+class="math inline"><em>E</em></span> 为边数，<span
+class="math inline"><em>k</em></span> 为常数（通常 <span
+class="math inline"><em>k</em> ≈ 2</span>）。
+<ul>
+<li><strong>SLF 优化</strong>：针对本题特殊的“长链+回边”结构，SLF
+优化（当新节点距离小于队首时插到队头）能极大地减少节点重复入队的次数。</li>
+<li><strong>实际表现</strong>：在 <span
+class="math inline"><em>N</em> = 1000, <em>M</em> = 10000</span>
+的规模下，优化后的 SPFA 接近线性查找。</li>
+</ul></li>
+</ol>
+<p><strong>综合复杂度</strong>：<span
+class="math inline"><em>T</em> ≈ <em>O</em>(TotalFlow × (<em>N</em> + <em>M</em>))</span></p>
+<h4 id="空间复杂度-1">空间复杂度</h4>
+<p>使用静态数组（链式前向星）存图：<span
+class="math inline"><em>S</em> = <em>O</em>(<em>N</em> + <em>M</em>)</span></p>
+<ol type="1">
+<li>节点数：<span class="math inline"><em>N</em> ≈ 1000</span>。</li>
+<li>边数：<span
+class="math inline">2 × (<em>N</em> + <em>M</em>)</span>（正反向边）。</li>
+</ol>
+<h2 id="c---最少操作数列">C - 最少操作数列</h2>
+<h3 id="题目-10">题目</h3>
+<p>定义初始数列为每个数字都为 0 的数列。
+定义一次操作为将数列的一个区间中每一个数的值增加
+1，规定该区间的长度不能超过 <em>m</em>。 给定一个长度为 <em>n</em>
+的数列 <em>a</em>，第 <em>i</em> 个数为 <em>ai</em>。 你需要回答
+<em>q</em> 次询问。每次询问给定
+<em>l</em>, <em>r</em>，你需要回答将一个长度为
+<em>r</em> − <em>l</em> + 1 的初始数列变为 <em>a</em> 中的
+[<em>l</em>, <em>r</em>]（即数列 <em>al</em>, <em>al</em> + 1, ⋯,
+<em>ar</em>）至少需要多少次操作。</p>
+<p>输入格式</p>
+<p>第一行三个整数 <em>n</em>, <em>m</em>, <em>q</em>。 第二行 <em>n</em>
+个整数，第 <em>i</em> 个为 <em>ai</em>。 接下来 <em>q</em>
+行，每行两个整数，表示 <em>l</em>, <em>r</em>。</p>
+<p>对于 100% 的数据，保证
+1 ≤ <em>m</em> ≤ <em>n</em> ≤ 105，1 ≤ <em>q</em> ≤ 105，0 ≤ <em>ai</em> ≤ 109，1 ≤ <em>l</em> ≤ <em>r</em> ≤ <em>n</em>。</p>
+<p>输出格式</p>
+<p><em>q</em> 行，每行一个整数，表示至少需要的操作次数。</p>
+<p>https://www.luogu.com.cn/problem/solution/P7908</p>
+<h2 id="d---最大和乘积">D - 最大和乘积</h2>
+<h3 id="题目描述-2">题目描述：</h3>
+<p>共有 <em>n</em> 个元素，标号 1 ∼ <em>n</em>，每个元素 <em>j</em>
+有两个正整数权值 <em>aj</em>, <em>bj</em>。 你要确定一个
+[1, <em>n</em>] ∩ ℕ 的子集 <em>S</em>，从而最大化 <span
+class="math display">$$
+\left(\sum_{k=1}^na_k[k\in S]\right)\left(\sum_{k=1}^nb_k[k\notin
+S]\right)
+$$</span> 这个问题显然不可做，因此<strong>保证每个
+<em>aj</em>, <em>bj</em> 分别在 [1, <em>A</em>] ∩ ℕ, [1, <em>B</em>] ∩ ℕ
+内独立均匀随机生成</strong>。 现在给定
+<em>n</em>, <em>A</em>, <em>B</em> 和每个元素的两个权值
+(<em>aj</em>, <em>bj</em>)，请求出这个最大的答案。</p>
+<h3 id="输入格式">输入格式</h3>
+<p>本题每个测试点中有多组测试数据。
+第一行四个整数，<em>T</em>, <em>n</em>, <em>A</em>, <em>B</em>，<em>T</em>
+表示该组数据内的数据组数，<em>n</em>, <em>A</em>, <em>B</em>
+表示该测试点内的所有数据均对应此 <em>n</em>, <em>A</em>, <em>B</em>。
+接下来每组数据占 <em>n</em> 行，其中第 <em>j</em> 行两个整数
+<em>aj</em>, <em>bj</em>。</p>
+<p>保证 <em>aj</em>, <em>bj</em> 在对应范围内独立均匀随机生成。
+对于所有的数据，保证
+10 ≤ <em>n</em> ≤ 3000，10<sup>4 ≤ <em>A</em>, <em>B</em> ≤ 10</sup>12，1 ≤ <em>T</em> ≤ 50。</p>
+<h3 id="算法思路-11">算法思路</h3>
+<ol type="1">
+<li><strong>比例排序（Ratio
+Sorting）</strong>：为了最大化和的乘积，核心思想是优先将“<span
+class="math inline"><em>a</em></span> 权值相对 <span
+class="math inline"><em>b</em></span> 权值更高”的元素放入集合 <span
+class="math inline"><em>S</em></span>。因此，首先根据 <span
+class="math inline">$\frac{a_j}{b_j}$</span>
+的比值对所有元素进行降序排序。</li>
+<li><strong>随机性利用（Randomness
+Exploitation）</strong>：题目保证权值是独立均匀随机生成的。在这种分布下，最优解对应的集合
+<span class="math inline"><em>S</em></span>
+极大概率是排序后序列的一个<strong>前缀</strong>，或者与某个前缀非常接近。</li>
+<li><strong>局部搜索/剪枝搜索（Local Search/DFS）</strong>：
+<ul>
+<li>预处理排序后的前缀和 <span
+class="math inline"><em>p</em><em>r</em><em>e</em><em>A</em></span>（<span
+class="math inline"><em>a</em></span> 的累加）和后缀和 <span
+class="math inline"><em>s</em><em>u</em><em>f</em><em>B</em></span>（<span
+class="math inline"><em>b</em></span> 的累加）。</li>
+<li>枚举可能的“分割点” <span
+class="math inline"><em>i</em></span>。在分割点附近的一小段区间内进行深度优先搜索（DFS），允许少量元素偏离“前缀必选”的规则。</li>
+<li>搜索过程中，对于区间外的元素，直接通过预处理的汇总值计算贡献，从而在极小的搜索空间内找到全局最优值。</li>
+</ul></li>
+</ol>
+<h3 id="伪代码-9">伪代码</h3>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs fortran">ALGORITHM <span class="hljs-built_in">Max</span>-<span class="hljs-built_in">Sum</span>-<span class="hljs-built_in">Product</span><br>    INPUT: T, n, A, B, Weights[(a_1, b_1), ..., (a_n, b_n)]<br>    OUTPUT: Maximum <span class="hljs-built_in">product</span> of (<span class="hljs-built_in">sum</span> of a <span class="hljs-keyword">in</span> S) * (<span class="hljs-built_in">sum</span> of b not <span class="hljs-keyword">in</span> S)<br>    FOR each test <span class="hljs-keyword">case</span> <span class="hljs-keyword">DO</span><br>        FOR j FROM <span class="hljs-number">1</span> TO n <span class="hljs-keyword">DO</span> Items[j].ratio ← a_j / b_j<br>        SORT Items <span class="hljs-keyword">in</span> descending order of ratio<br>        preA[<span class="hljs-number">0</span>] ← <span class="hljs-number">0</span>, sufB[n + <span class="hljs-number">1</span>] ← <span class="hljs-number">0</span><br>        FOR j FROM <span class="hljs-number">1</span> TO n <span class="hljs-keyword">DO</span> preA[j] ← preA[j-<span class="hljs-number">1</span>] + Items[j].a<br>        FOR j FROM n DOWNTO <span class="hljs-number">1</span> <span class="hljs-keyword">DO</span> sufB[j] ← sufB[j+<span class="hljs-number">1</span>] + Items[j].b<br>        ans ← <span class="hljs-number">0</span><br>        mid ← n / <span class="hljs-number">2</span><br>        FOR i FROM <span class="hljs-built_in">MAX</span>(<span class="hljs-number">1</span>, mid - <span class="hljs-number">100</span>) TO <span class="hljs-built_in">MIN</span>(n, mid + <span class="hljs-number">100</span>) <span class="hljs-keyword">DO</span><br>            L ← <span class="hljs-built_in">MAX</span>(<span class="hljs-number">1</span>, i - <span class="hljs-number">6</span>), R ← <span class="hljs-built_in">MIN</span>(n, i + <span class="hljs-number">6</span>)<br>            DFS(L, R, preA[L-<span class="hljs-number">1</span>], sufB[R+<span class="hljs-number">1</span>])<br>        <span class="hljs-keyword">END</span> FOR<br>        <span class="hljs-built_in">PRINT</span> ans<br>    <span class="hljs-keyword">END</span> FOR<br>    <span class="hljs-function"><span class="hljs-keyword">FUNCTION</span></span> DFS(idx, <span class="hljs-keyword">end</span>, curA, curB)<br>        <span class="hljs-keyword">IF</span> idx &gt; <span class="hljs-keyword">end</span> <span class="hljs-keyword">THEN</span><br>            ans ← <span class="hljs-built_in">MAX</span>(ans, curA * curB)<br>            <span class="hljs-keyword">RETURN</span><br>        DFS(idx + <span class="hljs-number">1</span>, <span class="hljs-keyword">end</span>, curA + Items[idx].a, curB)<br>        DFS(idx + <span class="hljs-number">1</span>, <span class="hljs-keyword">end</span>, curA, curB + Items[idx].b)<br>    <span class="hljs-keyword">END</span> <span class="hljs-function"><span class="hljs-keyword">FUNCTION</span></span><br><span class="hljs-keyword">END</span> ALGORITHM<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-11">复杂度分析</h3>
+<ol type="1">
+<li><strong>时间复杂度 (Time Complexity)</strong>: <span
+class="math inline"><em>O</em>(<em>T</em> ⋅ (<em>n</em>log <em>n</em> + <em>Δ</em> ⋅ 2<sup>2 ⋅ TEMP</sup>))</span>
+<ul>
+<li><strong>排序</strong>：每组数据 <span
+class="math inline"><em>O</em>(<em>n</em>log <em>n</em>)</span>。</li>
+<li><strong>搜索</strong>：枚举 <span
+class="math inline"><em>Δ</em></span>（代码中为 <span
+class="math inline"><em>D</em><em>E</em><em>L</em><em>T</em><em>A</em></span>）个位置，每个位置进行深度为
+<span
+class="math inline">2 × <em>T</em><em>E</em><em>M</em><em>P</em></span>
+的 DFS。由于 <span
+class="math inline"><em>T</em><em>E</em><em>M</em><em>P</em></span>
+是常数（如 7），该部分复杂度在随机数据下表现极佳。</li>
+<li>对于 <span class="math inline"><em>n</em> = 3000</span>，<span
+class="math inline"><em>T</em> = 50</span>，总计算量在时限内绰绰有余。</li>
+</ul></li>
+<li><strong>空间复杂度 (Space Complexity)</strong>: <span
+class="math inline"><em>O</em>(<em>n</em>)</span>
+<ul>
+<li>需要存储 <span class="math inline"><em>n</em></span>
+个元素的权值、比例以及前缀/后缀和数组。</li>
+</ul></li>
+</ol>
+<p>这项算法通过利用数据随机性，将原本指数级的子集搜索问题，降维到了有序序列附近的局部搜索问题。</p>
+<h1 id="test">Test</h1>
+<h2 id="分而治之">分而治之</h2>
+<h3 id="找中位数快速选择算法-quick-select">找中位数：快速选择算法 (Quick
+Select)</h3>
+<p><strong>算法思路</strong>：</p>
+<p>基于快速排序 (Quick Sort) 的 Partition思想。随机选择一个基准值
+(Pivot)，将数组分为两部分：左边小于 Pivot，右边大于 Pivot。判断 Pivot
+的最终位置索引与目标中位数索引 <span
+class="math inline"><em>k</em></span> 的关系：若相等则找到；若 <span
+class="math inline"><em>k</em></span> 小于 Pivot
+索引，则在左半区继续找；否则在右半区找。平均情况不需要排序整个数组。</p>
+<p><strong>伪代码</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">FUNCTION</span> FindMedian(A, n)<br>    INPUT: <span class="hljs-keyword">Array</span> A <span class="hljs-keyword">of</span> size n<br>    OUTPUT: The median <span class="hljs-keyword">value</span><br>    k <span class="hljs-operator">&lt;</span><span class="hljs-operator">-</span> <span class="hljs-built_in">FLOOR</span>(n <span class="hljs-operator">/</span> <span class="hljs-number">2</span>) <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 中位数的目标索引<br>    <span class="hljs-keyword">left</span> <span class="hljs-operator">&lt;</span><span class="hljs-operator">-</span> <span class="hljs-number">0</span><br>    <span class="hljs-keyword">right</span> <span class="hljs-operator">&lt;</span><span class="hljs-operator">-</span> n <span class="hljs-operator">-</span> <span class="hljs-number">1</span><br>    WHILE <span class="hljs-keyword">left</span> <span class="hljs-operator">&lt;=</span> <span class="hljs-keyword">right</span> DO<br>        pivotIndex <span class="hljs-operator">&lt;</span><span class="hljs-operator">-</span> <span class="hljs-keyword">Partition</span>(A, <span class="hljs-keyword">left</span>, <span class="hljs-keyword">right</span>) <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 将A划分为两部分并返回基准下标<br>        IF pivotIndex <span class="hljs-operator">=</span><span class="hljs-operator">=</span> k <span class="hljs-keyword">THEN</span><br>            <span class="hljs-keyword">RETURN</span> A[k]<br>        <span class="hljs-keyword">ELSE</span> IF pivotIndex <span class="hljs-operator">&lt;</span> k <span class="hljs-keyword">THEN</span><br>            <span class="hljs-keyword">left</span> <span class="hljs-operator">&lt;</span><span class="hljs-operator">-</span> pivotIndex <span class="hljs-operator">+</span> <span class="hljs-number">1</span> <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 在右半边查找<br>        <span class="hljs-keyword">ELSE</span><br>            <span class="hljs-keyword">right</span> <span class="hljs-operator">&lt;</span><span class="hljs-operator">-</span> pivotIndex <span class="hljs-operator">-</span> <span class="hljs-number">1</span> <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 在左半边查找<br>        ENDIF<br>    ENDWHILE<br>ENDFUNCTION<br></code></pre></td></tr></table></figure>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li><strong>时间复杂度</strong>：平均 <span
+class="math inline"><em>O</em>(<em>N</em>)</span>，最坏 <span
+class="math inline"><em>O</em>(<em>N</em><sup>2</sup>)</span>
+(发生于每次 Partition 极度不平衡时，可用 Randomized Partition
+优化)。</li>
+<li><strong>空间复杂度</strong>：<span
+class="math inline"><em>O</em>(1)</span> (迭代写法) 或 <span
+class="math inline"><em>O</em>(log <em>N</em>)</span> (递归栈)。</li>
+</ul>
+<h3 id="找众数摩尔投票算法-boyer-moore-voting">找众数：摩尔投票算法
+(Boyer-Moore Voting)</h3>
+<h3 id="排序遍历法-sorting">2. 排序遍历法 (Sorting)</h3>
+<p><strong>算法思路</strong>：</p>
+<p>首先将数组排序。排序后，相同的元素会连续排列。只需遍历一次排序后的数组，统计当前连续元素的长度。如果当前连续长度超过了历史最大长度，则更新结果。该方法牺牲了时间以换取空间效率。</p>
+<p><strong>伪代码</strong>：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">FUNCTION</span> FindModeSorting(A, n)<br>    <span class="hljs-keyword">INPUT</span>: <span class="hljs-keyword">Array</span> A <span class="hljs-keyword">of</span> size n<br>    OUTPUT: The mode <span class="hljs-keyword">value</span><br>    Sort A <span class="hljs-keyword">in</span> ascending <span class="hljs-keyword">order</span><br>    mode &lt;- A[<span class="hljs-number">0</span>]<br>    maxCount &lt;- <span class="hljs-number">1</span><br>    currentCount &lt;- <span class="hljs-number">1</span><br>    <span class="hljs-keyword">FOR</span> i <span class="hljs-keyword">FROM</span> <span class="hljs-number">1</span> <span class="hljs-keyword">TO</span> n - <span class="hljs-number">1</span> <span class="hljs-keyword">DO</span><br>        <span class="hljs-keyword">IF</span> A[i] == A[i<span class="hljs-number">-1</span>] <span class="hljs-keyword">THEN</span><br>            currentCount &lt;- currentCount + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">ELSE</span><br>            currentCount &lt;- <span class="hljs-number">1</span><br>        ENDIF<br>        <span class="hljs-keyword">IF</span> currentCount &gt; maxCount <span class="hljs-keyword">THEN</span><br>            maxCount &lt;- currentCount<br>            mode &lt;- A[i]<br>        ENDIF<br>    ENDFOR<br>    <span class="hljs-keyword">RETURN</span> mode<br>ENDFUNCTION<br></code></pre></td></tr></table></figure>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li><strong>时间复杂度</strong>：<span
+class="math inline"><em>O</em>(<em>N</em>log <em>N</em>)</span>，主要消耗在排序操作上（如快排或归并排序）。</li>
+<li><strong>空间复杂度</strong>：<span
+class="math inline"><em>O</em>(1)</span> 或 <span
+class="math inline"><em>O</em>(log <em>N</em>)</span>，取决于排序算法是否为原地排序
+(In-place) 以及递归栈的深度。</li>
+</ul>
+<h2 id="动态规划">动态规划</h2>
+<p>字符串A和字符串B，每次可以删除一个字符，问最少的删除次数，能够使得这两个字符串相等。</p>
+<h3 id="算法思路-12">算法思路</h3>
+<p>该问题本质上是求解两个字符串的<strong>最长公共子序列 (LCS)</strong>
+的变种。使得两个字符串相等的最小删除次数，等于两个字符串的总长度减去它们最长公共子序列长度的两倍。</p>
+<p>或者直接定义 <span
+class="math inline"><em>d</em><em>p</em>[<em>i</em>][<em>j</em>]</span>
+为使字符串 <span class="math inline"><em>A</em></span> 的前 <span
+class="math inline"><em>i</em></span> 个字符和 <span
+class="math inline"><em>B</em></span> 的前 <span
+class="math inline"><em>j</em></span> 个字符相等所需的最小删除次数：</p>
+<ol type="1">
+<li><strong>初始化</strong>：如果一个字符串为空，另一个字符串必须全部删除。即
+<span
+class="math inline"><em>d</em><em>p</em>[<em>i</em>][0] = <em>i</em></span>，<span
+class="math inline"><em>d</em><em>p</em>[0][<em>j</em>] = <em>j</em></span>。</li>
+<li><strong>状态转移</strong>：
+<ul>
+<li>若 <span
+class="math inline"><em>A</em>[<em>i</em>] =  = <em>B</em>[<em>j</em>]</span>，不需要删除，继承之前的状态：<span
+class="math inline"><em>d</em><em>p</em>[<em>i</em>][<em>j</em>] = <em>d</em><em>p</em>[<em>i</em> − 1][<em>j</em> − 1]</span>。</li>
+<li>若 <span
+class="math inline"><em>A</em>[<em>i</em>] ≠ <em>B</em>[<em>j</em>]</span>，则需要删除
+<span class="math inline"><em>A</em>[<em>i</em>]</span> 或 <span
+class="math inline"><em>B</em>[<em>j</em>]</span>，取最小值并加1：<span
+class="math inline"><em>d</em><em>p</em>[<em>i</em>][<em>j</em>] = 1 + min (<em>d</em><em>p</em>[<em>i</em> − 1][<em>j</em>], <em>d</em><em>p</em>[<em>i</em>][<em>j</em> − 1])</span>。</li>
+</ul></li>
+</ol>
+<h3 id="伪代码-10">伪代码</h3>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs stylus">FUNCTION <span class="hljs-built_in">MinDeletions</span>(A, B)<br>    INPUT: String A (length m), String B (length n)<br>    OUTPUT: Integer min_ops<br><br>    DECLARE dp<span class="hljs-selector-attr">[0...m]</span><span class="hljs-selector-attr">[0...n]</span> AS INTEGER<br>    <br>    FOR <span class="hljs-selector-tag">i</span> FROM <span class="hljs-number">0</span> TO m DO<br>        dp<span class="hljs-selector-attr">[i]</span><span class="hljs-selector-attr">[0]</span> &lt;- <span class="hljs-selector-tag">i</span>    <span class="hljs-comment">// B为空，需删除A的所有字符</span><br>    ENDFOR<br>    FOR j FROM <span class="hljs-number">0</span> TO n DO<br>        dp<span class="hljs-selector-attr">[0]</span><span class="hljs-selector-attr">[j]</span> &lt;- j    <span class="hljs-comment">// A为空，需删除B的所有字符</span><br>    ENDFOR<br><br>    FOR <span class="hljs-selector-tag">i</span> FROM <span class="hljs-number">1</span> TO m DO<br>        FOR j FROM <span class="hljs-number">1</span> TO n DO<br>            IF A<span class="hljs-selector-attr">[i]</span> == B<span class="hljs-selector-attr">[j]</span> THEN<br>                dp<span class="hljs-selector-attr">[i]</span><span class="hljs-selector-attr">[j]</span> &lt;- dp<span class="hljs-selector-attr">[i-1]</span><span class="hljs-selector-attr">[j-1]</span>    <span class="hljs-comment">// 字符匹配，无额外删除</span><br>            ELSE<br>                dp<span class="hljs-selector-attr">[i]</span><span class="hljs-selector-attr">[j]</span> &lt;- <span class="hljs-number">1</span> + <span class="hljs-built_in">MIN</span>(dp<span class="hljs-selector-attr">[i-1]</span><span class="hljs-selector-attr">[j]</span>, dp<span class="hljs-selector-attr">[i]</span><span class="hljs-selector-attr">[j-1]</span>)    <span class="hljs-comment">// 删除A[i]或B[j]</span><br>            ENDIF<br>        ENDFOR<br>    ENDFOR<br><br>    RETURN dp<span class="hljs-selector-attr">[m]</span><span class="hljs-selector-attr">[n]</span><br>ENDFUNCTION<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-12">复杂度分析</h3>
+<ol type="1">
+<li><p><strong>时间复杂度</strong>：<span
+class="math inline"><em>O</em>(<em>m</em> × <em>n</em>)</span></p>
+<p>需要填充一个 <span class="math inline"><em>m</em> × <em>n</em></span>
+的二维数组，每个单元格的计算仅涉及常数次比较和加法操作。</p></li>
+<li><p><strong>空间复杂度</strong>：<span
+class="math inline"><em>O</em>(<em>m</em> × <em>n</em>)</span></p>
+<p>需要存储 <span class="math inline"><em>d</em><em>p</em></span>
+表。注：通过使用滚动数组优化，空间复杂度可降低至 <span
+class="math inline"><em>O</em>(min (<em>m</em>, <em>n</em>))</span>。</p></li>
+</ol>
+<h2 id="线性规划搬家问题">线性规划：搬家问题</h2>
+<p>卡车每次容量为Q，共m个箱子和n个物品都要搬走，每个箱子和每个物品都有容量，物品要放到箱子里，一个箱子可以放多件物品。最小化卡车搬运趟数。</p>
+<h3 id="算法思路-13">算法思路</h3>
+<p>基于<strong>贪心策略 (First Fit Decreasing)</strong> 分两步解决：</p>
+<ol type="1">
+<li><strong>物品入箱</strong>：将物品和箱子均按容量降序排序，优先把大物品放入能容纳它的最大箱子，若无法放入则无解。</li>
+<li><strong>箱子装车</strong>：统计已使用的箱子（视作刚性物体，体积为其容量），按容量降序排序。遍历箱子，优先放入当前已开启且剩余空间足够的卡车趟次，若放不下则开启新一趟。</li>
+</ol>
+<h3 id="伪代码-11">伪代码</h3>
+<p>Plaintext</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs sqf">FUNCTION MinTruckTrips(<span class="hljs-built_in">items</span>, boxes, Q)<br>    INPUT: Array <span class="hljs-built_in">items</span> (<span class="hljs-built_in">size</span> n), Array boxes (<span class="hljs-built_in">size</span> m), Integer Q<br>    OUTPUT: Integer <span class="hljs-built_in">count</span><br><br>    <span class="hljs-built_in">Sort</span> <span class="hljs-built_in">items</span> descending; <span class="hljs-built_in">Sort</span> boxes descending<br>    box_current_load[<span class="hljs-number">0</span>...m-<span class="hljs-number">1</span>] &lt;- <span class="hljs-number">0</span><br>    <br>    <span class="hljs-comment">// Stage 1: Put items into boxes</span><br>    <span class="hljs-keyword">FOREACH</span> item <span class="hljs-built_in">IN</span> <span class="hljs-built_in">items</span> <span class="hljs-keyword">DO</span><br>        placed &lt;- <span class="hljs-literal">FALSE</span><br>        <span class="hljs-keyword">FOR</span> i <span class="hljs-keyword">FROM</span> <span class="hljs-number">0</span> <span class="hljs-keyword">TO</span> m-<span class="hljs-number">1</span> <span class="hljs-keyword">DO</span><br>            <span class="hljs-keyword">IF</span> box_current_load[i] + item &lt;= boxes[i] <span class="hljs-keyword">THEN</span><br>                box_current_load[i] &lt;- box_current_load[i] + item<br>                placed &lt;- <span class="hljs-literal">TRUE</span>; <span class="hljs-keyword">BREAK</span><br>            ENDIF<br>        ENDFOR<br>        <span class="hljs-keyword">IF</span> <span class="hljs-built_in">NOT</span> placed <span class="hljs-keyword">THEN</span> RETURN <span class="hljs-string">&quot;Impossible&quot;</span><br>    ENDFOREACH<br><br>    <span class="hljs-comment">// Stage 2: Put used boxes into truck</span><br>    <span class="hljs-comment">// Collect capacity of boxes that are not empty</span><br>    used_boxes &lt;- [boxes[i] <span class="hljs-keyword">FOR</span> i <span class="hljs-keyword">FROM</span> <span class="hljs-number">0</span> <span class="hljs-keyword">TO</span> m-<span class="hljs-number">1</span> WHERE box_current_load[i] &gt; <span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">Sort</span> used_boxes descending<br>    <br>    trips_remaining_space &lt;- [] <span class="hljs-comment">// List storing remaining space of each trip</span><br>    <br>    <span class="hljs-keyword">FOREACH</span> box_cap <span class="hljs-built_in">IN</span> used_boxes <span class="hljs-keyword">DO</span><br>        <span class="hljs-keyword">IF</span> box_cap &gt; Q <span class="hljs-keyword">THEN</span> RETURN <span class="hljs-string">&quot;Impossible&quot;</span><br>        fit_in_trip &lt;- <span class="hljs-literal">FALSE</span><br>        <span class="hljs-keyword">FOR</span> k <span class="hljs-keyword">FROM</span> <span class="hljs-number">0</span> <span class="hljs-keyword">TO</span> length(trips_remaining_space) - <span class="hljs-number">1</span> <span class="hljs-keyword">DO</span><br>            <span class="hljs-keyword">IF</span> trips_remaining_space[k] &gt;= box_cap <span class="hljs-keyword">THEN</span><br>                trips_remaining_space[k] &lt;- trips_remaining_space[k] - box_cap<br>                fit_in_trip &lt;- <span class="hljs-literal">TRUE</span>; <span class="hljs-keyword">BREAK</span><br>            ENDIF<br>        ENDFOR<br>        <span class="hljs-keyword">IF</span> <span class="hljs-built_in">NOT</span> fit_in_trip <span class="hljs-keyword">THEN</span> <br>            <span class="hljs-built_in">APPEND</span> (Q - box_cap) <span class="hljs-keyword">TO</span> trips_remaining_space<br>        ENDIF<br>    ENDFOREACH<br><br>    RETURN length(trips_remaining_space)<br>ENDFUNCTION<br></code></pre></td></tr></table></figure>
+<h3 id="复杂度分析-13">复杂度分析</h3>
+<ol type="1">
+<li><strong>时间复杂度</strong>：<span
+class="math inline"><em>O</em>(<em>N</em> ⋅ <em>M</em> + <em>M</em><sup>2</sup>)</span>。第一阶段最坏需遍历所有箱子尝试放入物品
+(<span
+class="math inline"><em>N</em> × <em>M</em></span>)；第二阶段最坏需比较所有已开启的趟次
+(<span class="math inline"><em>M</em><sup>2</sup></span>)。排序开销为
+<span
+class="math inline"><em>O</em>(<em>N</em>log <em>N</em> + <em>M</em>log <em>M</em>)</span>。</li>
+<li><strong>空间复杂度</strong>：<span
+class="math inline"><em>O</em>(<em>M</em>)</span>。用于存储箱子负载状态和卡车每趟的剩余空间。</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="category-chain-item">算法学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%88%86%E6%B2%BB/" class="print-no-link">#分治</a>
+      
+        <a href="/tags/DP/" class="print-no-link">#DP</a>
+      
+        <a href="/tags/LP/" class="print-no-link">#LP</a>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0/" class="print-no-link">#学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>UCAS卜算</div>
+      <div>http://horizongazer.github.io/2026/01/23/FE/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>HorizonGazer</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/9999/09/09/%E7%8C%AE%E7%BB%99%E6%8C%9A%E7%88%B1%E7%9A%84%E5%B0%8F%E7%8B%97/" title="献给挚爱的小狗">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">献给挚爱的小狗</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/10/23/%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2%E5%99%A8%E5%92%8C%E9%AB%98%E6%96%AF%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%9A%84%E9%A2%91%E7%8E%87%E5%9F%9F%E6%A8%A1%E5%9E%8B/" title="均值滤波器和高斯滤波器的频率域模型">
+                        <span class="hidden-mobile">均值滤波器和高斯滤波器的频率域模型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"kSreM0uY5jXWPRahJhw2LDbE-gzGzoHsz","appKey":"Ux8qZ1XPuB6R9or0uKIElE9b","path":"window.location.pathname","placeholder":"留言仅限讨论，禁止广告等行为","avatar":"robohash","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://ksrem0uy.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"kSreM0uY5jXWPRahJhw2LDbE-gzGzoHsz","appkey":"Ux8qZ1XPuB6R9or0uKIElE9b"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/custom.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
